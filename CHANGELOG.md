@@ -14,3 +14,4 @@
 - Recorded universal audience, Marine Corps source boundaries and future founder qualification/authorship requirements without adding content or profile fields.
 - Preserved the canonical reference board; centralized provisional theme tokens and aligned existing web/account/admin/mobile shells. No logo redraw or font/media ingestion.
 - Added a contrast regression test and documented accessibility, asset replacement and terminology review. Phase B remains unstarted. Amendment validation status is recorded in docs/AMENDMENT_001_REPORT.md.
+- All 27 amendment acceptance criteria passed, including actual hosted run 33927729958 on main; evidence is recorded in the amendment report.

@@ -6,7 +6,7 @@ Post-Phase-A Product Positioning, Brand & Authorship Amendment
 
 ## STATUS
 
-INCOMPLETE — all local checks passed; hosted CI pending. Phase A remains complete; Phase B has not begun.
+COMPLETE — all 27 amendment acceptance criteria pass, including actual hosted GitHub Actions. Phase A remains complete; Phase B has not begun.
 
 ## AUTHORITATIVE BRAND REFERENCE
 
@@ -110,7 +110,11 @@ Next web/admin production builds, API ESM build and Expo Android/iOS/web exports
 
 ## HOSTED CI
 
-Not yet run for amendment.
+GitHub Actions workflow **Phase A foundation**, main commit **3f34fd89dc89be8a946e7f2e1d353f35c5378700**: [run 33927729958](https://github.com/stevendecker1986/formation-zero/actions/runs/33927729958), validate job 101199787779, completed **successfully** on 2026-09-04 (workflow updated 23:01:33 UTC). Every step succeeded. The two preceding amendment/archive commits also passed hosted CI; no hosted check failed or was bypassed.
+
+Hosted results: npm ci; format; lint; strict types; 26 tests, zero failures/skips; PostgreSQL migrations/seeds; zero audit vulnerabilities; 828 license entries; web/admin/API builds; Expo Android/iOS/web exports; 45-file client scan; doctor 21/21; mobile permission checks; HTTP smoke; all deliberate failure probes passed.
+
+[phase-a-evidence artifact 9957454274](https://github.com/stevendecker1986/formation-zero/actions/runs/33927729958/artifacts/9957454274) contains the hosted license inventory/notices. SHA-256 c190dcf994950bf1f32d9ee3add0947a359b6b606802028b5dcb4617fbc6de34. Full command output is in the hosted job log. Original reference hashes were verified against committed Git objects.
 
 ## ACCEPTANCE CRITERIA
 
@@ -142,12 +146,12 @@ Not yet run for amendment.
 | 24. Lint passes                                                 | PASS   | npm run validate: lint exit 0, max warnings 0.                                                            |
 | 25. Strict typecheck passes                                     | PASS   | Executed root and workspace typecheck, exit 0                                                             |
 | 26. Builds/exports pass                                         | PASS   | Web/admin/API production builds and Android/iOS/web exports exit 0.                                       |
-| 27. Hosted CI passes                                            | FAIL   | Not yet pushed/run for amendment                                                                          |
+| 27. Hosted CI passes                                            | PASS   | Actual run 33927729958 completed successfully; all job steps passed.                                      |
 
 ## KNOWN ISSUES
 
-Approved vector and formally approved palette/fonts are pending; documented fallbacks are authorized by this amendment. Physical-device screen-reader/outdoor/signing validation remains unperformed. No production deployment, commercial launch or ingestion is authorized.
+No remaining amendment blocker. Upstream action-runtime/dependency deprecation warnings did not fail checks. Approved vector and formally approved palette/fonts are pending; documented fallbacks are authorized by this amendment. Physical-device screen-reader/outdoor/signing validation remains unperformed. No production deployment, commercial launch or ingestion is authorized.
 
 ## PHASE B READINESS
 
-NOT READY until amendment validation passes; Phase B remains unstarted and requires separate authorization.
+READY. Phase A and Amendment 001 are complete. Phase B remains unstarted and requires separate authorization.
