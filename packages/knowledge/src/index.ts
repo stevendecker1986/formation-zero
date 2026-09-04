@@ -143,7 +143,13 @@ const note = z.string().max(2000).default("");
 const id = z.uuid();
 const date = z.iso.date().nullable().default(null);
 const score = z.number().int().min(0).max(5);
-const ids = z.array(id).max(50).default([]);
+const ids = z
+  .array(id)
+  .max(50)
+  .default([])
+  .refine((values) => new Set(values).size === values.length, {
+    message: "Duplicate version references are not allowed",
+  });
 const names = z.array(text).max(20).default([]);
 const common = { name: text, notes: note };
 const authored = {

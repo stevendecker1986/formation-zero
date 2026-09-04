@@ -327,6 +327,15 @@ test("knowledge real API, editorial workflow, constraints and privacy", async (t
       assert.ok(result.reasons.includes("STILL_COUNT_INVALID"));
       assert.equal(media.payload.video_required, false);
       assert.equal(media.payload.media_requirement_type, "STILL_SEQUENCE");
+      const duplicateAsset = randomUUID();
+      assert.throws(
+        () =>
+          parsePayload("EXERCISE", {
+            ...exercise.payload,
+            media_assets: [duplicateAsset, duplicateAsset],
+          }),
+        /Duplicate version references/,
+      );
       await call(
         "records",
         {
