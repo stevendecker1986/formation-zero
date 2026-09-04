@@ -97,7 +97,7 @@ Versioned methods with purpose, category, use, demand/intensity, duration guidan
 
 # MEDIA MODEL
 
-STILL_SEQUENCE defaults with START/KEY_POSITION/FINISH, 1–4 still capacity, optional alternate/fault/regression/progression views, optional video with video_required false. Asset metadata links creator, author, rights and technical review. No production image/video generated or imported. Synthetic metadata-only asset publication proves still-count/view/review gates.
+STILL_SEQUENCE defaults with START/KEY_POSITION/FINISH, 1–4 still capacity, optional alternate/fault/regression/progression views, optional video with video_required false. Asset metadata links creator, author, rights and technical review. Duplicate version references are rejected so repeating one asset cannot inflate image counts; a regression assertion covers this. No production image/video generated or imported. Synthetic metadata-only asset publication proves still-count/view/review gates.
 
 # RIGHTS / PUBLICATION
 
@@ -126,7 +126,7 @@ Transactional events cover every kind's version creation (including provenance, 
 - `npm run db:migrate`: 004 applied; `npm run db:seed`: success.
 - `npm run smoke:dev`: API, Next web/admin and Expo Metro passed.
 - Failure probes: lint/typecheck/test deliberately rejected invalid inputs and migration failure rolled back; probe command exit 0.
-- Final `npm run validate:clean` completed 2026-09-04T23:38:58Z: fresh install, migrations, seed, full validation and failure probes all exit 0. **40 tests passed, 0 failures, 0 skipped**. Format, lint, strict typecheck, secrets/client scans, dependency audit (0 vulnerabilities), 828-entry license review, all builds/exports, Expo doctor (21/21), permission check and built smoke passed. Evidence: ignored `validation-artifacts/clean-results.json` and `clean-*.log` files. Final documentation updates are additionally format-checked before commit and covered by hosted CI.
+- Final `npm run validate:clean` completed 2026-09-04T23:50:41Z, including duplicate-reference rejection: fresh install, migrations, seed, full validation and failure probes all exit 0. **40 tests passed, 0 failures, 0 skipped**. Format, lint, strict typecheck, secrets/client scans, dependency audit (0 vulnerabilities), 828-entry license review, all builds/exports, Expo doctor (21/21), permission check and built smoke passed. Evidence: ignored `validation-artifacts/clean-results.json` and `clean-*.log` files. Final documentation updates are additionally format-checked before commit and covered by hosted CI.
 
 # BUILD RESULTS
 
@@ -134,7 +134,7 @@ Final clean run: Next web/admin production builds, API tsup build and Expo web/A
 
 # HOSTED CI
 
-GitHub Actions, workflow **Phase A foundation**, branch `codex/phase-b-foundation`, implementation commit `a7035864f1e643619e2a37b2b62a2d5933ee0bdc`. [Run 33930440565](https://github.com/stevendecker1986/formation-zero/actions/runs/33930440565) completed **SUCCESS** at 2026-09-04T23:44:18Z; validation job `101207760056`. Actual downloaded job logs confirm 40 tests passed, 0 failed/skipped; dependency audit 0 vulnerabilities; 828 license entries; web/admin/API builds; Expo exports and doctor 21/21; client/permission scans; built CMS/account smoke; all four failure probes. No hosted failure or check weakening was required. Existing install/validation/failure-probe/artifact steps were retained. The branch keeps provisional supporting policy separate from main until the owner decision is resolved.
+GitHub Actions, workflow **Phase A foundation**, branch `codex/phase-b-foundation`, implementation commit `cd03015d92caec99aca81c4c11916188c0b2034b`. [Run 33930991775](https://github.com/stevendecker1986/formation-zero/actions/runs/33930991775) completed **SUCCESS** at 2026-09-04T23:53:20Z; validation job `101209366590`. Actual downloaded job logs confirm 40 tests passed, 0 failed/skipped; dependency audit 0 vulnerabilities; 828 license entries; web/admin/API builds; Expo exports and doctor 21/21; client/permission scans; built CMS/account smoke; all four failure probes. No hosted failure or check weakening was required. Existing install/validation/failure-probe/artifact steps were retained. The branch keeps provisional supporting policy separate from main until the owner decision is resolved.
 
 # ACCEPTANCE CRITERIA
 
@@ -176,7 +176,7 @@ PASS below means the listed implemented behavior was exercised or inspected as i
 | 32  | No bulk corpus                              | PASS   | File/seed review; no external document/media import                                                 |
 | 33  | No Phase C logic                            | PASS   | Scope/code review: metadata and editorial operations only                                           |
 | 34  | All tests pass                              | PASS   | Final clean run: 40 passed, 0 failed, 0 skipped                                                     |
-| 35  | Hosted CI passes                            | PASS   | Actual GitHub run 33930440565 completed SUCCESS                                                     |
+| 35  | Hosted CI passes                            | PASS   | Actual GitHub run 33930991775 completed SUCCESS                                                     |
 | 36  | Documentation reflects reality              | PASS   | Current-state docs, provisional policy and actual evidence distinguished                            |
 
 | Action                     | Status | Evidence                                                                              |
@@ -197,7 +197,7 @@ PASS below means the listed implemented behavior was exercised or inspected as i
 | A14 Search                 | PASS   | Collection/name/status/provenance/rights/review filters tested                        |
 | A15 Audit                  | PASS   | Critical events, immutable storage and rollback tests                                 |
 | A16 Tests                  | PASS   | 40 tests and production/development/browser smoke passed                              |
-| A17 CI                     | PASS   | Clean local and hosted run 33930440565 pass                                           |
+| A17 CI                     | PASS   | Clean local and hosted run 33930991775 pass                                           |
 | A18 Documentation          | PASS   | Required docs/ADRs report implementation and open policy accurately                   |
 | A19 Final clean validation | PASS   | Local install/migrate/seed/validate/probes and actual hosted run pass                 |
 
