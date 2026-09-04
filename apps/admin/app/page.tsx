@@ -20,6 +20,7 @@ export default async function Admin() {
     return (
       <section className="fz-surface">
         <h2>Administration foundation</h2>
+        <a href="/admin/knowledge">Open knowledge workspace</a>
         <p>Server authorization verified.</p>
         <p>
           Content management and product administration features are planned for

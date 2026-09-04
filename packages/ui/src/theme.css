@@ -145,7 +145,8 @@ label {
   max-width: var(--fz-layout-form);
 }
 input,
-select {
+select,
+textarea {
   min-width: 0;
   width: 100%;
   min-height: var(--fz-layout-target);
@@ -161,6 +162,12 @@ select {
   gap: var(--fz-space-md);
   max-width: var(--fz-layout-form);
   margin-top: var(--fz-space-lg);
+}
+.fz-form fieldset {
+  display: grid;
+  gap: var(--fz-space-md);
+  min-width: 0;
+  border: var(--fz-border-thin) solid var(--fz-color-border-default);
 }
 .fz-actions {
   display: flex;

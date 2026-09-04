@@ -3,6 +3,7 @@ import { randomUUID } from "node:crypto";
 import { spawn, type ChildProcess } from "node:child_process";
 import { once } from "node:events";
 import { testHarness } from "../tests/helpers.js";
+import { template } from "@formation-zero/knowledge/templates";
 const h = await testHarness({
   webOrigin: "http://localhost:3100",
   adminOrigin: "http://localhost:3101",
@@ -157,6 +158,11 @@ try {
   ).text();
   assert.match(denied, /Access denied/);
   assert.ok(!denied.includes("Server authorization verified"));
+  const kbDenied = await fetch(
+    "http://localhost:3101/admin/api/knowledge/records",
+    { headers: { cookie: user.cookie } },
+  );
+  assert.equal(kbDenied.status, 403);
   await h.pool.query("INSERT INTO user_roles(user_id,role) VALUES($1,$2)", [
     id,
     "PLATFORM_ADMIN",
@@ -186,6 +192,68 @@ try {
   assert.match(allowed, /Server authorization verified/);
   const anonymous = await (await fetch("http://localhost:3101/admin")).text();
   assert.ok(!anonymous.includes("Server authorization verified"));
+  const knowledge = "http://localhost:3101/admin/api/knowledge/";
+  const headers = {
+    cookie: user.cookie,
+    origin: "http://localhost:3101",
+    "Content-Type": "application/json",
+  };
+  assert.equal(
+    (
+      await fetch(knowledge + "records", {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          kind: "EQUIPMENT",
+          data: template("EQUIPMENT"),
+        }),
+      })
+    ).status,
+    403,
+  );
+  assert.equal(
+    (
+      await fetch(knowledge + "grants", {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          user_id: id,
+          permission: "CONTENT_EDITOR",
+          enabled: true,
+        }),
+      })
+    ).status,
+    200,
+  );
+  const cms = await (
+    await fetch("http://localhost:3101/admin/knowledge", { headers })
+  ).text();
+  assert.match(cms, /Knowledge workspace/);
+  const created = await fetch(knowledge + "records", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ kind: "EQUIPMENT", data: template("EQUIPMENT") }),
+  });
+  assert.equal(created.status, 201, await created.clone().text());
+  const record = await created.json();
+  assert.equal(
+    (await fetch(knowledge + "versions/" + record.id, { headers })).status,
+    200,
+  );
+  assert.equal(
+    (
+      await fetch(knowledge + "records", {
+        method: "POST",
+        headers: { ...headers, origin: "https://attacker.invalid" },
+        body: "{}",
+      })
+    ).status,
+    403,
+  );
+  assert.equal((await fetch(knowledge + "grants")).status, 401);
+  console.log(
+    "Phase B built CMS smoke passed: authorization, separate grants, SSR workspace, proxy create/read, origin rejection and anonymous denial.",
+  );
   console.log(
     "Smoke passed: API health, register/verify/login/account, USER denied admin, PLATFORM_ADMIN allowed API and built admin shell, built web response.",
   );

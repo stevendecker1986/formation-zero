@@ -23,6 +23,7 @@ import { createAuth } from "./auth.js";
 import { resolveAuthorization } from "./authorization.js";
 import { createLogger, type LogSink } from "./logging.js";
 import { createMailDelivery, type MailDelivery } from "./mail.js";
+import { knowledgeRouter } from "./knowledge/routes.js";
 
 export function createApp(
   config: ServerConfig,
@@ -316,6 +317,7 @@ export function createApp(
     }
     res.json({ shell: "Formation Zero administration", phase: "A" });
   });
+  app.use("/api/v1/knowledge", authenticated, knowledgeRouter(pool));
   app.use((_req, res) => fail(res, 404, "NOT_FOUND"));
   app.use(
     (error: unknown, _req: Request, res: Response, _next: NextFunction) => {

@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 const config: NextConfig = {
   basePath: "/admin",
-  transpilePackages: ["@formation-zero/domain", "@formation-zero/ui"],
+  transpilePackages: [
+    "@formation-zero/domain",
+    "@formation-zero/ui",
+    "@formation-zero/knowledge",
+  ],
   poweredByHeader: false,
   async headers() {
     return [

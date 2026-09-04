@@ -1,0 +1,13 @@
+# Version lifecycle
+
+The stable states are DISCOVERED, INGESTED, SOURCE_VERIFIED, TECHNICALLY_REVIEWED, SAFETY_REVIEWED, EDITORIALLY_REVIEWED, APPROVED, PUBLISHED, SUPERSEDED and RETIRED. New sources begin DISCOVERED; other records begin INGESTED. SUBMIT moves an unfrozen version to INGESTED. Review decisions append history and update the descriptive review state. That state is not proof that every required review passed: centralized eligibility examines the latest decision of every required type independently.
+
+CONTENT_EDITOR creates records and subsequent versions. Reviewers need both a matching explicit grant and an active current reviewer record linked to their enabled account. APPROVE/REJECT/CHANGES_REQUIRED never overwrite older decisions. Re-review dates are optional; a review is no longer valid on its re-review date. A revoked grant, inactive account/reviewer or changed reviewer identity invalidates its use for new approval/publication. A new content version inherits no decisions or approval.
+
+PUBLISHER invokes APPROVE, then PUBLISH with the expected state revision and a reason. The final approver must differ from the version creator and linked author account, and the approving publisher performs publication. Both operations recheck server gates. Published payloads and attachments remain immutable. An edit creates a new version; after that version is published, SUPERSEDE links the old version to its published successor. Historical reads expose `superseded_by` and derive reciprocal `supersedes`. RETIRE records time/reason without deletion. SUPERSEDED and RETIRED are terminal.
+
+Exercise/recovery require TECHNICAL, SAFETY, EDITORIAL and RIGHTS reviews. Assets require TECHNICAL and RIGHTS. Official/official-derived content additionally requires POLICY. These requirements and independent final approval were expressly approved by the owner. Supporting-record verification mapping is provisional pending the separate decision in ADR 0012.
+
+Rights must be explicitly eligible and reviewed. Referenced source versions require verification; referenced restrictions require safety review. Exercises must satisfy the selected still-image counts/views and reference published assets. The API reports concrete missing gates from `/versions/:id/eligibility`; users cannot submit a lifecycle status, verification status or approval flag in content payloads.
+
+This CMS is internal. No public knowledge endpoint exists. PUBLISHED does not mean approved for commercial launch; the Phase A legal commercial gate remains false.

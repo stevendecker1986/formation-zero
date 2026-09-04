@@ -1,0 +1,13 @@
+# Internal knowledge CMS
+
+Open `/admin/knowledge` using the existing shared-host account session. The server checks `/api/v1/knowledge/access` before rendering the workspace. Ordinary users and anonymous visitors cannot obtain drafts or reviews. An operator with an existing PLATFORM_ADMIN account grants explicit editorial permissions; no new default administrative account or password is seeded. Existing account bootstrap procedures remain applicable.
+
+The Collection selector exposes Sources, Source Versions, Source Sections, Citations, Authors, Qualifications, Reviewers, Exercises, Equipment, Recovery, Restrictions, Media Requirements, Media Assets and Rights. Search/filter by collection, name/FZ code, lifecycle status, provenance, rights and review decision; pages contain at most 50 versions. The review/publication queue is the pending-version filter. Historical versions are intentionally searchable.
+
+Create a record using its typed form. Nested demand/suitability objects have numeric fields. Arrays (citations, equipment, variants' relationships, media and recovery links) are JSON array fields with parse and schema validation. Copy exact version UUIDs from the selected target's Version ID. Exercise Relationships are edited within the exercise form, where direction and target are explicit. This foundation editor favors exact references over a production content-authoring experience.
+
+Opening a record shows its metadata, exact ID, status, review history and version history. Save creates another immutable version; it never overwrites the selected version. Qualification identifiers are not echoed back. Use provenance/rights/eligibility lookups to inspect dependencies. Submit a review with an authorized reviewer-version ID, type, decision, comments and optional re-review date/specialty. Lifecycle buttons require a reason, correct grant and current revision; supersede additionally requires a published successor-version ID. Server validation remains authoritative.
+
+PLATFORM_ADMIN can view, grant and revoke separate editorial permissions. This does not change qualifications, account consumer roles or subscriptions. Grants and all editorial mutations are audited transactionally. The allowlisted same-origin Next proxy forwards host-only session cookies to fixed API paths, bounds JSON bodies and rejects foreign origins. No API origin or secret is sent to the browser.
+
+The existing Amendment 001 colors, typography, Shell and semantic tokens are reused. The shared styles add textarea/fieldset support only. No new logo, consumer fitness functionality or production corpus is introduced.

@@ -1,0 +1,7 @@
+# Phase B validation supplement
+
+Baseline instructions: [TESTING.md](../TESTING.md). `npm test` discovers all existing and Phase B tests. `tests/knowledge.test.ts` uses actual PostgreSQL and HTTP sessions for source/citation/version, author/qualification redaction, reviewer grants and decisions, equipment/exercise/recovery, still metadata, rights/publication, supersession/retirement, exact taxonomies, constraints, concurrency, search, origin/access boundaries and transactional audit failure. Fixtures are synthetic and schema-isolated.
+
+`npm run smoke` starts production API, web and admin builds. Phase B assertions cover denied ordinary users, explicit grants, SSR workspace access, actual Next proxy creation/read, foreign-origin rejection and anonymous denial. `npm run smoke:dev` retains baseline development-client checks. There is no mocked claim of professional review or content correctness.
+
+`npm run validate:clean` installs a fresh source-only checkout into a new directory, creates a disposable PostgreSQL database, runs all migrations and synthetic seed, full format/lint/typecheck/tests/security/dependency/licenses/builds/Expo validation and smoke, plus failure probes. Logs live in ignored `validation-artifacts/`. The existing GitHub workflow **Phase A foundation** now labels its validation step for Phase A, Amendment 001 and Phase B; no prior check is removed or weakened. The report records actual run evidence only.

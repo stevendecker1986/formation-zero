@@ -1,0 +1,11 @@
+# Authorship, qualifications and reviews
+
+AUTHOR records are editorial identities separate from ordinary account profiles. They store display name (`name`), editorial role, optional public affiliation/account link, active flag and notes. QUALIFICATION records link an author/person and store credential name, issuer, optional private identifier, dates and active/expired/inactive status. They support the founder's stated ISSA CPT and Bodybuilding Specialist credentials without importing courseware or implying endorsement. No real credentials are seeded.
+
+Credential identifiers are omitted from every normal knowledge read/list/create/version response and from client logs. Omitting this hidden field when making a new qualification version preserves the old value; explicitly setting an empty value clears it in the new version. Qualification verification is derived from review history, separate from the credential's active/expired status. The proposed TECHNICAL verification mapping is pending ADR 0012.
+
+REVIEWER records link a person and platform account, supported review types and optional specialties. Qualified identity alone grants no permissions. PLATFORM_ADMIN manages separate grants: CONTENT_EDITOR; TECHNICAL_REVIEWER, SAFETY_REVIEWER, EDITORIAL_REVIEWER, RIGHTS_REVIEWER, POLICY_REVIEWER, SPECIALTY_REVIEWER; PUBLISHER. An admin is not implicitly any of these. BASE/PERFORMANCE/COMMAND and consumer roles do not confer editorial rights.
+
+Review history records exact version identity, reviewer identity/account, type, decision, comments, time, optional re-review date and specialty. Joins to the version/entity provide kind, FZ code and version number. Types are TECHNICAL, SAFETY, EDITORIAL, RIGHTS, POLICY and SPECIALTY. Specialty categories are NUTRITION, SPORTS_MEDICINE, ENDURANCE, STRENGTH_CONDITIONING, FORCE_FITNESS, MCMAP and OTHER. A future category is added through schema/migration review, never arbitrary client privilege claims.
+
+Independent final approval is mandatory for every publication. Technical, safety, specialty, rights and policy reviews are distinct records; none grants endorsement or replaces another required review. Private reviewer comments and audit data have no public endpoint.

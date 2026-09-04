@@ -7,6 +7,7 @@
     "@formation-zero/domain": "0.1.0",
     "@formation-zero/schemas": "0.1.0",
     "@formation-zero/entitlements": "0.1.0",
-    "@formation-zero/config": "0.1.0"
+    "@formation-zero/config": "0.1.0",
+    "@formation-zero/knowledge": "0.1.0"
   }
 }

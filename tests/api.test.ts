@@ -23,6 +23,7 @@ test("real PostgreSQL API, authentication and authorization integration", async 
         "001_auth.sql",
         "002_foundation.sql",
         "003_account_hardening.sql",
+        "004_knowledge.sql",
       ]);
       assert.deepEqual(await migrate(h.pool), []);
       await seed(h.pool, "TEST");

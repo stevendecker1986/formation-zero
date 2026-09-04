@@ -5,6 +5,7 @@ import { TIERS } from "@formation-zero/domain";
 import { resolveCapabilities } from "@formation-zero/entitlements";
 import { loadConfig } from "@formation-zero/config";
 import { createPool, transaction } from "../../services/api/src/db.js";
+import { seedKnowledge } from "./knowledge.js";
 export async function seed(pool: pg.Pool, environment: string): Promise<void> {
   if (!["LOCAL", "TEST"].includes(environment))
     throw new Error("Synthetic seeds are LOCAL/TEST only");
@@ -46,6 +47,7 @@ export async function seed(pool: pg.Pool, environment: string): Promise<void> {
         ],
       );
   });
+  await seedKnowledge(pool, environment);
 }
 if (
   process.argv[1] &&

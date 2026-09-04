@@ -29,7 +29,8 @@ jobs:
           node-version: "22.23.2"
           cache: npm
       - run: npm ci --no-fund
-      - run: npm run validate
+      - name: Validate Phase A, Amendment 001 and Phase B (all migrations and tests)
+        run: npm run validate
       - run: npm run ci:failure-probes
       - uses: actions/upload-artifact@v4
         if: always()
