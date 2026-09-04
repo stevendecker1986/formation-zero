@@ -12,4 +12,4 @@ Use Node test runner/tsx, PostgreSQL isolation, unit/API/database tests, built-s
 
 ## Consequences
 
-No tests are skipped to produce green output. Intentionally invalid lint/type/test/SQL inputs verify failure propagation. Local clean-source validation differs from a hosted CI run. With no Git remote, hosted CI cannot be claimed; report the limitation explicitly.
+No tests are skipped to produce green output. Intentionally invalid lint/type/test/SQL inputs verify failure propagation. Local clean-source validation differs from a hosted CI run. Hosted CI must be observed before claiming success. The initially missing remote was resolved by owner authorization of stevendecker1986/formation-zero; successful hosted run/commit evidence is recorded in PHASE_A_REPORT.md.

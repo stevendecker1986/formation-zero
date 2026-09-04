@@ -4,9 +4,9 @@ Phase A — Foundation
 
 ## STATUS
 
-**INCOMPLETE — Phase A = INCOMPLETE.**
+**COMPLETE — Phase A = COMPLETE.**
 
-All executed local checks passed. The unsatisfied acceptance item is **A18 / “CI passes”**: this repository has no Git remote and no hosted CI run. The supplied GitHub Actions workflow must pass from an authorized remote clean checkout before Phase A can be declared COMPLETE. A local clean-source run is evidence of local reproducibility, not a fabricated hosted CI result.
+All Phase A acceptance criteria now pass. The authorized GitHub repository is connected on its default branch `main`. The actual GitHub Actions “Phase A foundation” workflow completed successfully on implementation commit `8646ea9749ee7982d2808ddfeac4bac950976d3d`; hosted evidence is recorded below.
 
 No Phase B work was started.
 
@@ -136,7 +136,7 @@ Next dev generated the two AGENTS.md/CLAUDE.md pairs and Next type-reference fil
 
 ## FILES MODIFIED
 
-No pre-existing project files were modified: there were none. The original Git metadata and supplied external directive were preserved. Files above were iteratively refined during implementation.
+No pre-existing project files were modified: there were none. The original Git metadata and supplied external directive were preserved. Files above were iteratively refined during implementation. The hosted-CI completion pass modified only `tests/security.test.ts`, this report, `CHANGELOG.md`, `TESTING.md`, and `docs/adr/0007-testing-ci.md`. The application architecture, migrations, dependencies and CI checks were preserved.
 
 ## DATABASE MIGRATIONS
 
@@ -158,7 +158,7 @@ Migrations use a PostgreSQL advisory transaction lock, SHA-256 history checks an
 | 0004 | Independent identity/role/tier/resource resolution; owner-approved centralized mapping; closed commercial gate.             |
 | 0005 | Transactional privileged audit, append-only controls, trusted schema-owner boundary.                                        |
 | 0006 | Validated private config, safe logging, ACCOUNT-only data and NULL-constrained optional library fields.                     |
-| 0007 | Real-database tests, clean local validation, CI/failure probes and truthful hosted-CI limitation.                           |
+| 0007 | Real-database tests, clean local validation, CI/failure probes and verified hosted-CI evidence.                             |
 | 0008 | Exact provenance/rights/status foundations and conservative helper without CMS/publishing.                                  |
 
 ## SECURITY / PRIVACY
@@ -167,7 +167,7 @@ Implemented strict schemas, parameterized access, safe structured errors/request
 
 Only ACCOUNT/profile and authentication infrastructure data exist. No rank/unit/billet, fitness, readiness, health, GPS or raw payment information is collected. No sensitive mobile permissions are requested; generated Android manifest explicitly removes all named sensitive permissions plus overlay/vibration and disables backup. No credentials are bundled in the 47 inspected public artifact files.
 
-Secrets/config fail closed. Local private material is ignored by Git; no secrets or any other files were committed. Source scanning and npm audit passed, with zero reported dependency vulnerabilities at validation time. License inventory/notice controls are active.
+Secrets/config fail closed. Local private material is ignored by Git. The staged publication set was reviewed before commit: no private .env, credentials, database data, dependencies, temporary files or build output were committed; `.env.example` contains only the public template. Source scanning and npm audit passed, with zero reported dependency vulnerabilities at validation time. License inventory/notice controls are active.
 
 Operational limitations are explicit in SECURITY.md: Windows inherited ACLs; OneDrive synchronization independent of Git ignore; development-only local credentials; trusted database owner; production SMTP/TLS/secret-manager/runtime-login provisioning still external; sensitive library session material requires encrypted storage/backups and rotation on compromise. Mail delivery failures produce sanitized operational errors while public responses stay generic; there is no durable mail retry queue.
 
@@ -219,26 +219,36 @@ Actual executed results:
 | npm run db:maintenance                                                                       | PASS, exit 0; expired auth infrastructure cleanup.                                                   |
 | npm run validate:clean                                                                       | PASS, all five stages exited 0; independent source directory and brand-new disposable PostgreSQL DB. |
 
-Evidence: `validation-artifacts/clean-results.json`, `clean-install.log`, `clean-migrate.log`, `clean-seed.log`, `clean-validate.log`, `clean-failure-probes.log`. The clean runner retains the source copy and logs, and drops only its generated disposable DB. No test output contains credentials/tokens.
+Evidence: `validation-artifacts/clean-results.json`, `clean-install.log`, `clean-migrate.log`, `clean-seed.log`, `clean-validate.log`, `clean-failure-probes.log`. The clean runner retains the source copy and logs, and drops only its generated disposable DB. The local evidence remains separate from hosted evidence. Initial hosted PostgreSQL diagnostics exposed an ephemeral test session token during an intentional constraint rejection; the disposable schema and container were destroyed. The corrected test uses an expired noncredential fixture, and its subsequent hosted log was inspected to verify that fixture. No production credential was involved.
 
 Failures encountered and fixed, rather than concealed: sandbox Node/network restrictions; ES2022 typing of findLast (updated server type library to ES2023); invalid tsup CLI flag (typed tsup config); vulnerable Nodemailer/esbuild/UUID resolutions (patched versions); duplicate/incompatible React Native peers and their transitive advisories (Expo-aligned override); initially unreviewed license expressions (documented explicit review); mutually exclusive Expo smoke CLI flags (corrected and rerun). No failing test or scan was suppressed.
 
 ## BUILD RESULTS
 
-| Command                                        | Actual result                                                                                                     |
-| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| npm run format:check                           | PASS.                                                                                                             |
-| npm run lint                                   | PASS, max warnings 0.                                                                                             |
-| npm run typecheck                              | PASS, root plus all app workspaces in strict mode.                                                                |
-| npm run build -w @formation-zero/web           | PASS, Next production build.                                                                                      |
-| npm run build -w @formation-zero/admin         | PASS, Next protected shell build.                                                                                 |
-| npm run build:api                              | PASS, ESM bundle, executed by production smoke.                                                                   |
-| npm run validate -w @formation-zero/mobile     | PASS, Android/iOS Hermes and web bundles exported without credentials.                                            |
-| npm run validate                               | PASS, complete local fail-fast pipeline; repeated in clean source/database environment.                           |
-| Hosted GitHub Actions                          | **NOT RUN / FAIL acceptance evidence**: no remote exists. Workflow is supplied; no hosted result is claimed.      |
-| Signed mobile binary / native device execution | NOT RUN: no SDK/device/signing environment supplied; strongest available credential-free validation above passed. |
+| Command                                        | Actual result                                                                                                                                                                                   |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| npm run format:check                           | PASS.                                                                                                                                                                                           |
+| npm run lint                                   | PASS, max warnings 0.                                                                                                                                                                           |
+| npm run typecheck                              | PASS, root plus all app workspaces in strict mode.                                                                                                                                              |
+| npm run build -w @formation-zero/web           | PASS, Next production build.                                                                                                                                                                    |
+| npm run build -w @formation-zero/admin         | PASS, Next protected shell build.                                                                                                                                                               |
+| npm run build:api                              | PASS, ESM bundle, executed by production smoke.                                                                                                                                                 |
+| npm run validate -w @formation-zero/mobile     | PASS, Android/iOS Hermes and web bundles exported without credentials.                                                                                                                          |
+| npm run validate                               | PASS, complete local fail-fast pipeline; repeated in clean source/database environment.                                                                                                         |
+| Hosted GitHub Actions                          | PASS: [run 33921377774](https://github.com/stevendecker1986/formation-zero/actions/runs/33921377774), all steps successful on implementation commit `8646ea9749ee7982d2808ddfeac4bac950976d3d`. |
+| Signed mobile binary / native device execution | NOT RUN: no SDK/device/signing environment supplied; strongest available credential-free validation above passed.                                                                               |
 
 A local run is not a hosted CI run. The clean snapshot was followed by a development-smoke script, type-only exports, generated Next guidance and documentation refinements; final formatting/type/lint/security checks also passed for those changes.
+
+## HOSTED CI EVIDENCE
+
+- Authorized repository: [stevendecker1986/formation-zero](https://github.com/stevendecker1986/formation-zero), default branch `main`.
+- Provider/workflow: GitHub Actions / `Phase A foundation` / `.github/workflows/phase-a.yml`; triggered by push, clean Ubuntu runner with Node 22.23.2 and PostgreSQL 18.4.
+- Initial import `51146d110852a290a6a3107e66f391ca74cd708f`: [run 33921079497](https://github.com/stevendecker1986/formation-zero/actions/runs/33921079497) completed successfully. Log review identified the ephemeral test-token diagnostic described above; no failed checks were hidden.
+- Corrected implementation `8646ea9749ee7982d2808ddfeac4bac950976d3d`: [run 33921377774](https://github.com/stevendecker1986/formation-zero/actions/runs/33921377774), job `validate` (101180243801), completed **successfully** on 2026-09-04; workflow updated at 21:32:12 UTC. Every job step reported success.
+- Actual hosted results: npm ci, formatting, lint, strict typecheck, 25 tests (0 failed/skipped), real PostgreSQL migrations/seeds, source scan, npm audit (0 vulnerabilities), 828-entry license review, web/admin/API builds, Android/iOS/web Expo exports, 43-file client-artifact scan, Expo doctor (21/21), mobile permission checks, built API/auth/web/admin smoke and lint/type/test/migration failure probes all passed.
+- [Evidence artifact 9955201288](https://github.com/stevendecker1986/formation-zero/actions/runs/33921377774/artifacts/9955201288): `phase-a-evidence`, containing hosted license inventory and upstream notices; SHA-256 `78b4692d457a90e4849ce321307638e68447aa7a3268c3b0c7259e31ac22e602`. Executed check details are in the hosted job log.
+- Only implementation correction: the tracking-constraint test uses an expired noncredential session fixture before creating the authenticated session used by the remaining assertions. Constraints and assertions remain active; no workflow check was weakened or removed.
 
 ## ACCEPTANCE CRITERIA
 
@@ -263,42 +273,42 @@ Every action acceptance item:
 | A15 Config/secrets         | PASS   | Invalid/missing config rejected; private generated files ignored; source and client-artifact scans passed.                                                                                           |
 | A16 Security               | PASS   | Throttling, authorization, validation, safe logging, dependency/secret checks and docs verified.                                                                                                     |
 | A17 Testing                | PASS   | 25/25 tests passed in independent clean environment.                                                                                                                                                 |
-| A18 CI                     | FAIL   | Local CI-equivalent pipeline and deliberate lint/type/test/migration failure probes passed; hosted clean-checkout CI cannot run without a remote.                                                    |
+| A18 CI                     | PASS   | Actual clean-checkout GitHub Actions run 33921377774 completed successfully, including install, full validation and deliberate failure probes.                                                       |
 | A19 License control        | PASS   | 828-entry inventory, upstream notices and conditional copyleft obligations reviewed.                                                                                                                 |
 | A20 ADRs/docs              | PASS   | All required documents, eight ADRs and exact local startup commands supplied and exercised.                                                                                                          |
 | A21 Final clean validation | PASS   | Independent source copy, npm ci, new PostgreSQL DB, migrations, seed, static/security/license tests, builds and API/auth/admin smoke all exited 0.                                                   |
 
 Every final Phase A acceptance criterion:
 
-| Criterion                                              | Status | Evidence                                                                                                                                                                              |
-| ------------------------------------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Repository audit completed                             | PASS   | docs/REPOSITORY_AUDIT.md was created before implementation; initial Git repository was empty.                                                                                         |
-| Monorepo/workspace coherent                            | PASS   | Fresh npm ci, strict workspace typecheck, package imports, and all shell builds passed.                                                                                               |
-| Web/mobile/admin/API foundations boot or validate      | PASS   | Production builds, built API/web/admin smoke, development smoke, Android/iOS/web Expo exports, and Expo doctor 21/21 passed.                                                          |
-| PostgreSQL authoritative; migrations reproducible      | PASS   | Actual PostgreSQL 18.4; new disposable database → three migrations → seed → startup; schema-isolated tests and migration rerun passed.                                                |
-| Authentication works                                   | PASS   | Register/duplicate rejection, verification/replay/expiry, login failure/success, logout, password reset and revocation tested on PostgreSQL.                                          |
-| Role model works                                       | PASS   | Exact five roles, default USER, forged claims denied; USER denied admin and PLATFORM_ADMIN allowed.                                                                                   |
-| BASE/PERFORMANCE/COMMAND model works                   | PASS   | Exact three tiers, BASE default, owner-approved 0/6/9 mapping and PostgreSQL catalog parity tested.                                                                                   |
-| Centralized entitlements work                          | PASS   | One immutable resolver; COMMAND inherits PERFORMANCE; PERFORMANCE denied Unit PT; forgery tests passed.                                                                               |
-| Role/tier/resource-permission concepts remain separate | PASS   | Independent resolution; COMMAND USER remains denied admin; resource permission foundation always denies.                                                                              |
-| Commercial legal gate defaults false                   | PASS   | Literal false, config default false, config rejects true, commercial activation function tested to throw.                                                                             |
-| No real billing active                                 | PASS   | No payment integration, billing endpoint, card data or activation path exists.                                                                                                        |
-| Audit framework works                                  | PASS   | Privileged changes create queryable actor/action/entity/time/reason/metadata/request records; UPDATE/DELETE/TRUNCATE denied; audit failure rolls back change.                         |
-| Shared domain/schema/config foundations exist          | PASS   | Strict typed packages consumed across workspaces; final typecheck and enum/config tests passed.                                                                                       |
-| Content-status/provenance/rights foundations exist     | PASS   | Exact enums and runtime schemas tested; no CMS or source ingestion implemented.                                                                                                       |
-| UNKNOWN rights is non-publishable                      | PASS   | Helper returns false for UNKNOWN across every content status; automated tests passed.                                                                                                 |
-| Environment validation works                           | PASS   | Missing/invalid values, malformed private inputs, production transport requirements and gate true rejected in tests.                                                                  |
-| Secrets are not committed/exposed                      | PASS   | No commits exist; Git ignores private generated files; source secret scan passed; 47 browser/mobile artifact files passed secret-boundary scan.                                       |
-| Security baseline implemented/documented               | PASS   | Origin/CSRF checks, strict validation, shared throttling, safe errors/logs, session controls, database hardening and security/privacy docs; npm audit reports zero vulnerabilities.   |
-| Critical tests pass                                    | PASS   | 25 tests passed, zero failed/skipped; repeated successfully in independent clean source/database environment.                                                                         |
-| CI passes                                              | FAIL   | GitHub Actions workflow is configured; equivalent local clean pipeline and failure probes passed. No remote or hosted workflow run exists, so clean-checkout hosted CI is unverified. |
-| Dependency licensing reviewed                          | PASS   | 828 locked dependency entries reviewed; installed notices retained; no unknown/incompatible license unresolved for Phase A use. MPL/LGPL redistribution obligations are explicit.     |
-| ADRs/docs reflect reality                              | PASS   | Eight ADRs; required architecture/security/privacy/development/testing/deployment/changelog docs, preserved directive, complete inventory and truthful evidence.                      |
-| No unauthorized Phase B+ functionality                 | PASS   | No fitness/policy/medical engine, CMS, formations, GPS, health integration, real billing, book/QR, AI, social or ads.                                                                 |
+| Criterion                                              | Status | Evidence                                                                                                                                                                                                      |
+| ------------------------------------------------------ | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Repository audit completed                             | PASS   | docs/REPOSITORY_AUDIT.md was created before implementation; initial Git repository was empty.                                                                                                                 |
+| Monorepo/workspace coherent                            | PASS   | Fresh npm ci, strict workspace typecheck, package imports, and all shell builds passed.                                                                                                                       |
+| Web/mobile/admin/API foundations boot or validate      | PASS   | Production builds, built API/web/admin smoke, development smoke, Android/iOS/web Expo exports, and Expo doctor 21/21 passed.                                                                                  |
+| PostgreSQL authoritative; migrations reproducible      | PASS   | Actual PostgreSQL 18.4; new disposable database → three migrations → seed → startup; schema-isolated tests and migration rerun passed.                                                                        |
+| Authentication works                                   | PASS   | Register/duplicate rejection, verification/replay/expiry, login failure/success, logout, password reset and revocation tested on PostgreSQL.                                                                  |
+| Role model works                                       | PASS   | Exact five roles, default USER, forged claims denied; USER denied admin and PLATFORM_ADMIN allowed.                                                                                                           |
+| BASE/PERFORMANCE/COMMAND model works                   | PASS   | Exact three tiers, BASE default, owner-approved 0/6/9 mapping and PostgreSQL catalog parity tested.                                                                                                           |
+| Centralized entitlements work                          | PASS   | One immutable resolver; COMMAND inherits PERFORMANCE; PERFORMANCE denied Unit PT; forgery tests passed.                                                                                                       |
+| Role/tier/resource-permission concepts remain separate | PASS   | Independent resolution; COMMAND USER remains denied admin; resource permission foundation always denies.                                                                                                      |
+| Commercial legal gate defaults false                   | PASS   | Literal false, config default false, config rejects true, commercial activation function tested to throw.                                                                                                     |
+| No real billing active                                 | PASS   | No payment integration, billing endpoint, card data or activation path exists.                                                                                                                                |
+| Audit framework works                                  | PASS   | Privileged changes create queryable actor/action/entity/time/reason/metadata/request records; UPDATE/DELETE/TRUNCATE denied; audit failure rolls back change.                                                 |
+| Shared domain/schema/config foundations exist          | PASS   | Strict typed packages consumed across workspaces; final typecheck and enum/config tests passed.                                                                                                               |
+| Content-status/provenance/rights foundations exist     | PASS   | Exact enums and runtime schemas tested; no CMS or source ingestion implemented.                                                                                                                               |
+| UNKNOWN rights is non-publishable                      | PASS   | Helper returns false for UNKNOWN across every content status; automated tests passed.                                                                                                                         |
+| Environment validation works                           | PASS   | Missing/invalid values, malformed private inputs, production transport requirements and gate true rejected in tests.                                                                                          |
+| Secrets are not committed/exposed                      | PASS   | Reviewed tracked publication set excludes private files; source scan passed; 47 local and 43 hosted public artifacts passed boundary scans. Hosted constraint test now uses an expired noncredential fixture. |
+| Security baseline implemented/documented               | PASS   | Origin/CSRF checks, strict validation, shared throttling, safe errors/logs, session controls, database hardening and security/privacy docs; npm audit reports zero vulnerabilities.                           |
+| Critical tests pass                                    | PASS   | 25 tests passed, zero failed/skipped; repeated successfully in independent clean source/database environment.                                                                                                 |
+| CI passes                                              | PASS   | Actual GitHub Actions run 33921377774 on main completed successfully; every required job and step passed.                                                                                                     |
+| Dependency licensing reviewed                          | PASS   | 828 locked dependency entries reviewed; installed notices retained; no unknown/incompatible license unresolved for Phase A use. MPL/LGPL redistribution obligations are explicit.                             |
+| ADRs/docs reflect reality                              | PASS   | Eight ADRs; required architecture/security/privacy/development/testing/deployment/changelog docs, preserved directive, complete inventory and truthful evidence.                                              |
+| No unauthorized Phase B+ functionality                 | PASS   | No fitness/policy/medical engine, CMS, formations, GPS, health integration, real billing, book/QR, AI, social or ads.                                                                                         |
 
 ## KNOWN ISSUES
 
-1. **Blocking completion:** hosted clean-checkout CI is unverified. Configure an authorized remote and obtain a green supplied workflow run. A18 and the final CI criterion remain FAIL.
+1. No remaining Phase A acceptance blocker. Hosted CI is verified. GitHub emitted upstream action-runtime/dependency deprecation warnings, but all checks passed; none were bypassed.
 2. SMTP delivery to real external infrastructure, HTTPS deployment, runtime DB-role provisioning, device execution and native signing were not exercised. Local/in-memory mail, actual PostgreSQL and credential-free mobile checks passed.
 3. The current proxy conservatively shares an IP throttle bucket; multi-user deployment needs trusted proxy/rate-limiter provisioning. Do not trust arbitrary forwarding headers.
 4. Local credentials/data reside in a OneDrive workspace; Git ignore is not a cloud-sync control. Use unsynced/managed secret storage for real data. Audit retention and deployment admin bootstrap require explicit operational approval before real launch.
@@ -307,8 +317,8 @@ Every final Phase A acceptance criterion:
 
 ## OPEN DECISIONS
 
-No unresolved product-level Phase A decision. The only ambiguity encountered—the nine-capability tier mapping—was explicitly approved by the owner and recorded in ADR 0004 / OPEN_DECISIONS.md. Deployment access/operational prerequisites and hosted CI are external execution requirements, not invented product decisions. Commercial launch approval remains absent.
+No unresolved product-level Phase A decision. The only ambiguity encountered—the nine-capability tier mapping—was explicitly approved by the owner and recorded in ADR 0004 / OPEN_DECISIONS.md. Hosted CI is satisfied. Deployment access/operational prerequisites remain external execution requirements, not invented product decisions. Commercial launch approval remains absent.
 
 ## PHASE B READINESS
 
-The local foundation is implemented and validated. **Phase B must not begin** until Phase A's outstanding hosted-CI acceptance item is satisfied and further work is separately authorized. No Phase B functionality was implemented.
+**READY** as a completed foundation. Phase A is complete; Phase B requires separate authorization and has not begun. No Phase B functionality was implemented.
