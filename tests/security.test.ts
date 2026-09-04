@@ -83,13 +83,21 @@ test("additional security and data minimization integration", async (t) => {
           "https://example.invalid/image",
         ]),
       );
-      const login = await h.login("verify@example.invalid", password);
-      await assert.rejects(
-        h.pool.query(
-          'UPDATE auth_sessions SET "ipAddress"=$2 WHERE "userId"=$1',
-          [id, "127.0.0.1"],
-        ),
+      // PostgreSQL may log rejected rows. Exercise the constraint with an
+      // expired, noncredential fixture rather than a live test session token.
+      const fixtureId = randomUUID();
+      await h.pool.query(
+        'INSERT INTO auth_sessions(id,"expiresAt",token,"createdAt","updatedAt","userId") VALUES($1,now()-interval \'1 day\',$2,now(),now(),$3)',
+        [fixtureId, "expired-noncredential-tracking-fixture", id],
       );
+      await assert.rejects(
+        h.pool.query('UPDATE auth_sessions SET "ipAddress"=$2 WHERE id=$1', [
+          fixtureId,
+          "127.0.0.1",
+        ]),
+      );
+      await h.pool.query("DELETE FROM auth_sessions WHERE id=$1", [fixtureId]);
+      const login = await h.login("verify@example.invalid", password);
       await h.pool.query(
         "CREATE FUNCTION deliberate_error() RETURNS trigger LANGUAGE plpgsql AS $$ BEGIN RAISE EXCEPTION 'private-database-detail'; END; $$",
       );
