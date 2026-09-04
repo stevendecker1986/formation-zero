@@ -79,7 +79,7 @@ export default function Account() {
     if (response.ok) setAccount("");
   }
   return (
-    <section>
+    <section className="fz-surface">
       <h2>Account</h2>
       <label>
         Action{" "}
@@ -95,10 +95,7 @@ export default function Account() {
           <option value="reset-password">Reset password</option>
         </select>
       </label>
-      <form
-        onSubmit={submit}
-        style={{ display: "grid", gap: 16, maxWidth: 420, marginTop: 24 }}
-      >
+      <form onSubmit={submit} className="fz-form">
         {action === "register" && (
           <label>
             Display name{" "}
@@ -146,9 +143,11 @@ export default function Account() {
         <button type="submit">Continue</button>
       </form>
       <p role="status">{message}</p>
-      <button onClick={loadAccount}>View account</button>{" "}
-      <button onClick={logout}>Sign out</button>
-      <pre style={{ whiteSpace: "pre-wrap" }}>{account}</pre>
+      <div className="fz-actions">
+        <button onClick={loadAccount}>View account</button>
+        <button onClick={logout}>Sign out</button>
+      </div>
+      <pre>{account}</pre>
     </section>
   );
 }

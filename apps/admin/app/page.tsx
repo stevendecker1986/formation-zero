@@ -12,13 +12,13 @@ export default async function Admin() {
     });
     if (!response.ok)
       return (
-        <section>
+        <section className="fz-surface">
           <h2>Access denied</h2>
           <p>A signed-in PLATFORM_ADMIN account is required.</p>
         </section>
       );
     return (
-      <section>
+      <section className="fz-surface">
         <h2>Administration foundation</h2>
         <p>Server authorization verified.</p>
         <p>

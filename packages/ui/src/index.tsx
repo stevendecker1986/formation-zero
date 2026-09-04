@@ -1,19 +1,58 @@
 import type { ReactNode } from "react";
-export function Shell({ children }: { children: ReactNode }) {
+import { brand } from "./tokens";
+export { themeStyle } from "./theme";
+export function BrandName() {
+  // Text identification only; never an approximation of the canonical symbol.
   return (
-    <main style={{ maxWidth: 840, margin: "0 auto", padding: "64px 24px" }}>
-      <header>
-        <p style={{ color: "#c5d49c", letterSpacing: 3 }}>FORMATION ZERO</p>
-        <h1>Readiness Starts Here.</h1>
+    <p className="fz-brand">
+      FORMATION <span>ZERO</span>
+    </p>
+  );
+}
+export function Surface({ children }: { children: ReactNode }) {
+  return <section className="fz-surface">{children}</section>;
+}
+export function Badge({ children }: { children: ReactNode }) {
+  return <span className="fz-badge">{children}</span>;
+}
+export function Shell({
+  children,
+  administration = false,
+}: {
+  children: ReactNode;
+  administration?: boolean;
+}) {
+  return (
+    <div className="fz-shell">
+      <a className="fz-skip" href="#content">
+        Skip to content
+      </a>
+      <header className="fz-header">
+        <BrandName />
+        <p className="fz-eyebrow">
+          {administration
+            ? "Administration"
+            : "Build capability. Improve every day."}
+        </p>
       </header>
-      {children}
-      <footer style={{ marginTop: 64, fontSize: 14, color: "#bdc7d1" }}>
+      <main id="content" tabIndex={-1}>
+        <div className="fz-intro">
+          <p className="fz-eyebrow">
+            {administration
+              ? "Accuracy. Accountability. Trust."
+              : "For every athlete. Every body. Every goal."}
+          </p>
+          <h1>{brand.tagline}</h1>
+        </div>
+        {children}
+      </main>
+      <footer className="fz-footer">
         <p>
-          Independent fitness software. Not an official USMC or DoD product. No
-          endorsement implied.
+          Independent fitness and human-performance software. Not an official
+          USMC or DoD product. No endorsement implied.
         </p>
         <p>Phase A — Foundation. Commercial launch is not authorized.</p>
       </footer>
-    </main>
+    </div>
   );
 }

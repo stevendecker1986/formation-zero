@@ -1,6 +1,6 @@
 # Formation Zero
 
-**Readiness Starts Here.** Phase A account and platform foundation only. Independent fitness software, not an official USMC/DoD product; no endorsement implied. Commercial launch is not authorized.
+**Readiness Starts Here.** Phase A account and platform foundation only. Universal fitness and human-performance software, not an official USMC/DoD product; no endorsement implied. Commercial launch is not authorized.
 
 The initial repository was empty. See [the audit and implementation plan](docs/REPOSITORY_AUDIT.md), [architecture](docs/ARCHITECTURE.md), and [Phase A report](docs/PHASE_A_REPORT.md).
 
@@ -36,3 +36,5 @@ npm run validate
 ```
 
 See [development](DEVELOPMENT.md), [testing](TESTING.md), [deployment](DEPLOYMENT.md), [security](SECURITY.md), and [privacy](PRIVACY_DATA_CLASSIFICATION.md). No training, policy, CMS, formations, tracking, real billing, or AI features exist. Roles, tiers, and resource permissions are separate; COMMAND never grants formation membership.
+
+Post-Phase-A positioning and brand authority: [PRODUCT_POSITIONING](docs/PRODUCT_POSITIONING.md), [DESIGN_SYSTEM](docs/DESIGN_SYSTEM.md), and [Amendment 001](docs/AMENDMENT_001_DIRECTIVE.txt). Phase B remains unstarted.

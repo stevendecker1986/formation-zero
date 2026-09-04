@@ -1,0 +1,1412 @@
+FORMATION ZERO
+POST-PHASE-A PRODUCT POSITIONING, BRAND, AUTHORSHIP & DESIGN-SYSTEM AMENDMENT
+
+VERSION:
+v1.0-PLAN Amendment 001
+
+STATUS:
+AUTHORITATIVE
+
+EXECUTION POINT:
+AFTER PHASE A
+BEFORE PHASE B
+
+CURRENT FOUNDATION:
+Phase A — COMPLETE
+Hosted CI — PASS
+Branch — main
+Phase B — NOT STARTED
+
+======================================================================
+R — ROLE
+======================================================================
+
+You are continuing as the Principal Software Architect, Product Systems Architect,
+Design-System Engineer, Security/Privacy Engineer, and Technical Documentation Lead
+for Formation Zero.
+
+Phase A is COMPLETE.
+
+Do NOT begin Phase B during this task.
+
+This is a controlled post-Phase-A amendment whose purpose is to lock:
+
+1. Formation Zero's universal target audience.
+2. The relationship between Marine Corps source material and the product.
+3. Founder fitness qualifications and future authorship metadata.
+4. Formation Zero's canonical visual identity.
+5. The design-system foundation all future product surfaces must use.
+6. Neutral terminology for civilian, military, tactical, athletic, and group users.
+
+Preserve all passing Phase A architecture, security controls, authentication,
+authorization, subscription entitlements, CI, migrations, tests, documentation,
+and legal-commercial safeguards.
+
+Do not rewrite working Phase A systems unnecessarily.
+
+Do not implement fitness functionality.
+
+Do not populate the knowledge base.
+
+Do not begin Phase B.
+
+======================================================================
+C — PRODUCT POSITIONING
+======================================================================
+
+FORMATION ZERO is:
+
+A universal fitness, human-performance, recovery, readiness, and group-training
+platform.
+
+Working tagline:
+
+READINESS STARTS HERE.
+
+FORMATION ZERO IS NOT A MARINE CORPS-ONLY PRODUCT.
+
+FORMATION ZERO IS NOT AN OFFICIAL UNITED STATES MARINE CORPS OR DEPARTMENT OF
+DEFENSE PRODUCT.
+
+A user must be able to obtain full value from Formation Zero without having any
+military affiliation, experience, rank, unit, or background.
+
+Potential users include:
+
+- general fitness users
+- beginners
+- recreational athletes
+- strength-focused users
+- muscle-development users
+- runners
+- hybrid athletes
+- ruckers
+- tactical athletes
+- military personnel
+- veterans
+- law-enforcement personnel
+- firefighters
+- first responders
+- personal trainers
+- coaches
+- sports teams
+- academies
+- ROTC programs
+- group fitness instructors
+- tactical-performance organizations
+- people preparing for physically demanding occupations
+- organizations responsible for group physical training
+
+The Marine Corps is an important KNOWLEDGE FOUNDATION.
+
+It is NOT the boundary of Formation Zero's target market.
+
+Use this distinction throughout the architecture, documentation, naming, UI copy,
+future content model, and design system.
+
+======================================================================
+1. FORMATION ZERO KNOWLEDGE FOUNDATION
+======================================================================
+
+Formation Zero may eventually draw from multiple approved knowledge streams.
+
+A. PUBLICLY RELEASABLE MARINE CORPS HUMAN-PERFORMANCE MATERIAL
+
+Examples may include appropriately reviewed material relating to:
+
+- physical fitness
+- Force Fitness Instructor concepts
+- HITT / FitForce
+- PFT
+- CFT
+- recovery
+- Sports Medicine Injury Prevention
+- performance nutrition
+- body-composition policy
+- MCMAP-supportive physical conditioning where appropriate
+- unit/group PT
+- human performance
+- readiness
+- mobility
+- strength
+- endurance
+- injury-risk mitigation
+
+These are knowledge sources.
+
+They do NOT make Formation Zero a Marine Corps product.
+
+Marine Corps-specific standards must later remain distinguishable from Formation
+Zero original recommendations.
+
+B. PROFESSIONAL FITNESS EDUCATION
+
+The founder currently holds:
+
+- ISSA Certified Personal Trainer
+- ISSA Specialist in Bodybuilding
+
+These qualifications may inform Formation Zero original programming within
+appropriate professional scope.
+
+They do NOT authorize copying proprietary ISSA:
+
+- textbooks
+- course materials
+- diagrams
+- charts
+- tables
+- photographs
+- videos
+- exercise descriptions
+- branded programs
+- logos
+- proprietary wording
+
+Do NOT ingest proprietary ISSA materials merely because the founder holds the
+credentials.
+
+Do NOT imply ISSA sponsors, certifies, approves, or endorses Formation Zero.
+
+C. EXERCISE SCIENCE / HUMAN-PERFORMANCE EVIDENCE
+
+Formation Zero may later incorporate appropriately reviewed exercise science,
+sports-performance, and human-performance evidence.
+
+D. QUALIFIED SPECIALTY REVIEW
+
+Future content architecture must support review by appropriate professionals,
+including where relevant:
+
+- certified strength and conditioning professionals
+- personal trainers
+- registered dietitians
+- physical therapists
+- athletic trainers
+- sports-medicine professionals
+- endurance/running specialists
+- Force Fitness SMEs
+- MAI/MAIT
+- other specialty reviewers
+
+E. FORMATION ZERO ORIGINAL METHODOLOGY
+
+Formation Zero may create original:
+
+- training programs
+- strength programming
+- hypertrophy programming
+- running programming
+- rucking programming
+- progression logic
+- regression logic
+- substitutions
+- readiness logic
+- recovery logic
+- training-load interpretation
+- adaptive programming
+- group training
+- circuit generation
+- station generation
+- equipment allocation
+- mixed-ability scaling
+- Unit PT generation
+- leader workflows
+- AAR logic
+- analytics
+
+These must be identified appropriately as:
+
+FZ_ORIGINAL
+
+or
+
+FZ_DERIVED
+
+rather than being represented as official Marine Corps material.
+
+======================================================================
+2. AUTHORSHIP, QUALIFICATION, SOURCE & RIGHTS ARE DIFFERENT
+======================================================================
+
+Maintain strict separation among:
+
+SOURCE PROVENANCE
+
+Answers:
+Where is the underlying fact, principle, or standard supported?
+
+CONTENT AUTHORSHIP
+
+Answers:
+Who created the Formation Zero expression or programming?
+
+PROFESSIONAL QUALIFICATION
+
+Answers:
+What relevant qualification does an author/reviewer hold?
+
+TECHNICAL REVIEW
+
+Answers:
+Who professionally reviewed the content?
+
+RIGHTS PROVENANCE
+
+Answers:
+Who owns or may legally publish the expression/media?
+
+These must NOT be collapsed into one field.
+
+Future content architecture should be capable of representing concepts such as:
+
+author_id
+author_display_name
+author_role
+
+developer_qualifications
+
+technical_reviewer_id
+technical_review_status
+
+safety_reviewer_id
+safety_review_status
+
+specialty_reviewer_id
+specialty_review_type
+specialty_review_status
+
+source_provenance
+
+content_classification
+
+rights_classification
+
+These fields belong to future content/editorial administration.
+
+Do NOT add them to ordinary user profiles.
+
+Do NOT implement the complete Phase B content model in this amendment.
+
+Document the requirement for Phase B.
+
+======================================================================
+3. CORE TERMINOLOGY
+======================================================================
+
+The default Formation Zero user is NOT assumed to be a Marine.
+
+Preferred general product terms:
+
+USER
+ATHLETE
+INDIVIDUAL
+MEMBER
+PARTICIPANT
+LEADER
+COACH
+TRAINER
+TEAM
+GROUP
+FORMATION
+
+Use the term most appropriate to context.
+
+Examples:
+
+BAD:
+Good morning, Marine.
+
+GOOD:
+Good morning, Steven.
+
+BAD:
+How many Marines are training?
+
+GOOD:
+How many people are training?
+
+BAD:
+Build Marine readiness.
+
+GOOD:
+Build capability.
+
+BAD:
+Marine Fitness Dashboard.
+
+GOOD:
+Performance Dashboard.
+
+BAD:
+Marine Training Group.
+
+GOOD:
+Formation / Team / Group.
+
+Military terminology remains appropriate in military-specific:
+
+- assessments
+- programs
+- source records
+- policy modules
+- educational content
+- organizational structures
+
+Do not mechanically eliminate valid Marine Corps references.
+
+======================================================================
+4. ACCOUNT MODEL
+======================================================================
+
+Core Formation Zero accounts must NOT require:
+
+- military service
+- branch
+- rank
+- MOS
+- unit
+- billet
+- service status
+- veteran status
+- DoD email
+- government email
+- government affiliation
+
+Do not add these to the Phase A identity/profile model.
+
+Future military affiliation data may only be added if a legitimate product
+requirement is separately approved.
+
+======================================================================
+5. FUTURE ONBOARDING
+======================================================================
+
+Future Formation Zero onboarding should support universal goals such as:
+
+GENERAL FITNESS
+STRENGTH
+MUSCLE DEVELOPMENT
+RUNNING
+HYBRID PERFORMANCE
+RUCKING
+TACTICAL FITNESS
+WORK CAPACITY
+MOBILITY
+RECOVERY
+BODY-COMPOSITION SUPPORT
+RETURN TO STRUCTURED TRAINING
+EVENT PREPARATION
+CUSTOM GOAL
+
+Specialized military goals may include:
+
+MARINE CORPS PFT
+MARINE CORPS CFT
+
+Those are specialized programs/modules.
+
+They must NOT dominate general onboarding.
+
+A civilian should be able to complete onboarding without irrelevant military
+questions.
+
+Do not implement onboarding during this amendment.
+
+Document this requirement for later phases.
+
+======================================================================
+6. COMMAND IS UNIVERSAL GROUP TRAINING
+======================================================================
+
+COMMAND is not exclusively military Unit PT software.
+
+COMMAND solves:
+
+"I have X people,
+Y minutes,
+this equipment,
+this space,
+these ability levels,
+these restrictions,
+this recent training history,
+and this training objective.
+
+Build an executable group training session."
+
+Potential COMMAND users include:
+
+- military leaders
+- coaches
+- trainers
+- sports teams
+- fire departments
+- law-enforcement organizations
+- academies
+- ROTC
+- group fitness instructors
+- tactical-performance coaches
+- fitness organizations
+- other group-training organizations
+
+Future hierarchy remains flexible:
+
+formation
+parent_formation
+formation_type
+
+Possible future formation types may include:
+
+CUSTOM_GROUP
+TEAM
+CLASS
+CREW
+SECTION
+FIRE_TEAM
+SQUAD
+PLATOON
+COMPANY
+ORGANIZATION
+OTHER
+
+Military structures are supported.
+
+They are not mandatory.
+
+Do not hard-code Marine Corps organization as the only hierarchy.
+
+======================================================================
+7. SUBSCRIPTION MODEL — LOCKED
+======================================================================
+
+Do not alter the subscription model.
+
+Exactly:
+
+BASE
+PERFORMANCE
+COMMAND
+
+Approved premium entitlement foundation remains:
+
+PERFORMANCE:
+
+CAN_USE_FULL_LIBRARY
+CAN_USE_ADAPTIVE_PROGRAMMING
+CAN_USE_READINESS_ENGINE
+CAN_USE_ADVANCED_PROGRESS
+CAN_USE_RUN_TRACKING
+CAN_USE_RUCK_TRACKING
+
+COMMAND:
+
+All PERFORMANCE capabilities plus:
+
+CAN_USE_UNIT_PT
+CAN_USE_LIVE_PT
+CAN_USE_FORMATION_ANALYTICS
+
+BASE has none of these nine premium capability flags.
+
+BASE will still eventually receive its separately specified free functionality.
+
+Do NOT implement these fitness capabilities during this amendment.
+
+======================================================================
+8. CANONICAL VISUAL AUTHORITY
+======================================================================
+
+The branding board attached to THIS directive is now the AUTHORITATIVE Formation
+Zero visual reference.
+
+If previous:
+
+- branding boards
+- generated images
+- placeholder logos
+- UI concepts
+- temporary themes
+- old visual experiments
+
+conflict with the currently attached branding board:
+
+THE CURRENT ATTACHED BRANDING BOARD WINS.
+
+There is ONE Formation Zero identity.
+
+Do not blend incompatible old and new visual directions.
+
+======================================================================
+9. CANONICAL LOGO
+======================================================================
+
+Use the exact Formation Zero identity shown in the attached current branding board.
+
+Its defining structure includes:
+
+- angular outer formation structure
+- central ZERO
+- vertical centerline
+- red objective marker
+- FORMATION ZERO wordmark
+- READINESS STARTS HERE. tagline where appropriate
+
+Concept:
+
+ZERO
+=
+starting point / baseline
+
+CENTERLINE
+=
+direction / alignment / measurable progression
+
+RED OBJECTIVE MARKER
+=
+objective / focus / destination
+
+OUTER FORMATION
+=
+collective capability / alignment / readiness
+
+Conceptual sequence:
+
+STARTING POINT
+→
+DIRECTED DEVELOPMENT
+→
+CAPABILITY
+→
+READINESS
+
+DO NOT REDESIGN THE LOGO.
+
+======================================================================
+10. PROHIBITED LOGO DRIFT
+======================================================================
+
+Do not replace or reinterpret the canonical Formation Zero logo as:
+
+- FZ monogram
+- generic chevron
+- double chevron
+- mountain
+- shield
+- skull
+- Spartan helmet
+- crosshair
+- rifle
+- military crest
+- EGA
+- USMC mark
+- rank insignia
+- unit insignia
+- unrelated tactical emblem
+
+Do not invent alternate brand identities.
+
+======================================================================
+11. LOGO ASSET HANDLING
+======================================================================
+
+If only a raster branding-board reference is available and no approved production
+SVG/vector has been supplied:
+
+DO NOT redraw the mark and claim it is final.
+
+DO NOT generate an approximation and call it the master logo.
+
+Use the supplied reference asset appropriately.
+
+Create/document a stable asset location and simple replacement path for the final
+approved vector master.
+
+A later replacement of temporary/reference artwork with the final SVG must not
+require architectural redesign.
+
+======================================================================
+12. COLOR SYSTEM
+======================================================================
+
+Use the attached current branding board as visual authority.
+
+Core visual system:
+
+OBSIDIAN / NEAR BLACK
+Primary background.
+
+CHARCOAL
+Primary surfaces.
+
+GRAPHITE / FIELD GRAY
+Elevated surfaces.
+
+BONE / OFF-WHITE
+Primary text and light branding.
+
+MUTED GRAY
+Secondary information.
+
+FORMATION ZERO RED / CRIMSON
+Primary brand accent.
+
+OPTIONAL MUTED SAND / FIELD-NEUTRAL TONES
+Support only where appropriate.
+
+Do not blindly accept hexadecimal labels rendered into an AI concept image as
+official production values unless separately approved.
+
+If exact color values are not formally supplied:
+
+derive a reasonable provisional token set,
+mark the values provisional,
+centralize them,
+and document that the final palette can be changed globally.
+
+======================================================================
+13. RED USAGE
+======================================================================
+
+Formation Zero red should be restrained.
+
+Use for:
+
+- primary actions
+- active states
+- selected navigation
+- progress emphasis
+- objectives
+- important focus
+- controlled warnings where semantically appropriate
+
+Do not cover large portions of every screen in red.
+
+Do not make Formation Zero look like a gaming UI.
+
+Avoid introducing dominant:
+
+- bright blue
+- cyan
+- purple
+- neon colors
+- cyberpunk colors
+- unrelated gradients
+
+======================================================================
+14. VISUAL CHARACTER
+======================================================================
+
+Formation Zero should feel:
+
+DISCIPLINED
+CAPABLE
+PRECISE
+RUGGED
+MODERN
+PREMIUM
+ATHLETIC
+FUNCTIONAL
+SERIOUS
+CONFIDENT
+
+It should feel like:
+
+HIGH-PERFORMANCE FITNESS SOFTWARE
++
+REAL-WORLD READINESS
++
+PROFESSIONAL GROUP-TRAINING TOOLS
+
+It should NOT feel like:
+
+- Call of Duty
+- combat simulator
+- gun brand
+- prepper website
+- generic SaaS
+- government portal
+- supplement company
+- bodybuilding cliché
+- military recruiting software
+
+======================================================================
+15. MILITARY INFLUENCE
+======================================================================
+
+Military influence should come primarily through:
+
+- discipline
+- readiness
+- precision
+- hierarchy
+- leadership
+- durability
+- organization
+- field usability
+
+NOT:
+
+- camouflage UI backgrounds
+- fake classified markings
+- skulls
+- weapons
+- Spartan imagery
+- excessive stencil fonts
+- official military insignia
+- military cosplay
+
+Formation Zero must remain its own brand.
+
+======================================================================
+16. PHOTOGRAPHY — BROAD AUDIENCE
+======================================================================
+
+Photography must communicate a broad fitness and human-performance audience.
+
+Use an appropriate mixture of:
+
+- men
+- women
+- different adult fitness levels
+- strength training
+- muscle development
+- running
+- rucking
+- hybrid training
+- functional training
+- mobility
+- recovery
+- individual training
+- partner work
+- group training
+- coaching
+- outdoor training
+- gym training
+- tactical fitness
+- first responders where appropriate
+- military fitness where appropriate
+- civilians
+
+Military photography may appear in relevant contexts.
+
+It must NOT dominate the visual identity.
+
+Avoid combat imagery as core branding.
+
+Guiding concept:
+
+REAL PEOPLE.
+REAL EFFORT.
+REAL TRAINING.
+REAL PROGRESS.
+
+======================================================================
+17. TYPOGRAPHY
+======================================================================
+
+Use the attached branding board as the style reference.
+
+HEADINGS:
+
+- strong
+- condensed
+- athletic
+- uppercase-friendly
+- highly legible
+
+BODY:
+
+- modern sans-serif
+- highly readable
+- comfortable for mobile and long-form use
+
+DATA / TIMERS:
+
+- highly legible numeric treatment
+- tabular numerals where useful
+- monospaced treatment where useful
+
+Any production font must have commercial-use licensing compatible with Formation
+Zero.
+
+If a visual concept names a font whose license or availability has not been
+verified:
+
+do not automatically download or bundle it.
+
+Use an approved fallback and document the intended final font.
+
+======================================================================
+18. DESIGN TOKENS
+======================================================================
+
+Implement centralized semantic design tokens.
+
+Do NOT scatter arbitrary values throughout components.
+
+Support:
+
+COLORS
+TYPOGRAPHY
+SPACING
+RADII
+BORDERS
+SHADOWS
+MOTION
+BREAKPOINTS
+Z-INDEX
+ICON SIZING
+
+Suggested semantic concepts:
+
+background-primary
+background-secondary
+
+surface-primary
+surface-elevated
+
+text-primary
+text-secondary
+text-muted
+
+brand-accent
+brand-accent-hover
+brand-accent-active
+
+border-default
+border-strong
+
+state-success
+state-warning
+state-danger
+state-info
+
+Use implementation patterns that fit the existing Phase A architecture.
+
+======================================================================
+19. LAYOUT PRINCIPLES
+======================================================================
+
+Use:
+
+- disciplined grids
+- strong alignment
+- generous spacing
+- obvious hierarchy
+- restrained card usage
+- large primary actions
+- predictable navigation
+- high readability
+- minimal unnecessary decoration
+
+Avoid:
+
+- dashboard overload
+- glassmorphism
+- excessive shadows
+- excessive gradients
+- cartoon cards
+- generic SaaS styling
+- gaming styling
+- unnecessary animation
+
+======================================================================
+20. PRODUCT-SURFACE QUESTIONS
+======================================================================
+
+Future surfaces should quickly answer:
+
+HOME:
+What should I do today?
+
+TRAIN:
+What am I training?
+
+RECOVER:
+What does my recovery need?
+
+PROGRESS:
+Am I improving?
+
+LIBRARY:
+What information do I need?
+
+COMMAND:
+What does this group need?
+
+LIVE PT:
+What is happening right now?
+
+ADMIN:
+What needs review or action?
+
+These are design principles only.
+
+Do NOT implement those product features now.
+
+======================================================================
+21. TIER VISUAL QUALITY
+======================================================================
+
+BASE, PERFORMANCE, and COMMAND use the same high-quality design system.
+
+Do not intentionally make BASE visually inferior.
+
+Subscription tiers unlock functionality.
+
+They do not unlock professional design.
+
+======================================================================
+22. COMMAND CHARACTER
+======================================================================
+
+Future COMMAND UI should emphasize:
+
+OBJECTIVE
+PEOPLE
+TIME
+EQUIPMENT
+SPACE
+SCALING
+EXECUTION
+AAR
+
+COMMAND may use denser layouts where appropriate.
+
+It should feel like:
+
+a serious coach/leader tool
+
+not:
+
+an enterprise HR system
+
+and not:
+
+military-only software.
+
+======================================================================
+23. LIVE PT CHARACTER
+======================================================================
+
+Future Live PT must prioritize:
+
+VERY LARGE TEXT
+VERY LARGE TIMER
+HIGH CONTRAST
+MINIMAL CONTROLS
+FAST INTERACTION
+OUTDOOR READABILITY
+
+It should feel like a purpose-built training instrument.
+
+Do NOT implement Live PT functionality in this task.
+
+======================================================================
+24. ADMIN CHARACTER
+======================================================================
+
+Admin uses the same Formation Zero identity but prioritizes:
+
+- readability
+- source review
+- content review
+- auditability
+- long-form editing
+- accuracy
+
+Admin may use lighter working surfaces where this materially improves usability.
+
+Do not force every administrative screen into cinematic black styling merely for
+brand consistency.
+
+======================================================================
+25. ACCESSIBILITY
+======================================================================
+
+Maintain/support:
+
+- WCAG-conscious contrast
+- large tap targets
+- keyboard navigation
+- visible focus
+- screen readers
+- VoiceOver
+- TalkBack
+- text scaling
+- reduced motion
+- captions
+- non-color-only communication
+- outdoor readability where relevant
+
+Accessibility is part of the Formation Zero brand.
+
+======================================================================
+26. CURRENT EXECUTION SCOPE
+======================================================================
+
+THIS AMENDMENT DOES NOT AUTHORIZE PHASE B.
+
+Authorized work only:
+
+1. Record the universal product-positioning amendment.
+2. Record Marine Corps source-foundation vs audience distinction.
+3. Record founder authorship/qualification architecture requirements.
+4. Review existing Phase A language for Marine-only assumptions.
+5. Correct generic Marine-only terminology where inappropriate.
+6. Preserve valid USMC legal/source references.
+7. Establish centralized Formation Zero design tokens.
+8. Establish typography/theme foundations.
+9. Align existing Phase A WEB shell with the current brand.
+10. Align existing Phase A MOBILE shell with the current brand.
+11. Align existing Phase A ADMIN shell appropriately with the current brand.
+12. Register/document the current branding board as visual authority.
+13. Preserve a clean future vector-logo replacement path.
+14. Update documentation and ADRs.
+15. Run the complete Phase A validation suite again.
+16. Run hosted CI after changes.
+17. Report.
+18. STOP.
+
+======================================================================
+27. DO NOT IMPLEMENT
+======================================================================
+
+Do NOT implement:
+
+- Phase B source registry
+- exercise library
+- recovery library
+- knowledge CMS
+- programs
+- training engine
+- rule engine
+- prescription engine
+- validation engine
+- readiness algorithm
+- training load
+- PFT/CFT scoring
+- body-composition calculation
+- running GPS
+- rucking GPS
+- formations
+- Unit PT
+- Live PT functionality
+- HealthKit
+- Health Connect
+- Garmin
+- real billing
+- AI features
+- book QR functionality
+- social features
+- ads
+
+This is a positioning/theme amendment only.
+
+======================================================================
+28. REPOSITORY LANGUAGE AUDIT
+======================================================================
+
+Search the existing Phase A repository for terms including:
+
+Marine
+Marines
+USMC
+military
+rank
+MOS
+unit
+branch
+billet
+DoD
+
+Review every meaningful occurrence contextually.
+
+Do NOT mechanically replace everything.
+
+Classify each occurrence as:
+
+A. VALID SOURCE / LEGAL / BRAND-BOUNDARY REFERENCE
+
+Preserve.
+
+B. VALID FUTURE SPECIALIZED MILITARY FEATURE
+
+Preserve or clarify.
+
+C. INCORRECT GENERIC USER ASSUMPTION
+
+Correct to neutral terminology.
+
+D. OBSOLETE BRAND POSITIONING
+
+Correct.
+
+Document meaningful changes.
+
+======================================================================
+29. DOCUMENTATION
+======================================================================
+
+Create or update as appropriate:
+
+docs/PRODUCT_POSITIONING.md
+
+docs/DESIGN_SYSTEM.md
+
+docs/ARCHITECTURE.md
+
+docs/PRIVACY_DATA_CLASSIFICATION.md
+
+docs/CHANGELOG.md
+
+Create an ADR or formal amendment record capturing:
+
+FORMATION ZERO IS A UNIVERSAL HUMAN-PERFORMANCE PLATFORM.
+
+Marine Corps human-performance doctrine is a major foundational source.
+
+It is not the target-market boundary.
+
+Also document:
+
+- founder professional qualification metadata requirements
+- source vs authorship distinction
+- canonical branding-board authority
+- logo rules
+- palette direction
+- typography direction
+- imagery direction
+- universal terminology
+- specialized military-module boundary
+- prohibited visual drift
+
+======================================================================
+30. DESIGN SYSTEM IMPLEMENTATION
+======================================================================
+
+Implement only the design-system foundation necessary for the current Phase A
+shells.
+
+Where appropriate establish reusable:
+
+- Button
+- Text
+- Heading
+- Surface
+- Input
+- Badge
+- Status
+- navigation primitives
+- layout primitives
+
+Do not build a huge speculative component library.
+
+Use the smallest useful foundation that establishes consistency for later phases.
+
+======================================================================
+31. PHASE A REGRESSION REQUIREMENT
+======================================================================
+
+All existing Phase A functionality must remain intact.
+
+After this amendment run applicable:
+
+- format
+- lint
+- strict typecheck
+- unit tests
+- integration tests
+- API tests
+- database tests
+- security tests
+- license checks
+- web build
+- admin build
+- API build
+- mobile validation/export
+- migration validation
+- smoke tests
+
+Then push changes and run the actual hosted GitHub Actions workflow.
+
+Do not report CI PASS unless the actual hosted workflow passes.
+
+Do not weaken existing tests/checks to accommodate the theme amendment.
+
+======================================================================
+32. ACCEPTANCE CRITERIA
+======================================================================
+
+This amendment is COMPLETE only when all applicable criteria PASS:
+
+[ ] Formation Zero is explicitly documented as a universal fitness /
+    human-performance platform.
+
+[ ] USMC knowledge is documented as a major source foundation rather than
+    target-market boundary.
+
+[ ] Generic product language is organization-neutral.
+
+[ ] Core accounts do not require military affiliation.
+
+[ ] Marine Corps-specific capabilities are positioned as specialized modules.
+
+[ ] COMMAND is documented as universal group-training functionality.
+
+[ ] BASE / PERFORMANCE / COMMAND remain unchanged.
+
+[ ] Approved entitlement mapping remains unchanged.
+
+[ ] Founder ISSA credentials are represented only as future authorship /
+    qualification metadata requirements.
+
+[ ] Source provenance and professional qualification remain separate concepts.
+
+[ ] No ISSA endorsement is implied.
+
+[ ] No proprietary ISSA material has been ingested.
+
+[ ] Current attached branding board is recorded as visual authority.
+
+[ ] Canonical logo has NOT been redesigned.
+
+[ ] Obsolete alternate logo concepts have not been adopted.
+
+[ ] Design tokens are centralized.
+
+[ ] Phase A web shell reflects the Formation Zero theme.
+
+[ ] Phase A mobile shell reflects the Formation Zero theme.
+
+[ ] Phase A admin shell appropriately reflects the Formation Zero identity.
+
+[ ] Photography/design documentation reflects a broad audience.
+
+[ ] Accessibility foundation remains intact.
+
+[ ] No Phase B functionality was implemented.
+
+[ ] Existing Phase A tests pass.
+
+[ ] Lint passes.
+
+[ ] Strict typecheck passes.
+
+[ ] Builds/exports pass.
+
+[ ] Hosted GitHub Actions CI passes.
+
+If a criterion fails:
+
+STATUS = INCOMPLETE.
+
+======================================================================
+33. REQUIRED FINAL REPORT
+======================================================================
+
+When complete, STOP.
+
+Return exactly these sections:
+
+PHASE:
+Post-Phase-A Product Positioning, Brand & Authorship Amendment
+
+STATUS:
+COMPLETE or INCOMPLETE
+
+AUTHORITATIVE BRAND REFERENCE:
+Identify the uploaded branding asset used.
+
+PRODUCT POSITIONING CHANGES:
+Summarize universal-audience changes.
+
+USMC SOURCE-FOUNDATION CHANGES:
+Explain how source vs audience distinction is documented.
+
+FOUNDER QUALIFICATION / AUTHORSHIP CHANGES:
+Explain metadata/design decisions only.
+Do not claim ISSA endorsement.
+
+TERMINOLOGY AUDIT:
+Report inappropriate generic military terminology corrected and legitimate
+references preserved.
+
+FILES CREATED:
+Complete relevant list.
+
+FILES MODIFIED:
+Complete relevant list.
+
+ADR / AMENDMENT:
+List new records.
+
+DESIGN TOKENS:
+List implemented token groups and provisional/final status.
+
+LOGO ASSET HANDLING:
+Explain current reference asset and future vector replacement path.
+
+WEB THEME:
+Changes.
+
+MOBILE THEME:
+Changes.
+
+ADMIN THEME:
+Changes.
+
+ACCESSIBILITY:
+Checks/changes.
+
+TESTS RUN:
+Actual commands.
+
+TEST RESULTS:
+Actual results.
+
+BUILD RESULTS:
+Actual results.
+
+HOSTED CI:
+Workflow/run/commit/result.
+
+ACCEPTANCE CRITERIA:
+Every criterion marked PASS or FAIL with evidence.
+
+KNOWN ISSUES:
+Remaining issues.
+
+PHASE B READINESS:
+READY or NOT READY.
+
+Then STOP.
+
+DO NOT BEGIN PHASE B.
+
+======================================================================
+FINAL DIRECTIVE
+======================================================================
+
+Formation Zero is a universal performance platform whose methodology is informed
+by the founder's professional fitness education, publicly releasable Marine Corps
+human-performance resources, established exercise/human-performance principles,
+qualified professional review, and Formation Zero original methodology.
+
+The Marine Corps is part of Formation Zero's knowledge DNA.
+
+It is not the fence around Formation Zero's audience.
+
+Use the CURRENT ATTACHED BRANDING BOARD as the single visual source of truth.
+
+Preserve the canonical Formation Zero identity.
+
+Implement this amendment only.
+
+Validate it fully.
+
+Run hosted CI.
+
+Report.
+
+STOP BEFORE PHASE B.

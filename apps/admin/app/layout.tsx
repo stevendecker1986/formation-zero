@@ -1,21 +1,16 @@
 import type { ReactNode } from "react";
-import { Shell } from "@formation-zero/ui";
+import { Shell, themeStyle } from "@formation-zero/ui";
+import "@formation-zero/ui/theme.css";
 export const metadata = {
   title: "Formation Zero — Administration",
-  description: "Readiness Starts Here. Independent fitness software.",
+  description:
+    "Readiness Starts Here. Universal fitness and human-performance software.",
 };
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body
-        style={{
-          margin: 0,
-          background: "#101923",
-          color: "#f1f4f6",
-          fontFamily: "system-ui",
-        }}
-      >
-        <Shell>{children}</Shell>
+      <body style={themeStyle}>
+        <Shell administration>{children}</Shell>
       </body>
     </html>
   );

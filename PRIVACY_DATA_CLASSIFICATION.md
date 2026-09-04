@@ -15,3 +15,7 @@ Phase A stores only minimal ACCOUNT data and infrastructure required to secure i
 Display name need not be a legal name. No rank, unit, billet, fitness measurement, medical detail, or raw card data is collected. Better Auth's optional image, provider-token, IP and user-agent fields are unused and constrained to NULL. HMAC IP/email throttle keys expire after one minute; expired records are cleaned by maintenance. Logs contain no emails or raw IP addresses. Browser cookies identify sessions and are not analytics cookies.
 
 Private health/readiness data must never automatically become leader-visible in future phases. A role, COMMAND subscription, or capability never creates a resource permission. Source rights are separate from account privacy; UNKNOWN rights cannot be published. Future sharing, retention, deletion/export workflows, and mobile account collection require explicitly scoped design before implementation.
+
+## Amendment 001 — universal accounts and editorial metadata
+
+Core accounts must not require military service, branch, rank, MOS, unit, billet, service/veteran status, DoD/government email or government affiliation. No such fields are added. Later optional affiliation requires a separately approved legitimate product requirement. Founder qualifications and author/reviewer metadata belong only to future editorial administration; they are not ordinary user profile data. Source, authorship, qualification, review and rights remain separate concepts. See docs/PRODUCT_POSITIONING.md.

@@ -27,3 +27,9 @@ Content enums are foundations only. Publishability denies UNKNOWN and unresolved
 ## Material decisions
 
 See `docs/adr/`. No existing architecture was replaced. Scope deviations are limited to technical implementation choices described there. Phase B remains excluded.
+
+## Post-Phase-A Amendment 001
+
+Formation Zero is universal fitness and human-performance software. Marine Corps doctrine is a major knowledge source, not the audience boundary. COMMAND serves universal group training; military hierarchy is optional in future design. See PRODUCT_POSITIONING.md for future authorship, qualification, technical/safety/specialty review and rights separation. No editorial schema or affiliation fields are added.
+
+The existing UI workspace now owns provisional cross-platform semantic tokens. Web/admin share CSS and Shell; native imports tokens only. Canonical artwork is retained in assets/brand with an approved-vector replacement contract. See DESIGN_SYSTEM.md and ADR 0009. Phase A runtime/security/entitlement architecture is unchanged; Phase B has not begun.
