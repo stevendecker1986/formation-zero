@@ -1,0 +1,11 @@
+{
+  "name": "@formation-zero/schemas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@formation-zero/domain": "0.1.0",
+    "zod": "^4.3.6"
+  }
+}

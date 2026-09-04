@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.next/
+.expo/
+dist/
+coverage/
+.local/
+*.tsbuildinfo
+apps/mobile/android/
+apps/mobile/ios/
+validation-artifacts/

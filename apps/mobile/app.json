@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Formation Zero",
+    "slug": "formation-zero",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.formationzero.foundation",
+      "infoPlist": {}
+    },
+    "android": {
+      "package": "com.formationzero.foundation",
+      "permissions": [],
+      "blockedPermissions": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.POST_NOTIFICATIONS",
+        "android.permission.BODY_SENSORS",
+        "android.permission.ACTIVITY_RECOGNITION",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.VIBRATE"
+      ],
+      "allowBackup": false
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

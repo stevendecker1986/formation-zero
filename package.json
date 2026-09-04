@@ -1,0 +1,80 @@
+{
+  "name": "formation-zero",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.0 <23",
+    "npm": ">=10"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "services/api"
+  ],
+  "scripts": {
+    "dev:web": "node --import tsx --env-file=.env scripts/next.mjs web dev",
+    "dev:admin": "node --import tsx --env-file=.env scripts/next.mjs admin dev",
+    "dev:mobile": "npm run start -w @formation-zero/mobile",
+    "dev:api": "tsx --env-file=.env services/api/src/start.ts",
+    "db:start": "tsx scripts/database-local.ts",
+    "db:migrate": "tsx --env-file=.env database/migrate.ts",
+    "db:seed": "tsx --env-file=.env database/seeds/seed.ts",
+    "typecheck": "tsc --noEmit && npm run typecheck --workspaces --if-present",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "tsx --test --test-concurrency=1 tests/*.test.ts",
+    "build": "npm run build -w @formation-zero/web && npm run build -w @formation-zero/admin && npm run build:api && npm run validate -w @formation-zero/mobile",
+    "build:api": "tsup",
+    "security:secrets": "tsx scripts/scan-secrets.ts",
+    "security:dependencies": "npm audit --audit-level=low --fetch-retries=0",
+    "licenses": "tsx scripts/licenses.ts",
+    "smoke": "tsx scripts/smoke.ts",
+    "validate": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run security:secrets && npm run security:dependencies && npm run licenses && npm run build && npm run security:clients && npm run doctor -w @formation-zero/mobile && npm run mobile:permissions && npm run smoke",
+    "start:web": "node --import tsx --env-file=.env scripts/next.mjs web start",
+    "start:admin": "node --import tsx --env-file=.env scripts/next.mjs admin start",
+    "db:maintenance": "tsx --env-file=.env scripts/maintenance.ts",
+    "mobile:permissions": "tsx scripts/mobile-permissions.ts",
+    "ci:failure-probes": "tsx scripts/failure-probes.ts",
+    "validate:clean": "tsx scripts/clean-validation.ts",
+    "security:clients": "tsx scripts/client-secrets.ts",
+    "smoke:dev": "tsx scripts/dev-smoke.ts"
+  },
+  "dependencies": {
+    "better-auth": "1.7.2",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "nodemailer": "10.0.0",
+    "pg": "^8.16.3",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "@types/nodemailer": "^7.0.0",
+    "@types/pg": "^8.15.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "embedded-postgres": "18.4.0-beta.17",
+    "esbuild": "0.28.2",
+    "eslint": "^9.39.0",
+    "expo-doctor": "1.20.4",
+    "globals": "^16.0.0",
+    "prettier": "^3.6.0",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.0"
+  },
+  "overrides": {
+    "tsup": {
+      "esbuild": "0.28.2"
+    },
+    "xcode": {
+      "uuid": "11.1.1"
+    },
+    "react-native": "0.86.3"
+  }
+}

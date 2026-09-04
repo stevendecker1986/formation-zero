@@ -1,0 +1,21 @@
+{
+  "name": "@formation-zero/mobile",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "typecheck": "tsc --noEmit",
+    "validate": "expo export --platform all",
+    "doctor": "expo-doctor"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "57.0.15",
+    "@formation-zero/domain": "0.1.0",
+    "expo": "57.0.20",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-web": "^0.21.0"
+  }
+}

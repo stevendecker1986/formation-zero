@@ -1,0 +1,11 @@
+node_modules
+.next
+.expo
+dist
+.local
+package-lock.json
+validation-artifacts
+apps/mobile/android
+apps/mobile/ios
+docs/DEPENDENCY_LICENSES.json
+docs/PHASE_A_DIRECTIVE.md
