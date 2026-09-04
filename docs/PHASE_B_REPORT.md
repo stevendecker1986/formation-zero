@@ -4,7 +4,7 @@ Phase B — Knowledge Base Foundation
 
 # STATUS
 
-INCOMPLETE. Supporting-record verification policy requires the owner decision recorded in ADR 0012. Final clean validation passed; hosted CI is pending. Phase B2 and Phase C have not begun.
+INCOMPLETE only because supporting-record verification policy requires the owner decision recorded in ADR 0012. Final clean validation and actual hosted CI passed. Phase B2 and Phase C have not begun.
 
 # INITIAL STATE
 
@@ -52,6 +52,9 @@ Strict typed knowledge workspace; immutable entity/version envelopes; typed exac
 
 # FILES MODIFIED
 
+- `README.md`
+- `DEVELOPMENT.md`
+- `docs/OPEN_DECISIONS.md`
 - `.gitattributes`
 - `.prettierignore`
 - `.github/workflows/phase-a.yml`
@@ -131,7 +134,7 @@ Final clean run: Next web/admin production builds, API tsup build and Expo web/A
 
 # HOSTED CI
 
-GitHub Actions, workflow **Phase A foundation**. Existing install/validate/failure-probe/artifact checks retained; validation step explicitly includes Phase B. No Phase B hosted run has completed at this report revision. Status: NOT YET VERIFIED.
+GitHub Actions, workflow **Phase A foundation**, branch `codex/phase-b-foundation`, implementation commit `a7035864f1e643619e2a37b2b62a2d5933ee0bdc`. [Run 33930440565](https://github.com/stevendecker1986/formation-zero/actions/runs/33930440565) completed **SUCCESS** at 2026-09-04T23:44:18Z; validation job `101207760056`. Actual downloaded job logs confirm 40 tests passed, 0 failed/skipped; dependency audit 0 vulnerabilities; 828 license entries; web/admin/API builds; Expo exports and doctor 21/21; client/permission scans; built CMS/account smoke; all four failure probes. No hosted failure or check weakening was required. Existing install/validation/failure-probe/artifact steps were retained. The branch keeps provisional supporting policy separate from main until the owner decision is resolved.
 
 # ACCEPTANCE CRITERIA
 
@@ -173,7 +176,7 @@ PASS below means the listed implemented behavior was exercised or inspected as i
 | 32  | No bulk corpus                              | PASS   | File/seed review; no external document/media import                                                 |
 | 33  | No Phase C logic                            | PASS   | Scope/code review: metadata and editorial operations only                                           |
 | 34  | All tests pass                              | PASS   | Final clean run: 40 passed, 0 failed, 0 skipped                                                     |
-| 35  | Hosted CI passes                            | FAIL   | No completed Phase B hosted evidence yet                                                            |
+| 35  | Hosted CI passes                            | PASS   | Actual GitHub run 33930440565 completed SUCCESS                                                     |
 | 36  | Documentation reflects reality              | PASS   | Current-state docs, provisional policy and actual evidence distinguished                            |
 
 | Action                     | Status | Evidence                                                                              |
@@ -194,13 +197,13 @@ PASS below means the listed implemented behavior was exercised or inspected as i
 | A14 Search                 | PASS   | Collection/name/status/provenance/rights/review filters tested                        |
 | A15 Audit                  | PASS   | Critical events, immutable storage and rollback tests                                 |
 | A16 Tests                  | PASS   | 40 tests and production/development/browser smoke passed                              |
-| A17 CI                     | FAIL   | Clean local passes; hosted run pending                                                |
+| A17 CI                     | PASS   | Clean local and hosted run 33930440565 pass                                           |
 | A18 Documentation          | PASS   | Required docs/ADRs report implementation and open policy accurately                   |
-| A19 Final clean validation | FAIL   | Local install/migrate/seed/validate/probes pass; hosted result pending                |
+| A19 Final clean validation | PASS   | Local install/migrate/seed/validate/probes and actual hosted run pass                 |
 
 # KNOWN ISSUES
 
-Supporting-record verification mapping is provisional; hosted CI remains pending at this report revision. No other implementation failure is currently known. Relationship arrays use an explicitly documented JSON editor, not a bulk content authoring tool. Production rights/media/content population has not been attempted.
+Supporting-record verification mapping is provisional. No other implementation blocker is currently known. Relationship arrays use an explicitly documented JSON editor, not a bulk content authoring tool. Production rights/media/content population has not been attempted. Toolchain deprecation notices are present in dependency/Actions logs; checks passed with no reported dependency vulnerabilities or unresolved license inventory entries.
 
 # OPEN DECISIONS
 
@@ -208,4 +211,4 @@ ADR 0012: approve EDITORIAL verification for source versions/citations and other
 
 # PHASE B2 READINESS
 
-NOT READY. Resolve ADR 0012 and complete hosted validation before declaring Phase B complete. No Phase B2 or Phase C work has begun.
+NOT READY. Resolve ADR 0012 before declaring Phase B complete. Local and hosted validation pass. No Phase B2 or Phase C work has begun.
