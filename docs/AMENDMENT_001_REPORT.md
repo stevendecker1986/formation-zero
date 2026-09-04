@@ -10,7 +10,7 @@ INCOMPLETE — all local checks passed; hosted CI pending. Phase A remains compl
 
 ## AUTHORITATIVE BRAND REFERENCE
 
-Owner-supplied ChatGPT Image Sep 4, 2026, 02_21_26 PM.png, preserved unchanged in assets/brand/formation-zero-board.png. SHA-256 F9BA9AC9E0CE41E13E53C8DF8555EA8F99E741DD916C6B6138542715B4A98377. Exact request preserved as AMENDMENT_001_DIRECTIVE.txt (SHA-256 7988062D20564493D8EC3EAEC3F964DAB435E9ADF2BC1AFC8410721682567298).
+Owner-supplied ChatGPT Image Sep 4, 2026, 02_21_26 PM.png, preserved unchanged in assets/brand/formation-zero-board.png. SHA-256 F9BA9AC9E0CE41E13E53C8DF8555EA8F99E741DD916C6B6138542715B4A98377. Exact request preserved with Git line-ending conversion disabled as AMENDMENT_001_DIRECTIVE.txt (SHA-256 7988062D20564493D8EC3EAEC3F964DAB435E9ADF2BC1AFC8410721682567298).
 
 ## PRODUCT POSITIONING CHANGES
 
@@ -45,6 +45,7 @@ See AMENDMENT_001_PLAN.md for all meaningful baseline occurrences and classifica
 
 ## FILES MODIFIED
 
+- .gitattributes
 - CHANGELOG.md
 - PRIVACY_DATA_CLASSIFICATION.md
 - README.md
