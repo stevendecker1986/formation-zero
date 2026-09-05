@@ -16,6 +16,7 @@ import {
 } from "@formation-zero/knowledge";
 import { transaction } from "../db.js";
 import * as kb from "./store.js";
+import { inspectCorpus } from "./corpus.js";
 const actor = (res: Response) => ({
   userId: String(res.locals.userId),
   requestId: String(res.locals.requestId),
@@ -23,6 +24,10 @@ const actor = (res: Response) => ({
 const id = (req: Request) => z.uuid().parse(req.params.id);
 export function knowledgeRouter(pool: pg.Pool) {
   const router = Router();
+  router.get("/corpus", async (_req, res) => {
+    res.setHeader("Cache-Control", "no-store");
+    res.json(await inspectCorpus(pool, actor(res)));
+  });
   router.get("/access", async (_req, res) => {
     res.json(await transaction(pool, (c) => kb.access(c, actor(res))));
   });

@@ -10,6 +10,7 @@ GRANT SELECT, INSERT ON kb_entities, kb_versions, kb_links, kb_tags, kb_reviews 
 GRANT SELECT, INSERT, UPDATE ON kb_states TO fz_runtime;
 GRANT SELECT, INSERT, DELETE ON kb_grants TO fz_runtime;
 GRANT SELECT ON kb_taxonomies TO fz_runtime;
+GRANT SELECT ON kb_corpus_members TO fz_runtime;
 GRANT USAGE, SELECT ON SEQUENCE kb_code_sequence, kb_reviews_sequence_seq TO fz_runtime;
 REVOKE UPDATE, DELETE, TRUNCATE ON kb_entities, kb_versions, kb_links, kb_tags, kb_reviews FROM fz_runtime;
 REVOKE DELETE, TRUNCATE ON kb_states FROM fz_runtime;

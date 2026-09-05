@@ -525,7 +525,7 @@ export async function eligibility(
     if (author.payload.platform_user_id === actor.userId)
       reasons.push("FOUR_EYES_REQUIRED");
   }
-  if (["EXERCISE", "RECOVERY", "MEDIA_ASSET", "RIGHTS"].includes(v.kind)) {
+  if (v.payload.rights || v.kind === "RIGHTS") {
     const rights =
       v.kind === "RIGHTS" ? v : await get(c, String(v.payload.rights));
     await c.query("SELECT id FROM kb_entities WHERE id=$1 FOR SHARE", [
@@ -679,6 +679,7 @@ export async function list(pool: pg.Pool, actor: Actor, input: unknown) {
         `SELECT v.*,e.code,e.kind,s.status,s.revision,s.approved_by FROM kb_versions v JOIN kb_entities e ON e.id=v.entity_id JOIN kb_states s ON s.version_id=v.id LEFT JOIN kb_versions rights ON rights.id::text=v.payload->>'rights'
  WHERE ($1::text IS NULL OR e.kind=$1) AND ($2::text IS NULL OR v.title ILIKE '%'||$2||'%' OR e.code ILIKE '%'||$2||'%') AND ($3::text IS NULL OR s.status=$3) AND ($4::text IS NULL OR v.payload->>'provenance'=$4) AND ($5::text IS NULL OR coalesce(rights.payload->>'classification',v.payload->>'classification')=$5)
  AND ($6::text IS NULL OR ($6='PENDING' AND s.status NOT IN ('APPROVED','PUBLISHED','SUPERSEDED','RETIRED')) OR EXISTS(SELECT 1 FROM kb_reviews r WHERE r.version_id=v.id AND r.decision=$6 AND NOT EXISTS(SELECT 1 FROM kb_reviews newer WHERE newer.version_id=r.version_id AND newer.review_type=r.review_type AND newer.sequence>r.sequence)))
+ AND ($8::text IS NULL OR EXISTS(SELECT 1 FROM kb_corpus_members cm WHERE cm.entity_id=e.id AND cm.corpus=$8))
  ORDER BY v.created_at DESC,v.id LIMIT 50 OFFSET $7`,
         [
           f.kind ?? null,
@@ -688,6 +689,7 @@ export async function list(pool: pg.Pool, actor: Actor, input: unknown) {
           f.rights ?? null,
           f.review ?? null,
           f.offset,
+          f.corpus ?? null,
         ],
       )
     ).rows;

@@ -51,6 +51,7 @@ const steps = [
   ["install", ["ci", "--no-fund"]],
   ["migrate", ["exec", "--", "tsx", "database/migrate.ts"]],
   ["seed", ["exec", "--", "tsx", "database/seeds/seed.ts"]],
+  ["corpus", ["exec", "--", "tsx", "database/corpus/import.ts"]],
   ["validate", ["run", "validate"]],
   ["failure-probes", ["run", "ci:failure-probes"]],
 ] as const;

@@ -1,6 +1,10 @@
-# Phase B change log
+# Formation Zero change log
 
 Historical releases: [CHANGELOG.md](../CHANGELOG.md).
+
+## Phase B2 — validation in progress
+
+Added the controlled official-source manifest, 100 exercise and 30 recovery drafts, 16 justified equipment entries, 100 still-first requirements, immutable corpus membership/import, safe authenticated inspection/export, integrity tests and review/media backlogs. All rights and professional approvals remain pending. Official-provenance review prerequisites were strengthened to the B2 directive. Phase C has not begun. See [Phase B2 report](PHASE_B2_REPORT.md) for actual validation status.
 
 ## Phase B — COMPLETE
 

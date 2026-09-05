@@ -189,6 +189,7 @@ export default function KnowledgeCMS() {
   const [provenance, setProvenance] = useState("");
   const [rights, setRights] = useState("");
   const [reviewFilter, setReviewFilter] = useState("");
+  const [corpus, setCorpus] = useState("");
   const [offset, setOffset] = useState(0);
   const [specialty, setSpecialty] = useState("OTHER");
   const [reReview, setReReview] = useState("");
@@ -209,6 +210,7 @@ export default function KnowledgeCMS() {
       provenance,
       rights,
       review: reviewFilter,
+      corpus,
     }))
       if (v) params.set(k, v);
     setRows(await request("records?" + params));
@@ -242,6 +244,7 @@ export default function KnowledgeCMS() {
       provenance,
       rights,
       review: reviewFilter,
+      corpus,
     }))
       if (value) params.set(key, value);
     request("records?" + params)
@@ -254,7 +257,7 @@ export default function KnowledgeCMS() {
     return () => {
       live = false;
     };
-  }, [kind, offset, q, status, provenance, rights, reviewFilter]);
+  }, [kind, offset, q, status, provenance, rights, reviewFilter, corpus]);
   async function select(id: string) {
     const v: RecordView = await request("versions/" + id);
     setSelected(v);
@@ -307,10 +310,29 @@ export default function KnowledgeCMS() {
     <section className="fz-surface">
       <h2>Knowledge workspace</h2>
       <p>
-        Versioned editorial metadata. Phase B uses synthetic fixtures only.
-        Publishing here does not authorize commercial launch.
+        Versioned editorial records. B2 candidates require real reviews and
+        rights clearance. Publishing here does not authorize commercial launch.
       </p>
       <div className="fz-actions">
+        <label>
+          Corpus
+          <select
+            value={corpus}
+            onChange={(e) => {
+              setCorpus(e.target.value);
+              setOffset(0);
+            }}
+          >
+            <option value="">All records</option>
+            <option value="PHASE_B2_INITIAL">B2 initial candidates</option>
+          </select>
+        </label>
+        <a
+          href="/admin/api/knowledge/corpus"
+          download="formation-zero-b2-corpus.json"
+        >
+          Export B2 corpus for editorial inspection
+        </a>
         <label>
           Collection
           <select

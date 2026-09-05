@@ -4,6 +4,7 @@ import { spawn, type ChildProcess } from "node:child_process";
 import { once } from "node:events";
 import { testHarness } from "../tests/helpers.js";
 import { template } from "@formation-zero/knowledge/templates";
+import { importCorpus } from "../database/corpus/import.js";
 const h = await testHarness({
   webOrigin: "http://localhost:3100",
   adminOrigin: "http://localhost:3101",
@@ -229,6 +230,53 @@ try {
     await fetch("http://localhost:3101/admin/knowledge", { headers })
   ).text();
   assert.match(cms, /Knowledge workspace/);
+  await importCorpus(h.pool);
+  assert.match(cms, /Export B2 corpus/);
+  const corpusResponse = await fetch(knowledge + "corpus", { headers });
+  assert.equal(corpusResponse.status, 200);
+  const corpus = await corpusResponse.json();
+  assert.equal(corpus.counts.kinds.EXERCISE, 100);
+  assert.equal(corpus.counts.kinds.RECOVERY, 30);
+  const candidates = await (
+    await fetch(
+      knowledge +
+        "records?corpus=PHASE_B2_INITIAL&kind=EXERCISE&q=Wall%20push-up",
+      { headers },
+    )
+  ).json();
+  assert.equal(candidates.length, 1);
+  const candidate = await (
+    await fetch(knowledge + "versions/" + candidates[0].id, { headers })
+  ).json();
+  assert.equal(candidate.payload.name, "Wall push-up");
+  const edit = await fetch(
+    knowledge + "versions/" + candidate.id + "/versions",
+    {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        expected_version: 1,
+        data: {
+          ...candidate.payload,
+          notes: "Disposable built-CMS smoke edit",
+        },
+      }),
+    },
+  );
+  assert.equal(edit.status, 201, await edit.clone().text());
+  const edited = await edit.json();
+  assert.equal(
+    (
+      await (
+        await fetch(knowledge + "versions/" + edited.id, { headers })
+      ).json()
+    ).history.length,
+    2,
+  );
+  assert.equal((await fetch(knowledge + "corpus")).status, 401);
+  console.log(
+    "B2 built CMS smoke passed: real corpus import, 100/30 export, filtered read, immutable edit/history and anonymous export denial.",
+  );
   const created = await fetch(knowledge + "records", {
     method: "POST",
     headers,

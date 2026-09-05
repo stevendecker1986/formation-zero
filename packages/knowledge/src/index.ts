@@ -185,6 +185,7 @@ export const schemas = {
         "OTHER",
       ]),
       source_url: z.string().max(1000).default(""),
+      rights: id.optional(),
       publication_number: z.string().max(200).default(""),
       publication_date: date,
       provenance: z.enum(PROVENANCE),
@@ -200,6 +201,23 @@ export const schemas = {
       change_identifier: z.string().max(200).default(""),
       checksum: z.string().max(128).default(""),
       locator: text,
+      currency_observation: z
+        .object({
+          status: z.enum([
+            "CURRENT",
+            "AMENDED",
+            "SUPERSEDED",
+            "PARTIALLY_SUPERSEDED",
+            "FUTURE_EFFECTIVE",
+            "HISTORICAL_ONLY",
+          ]),
+          checked_on: z.iso.date(),
+          evidence_url: z.url().max(1000),
+          scope: text,
+          notes: note,
+        })
+        .strict()
+        .optional(),
     })
     .strict(),
   SOURCE_SECTION: z
@@ -281,6 +299,10 @@ export const schemas = {
       ...content,
       summary: text,
       instructions: z.string().min(1).max(5000),
+      coaching_cues: names.optional(),
+      common_faults: names.optional(),
+      cautions: names.optional(),
+      classification_rationale: note.optional(),
       primary_movement: z.enum(MOVEMENTS),
       secondary_movements: z.array(z.enum(MOVEMENTS)).max(20).default([]),
       primary_capability: z.enum(CAPABILITIES),
@@ -460,6 +482,7 @@ export const transitionSchema = z
 export const filterSchema = z
   .object({
     kind: z.enum(KINDS).optional(),
+    corpus: z.literal("PHASE_B2_INITIAL").optional(),
     q: z.string().max(100).optional(),
     status: z.enum(CONTENT_STATUSES).optional(),
     provenance: z.enum(PROVENANCE).optional(),
@@ -486,6 +509,6 @@ export function requiredReviews(kind: Kind, provenance: unknown): ReviewType[] {
             ? ["TECHNICAL"]
             : ["EDITORIAL"];
   if (provenance === "OFFICIAL" || provenance === "OFFICIAL_DERIVED")
-    result.push("POLICY");
-  return result;
+    result.push("TECHNICAL", "POLICY", "EDITORIAL", "RIGHTS");
+  return [...new Set(result)];
 }

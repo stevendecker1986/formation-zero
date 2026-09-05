@@ -20,6 +20,8 @@
     "db:start": "tsx scripts/database-local.ts",
     "db:migrate": "tsx --env-file=.env database/migrate.ts",
     "db:seed": "tsx --env-file=.env database/seeds/seed.ts",
+    "db:corpus": "tsx --env-file=.env database/corpus/import.ts",
+    "corpus:docs": "tsx scripts/corpus-docs.ts",
     "typecheck": "tsc --noEmit && npm run typecheck --workspaces --if-present",
     "lint": "eslint . --max-warnings=0",
     "format": "prettier --write .",
