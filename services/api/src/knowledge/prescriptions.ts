@@ -88,6 +88,14 @@ export async function constructStored(
       input = {
         ...input,
         request,
+        // Failed production requests still retain the exact requested reference.
+        // This placeholder is never eligible for construction.
+        template: {
+          ...input.template,
+          version_id: body.template_version,
+          synthetic: false,
+          production_eligible: false,
+        },
         candidates: [],
         rules: [],
         rule_set_version: active ?? "UNAVAILABLE",

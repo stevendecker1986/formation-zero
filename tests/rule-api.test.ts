@@ -379,6 +379,22 @@ test("Phase C PostgreSQL/API lifecycle, production boundary and private provenan
         ...authored,
         definition,
       });
+      const rejectedContext = Object.fromEntries(
+        Object.entries(f.request).filter(
+          ([k]) => !["mode", "individual_ref"].includes(k),
+        ),
+      );
+      const rejected = await call("prescriptions", {
+        mode: "PRODUCTION",
+        template_version: structure.id,
+        context: rejectedContext,
+      });
+      assert.equal(
+        rejected.material.outcome,
+        "CONTENT_NOT_PRODUCTION_ELIGIBLE",
+      );
+      assert.equal(rejected.material.session, null);
+      assert.equal(rejected.material.provenance.template_version, structure.id);
       await transition(structure.id, "APPROVE", pc, null, 409);
       await publish(structure);
       const recovery = await create("RECOVERY", {

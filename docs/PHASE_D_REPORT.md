@@ -6,7 +6,7 @@ Phase D — Deterministic Individual Prescription Engine
 
 ## STATUS
 
-COMPLETE — every Phase D acceptance criterion passes.
+INCOMPLETE — final failure-provenance fix is undergoing clean and hosted revalidation.
 
 ## ARCHITECTURE
 
@@ -215,4 +215,6 @@ None blocking implementation. Future real reviewers must author/approve producti
 
 ## PHASE E READINESS
 
-READY for separately authorized Phase E work. Phase E is not started. STOP.
+NOT READY until final revalidation completes. Phase E is not started.
+
+Final review correction: rejected production templates now retain the exact requested template ID instead of a synthetic placeholder ID. Cross-editor history denial also has a direct regression assertion. Targeted PostgreSQL/API tests passed (8/8); full clean and hosted revalidation are pending for this correction.

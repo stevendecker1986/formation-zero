@@ -59,6 +59,16 @@ test("D API test authorization, forged fixture rejection, private immutable hist
   assert.equal(h.logs.join("").includes("RX_PRIVATE_MARKER"), false);
   assert.equal(JSON.stringify(saved).includes('"facts"'), false);
   await call("prescriptions/" + first.record_id, undefined, uc, 403);
+  const other = (
+    await h.pool.query("SELECT id FROM users WHERE email=$1", [
+      "rx-user@example.invalid",
+    ])
+  ).rows[0].id;
+  await h.pool.query(
+    "INSERT INTO kb_grants(user_id,permission,granted_by) VALUES($1,'CONTENT_EDITOR',$2)",
+    [other, editor],
+  );
+  await call("prescriptions/" + first.record_id, undefined, uc, 404);
   for (const sql of [
     "UPDATE prescriptions SET material='{}'",
     "DELETE FROM prescriptions",
