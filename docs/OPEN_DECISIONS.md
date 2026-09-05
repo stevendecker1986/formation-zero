@@ -2,7 +2,7 @@
 
 ## Phase B
 
-The owner approved separate editorial grants, exercise/recovery/media review gates, policy review for official content and independent final approval. Supporting-record verification mapping remains pending: EDITORIAL for source versions/citations and other registry metadata, RIGHTS for rights records, TECHNICAL for qualifications. See [ADR 0012](adr/0012-supporting-record-verification.md). Phase B cannot be marked complete while this policy is provisional.
+No unresolved Phase B product decisions. The owner approved separate editorial grants, exercise/recovery/media review gates, policy review for official content and independent final approval. The owner also approved EDITORIAL verification for source versions/citations and registry metadata, RIGHTS for rights records and TECHNICAL for qualifications, with server-owned prerequisites and no client override. See [ADR 0012](adr/0012-supporting-record-verification.md). Phase B2 population still requires separate authorization.
 
 ## Phase A historical decisions
 

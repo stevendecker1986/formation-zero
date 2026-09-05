@@ -26,4 +26,4 @@ Run `npm run db:migrate`, then `npm run db:seed` only against LOCAL/TEST. Migrat
 
 Use separate migration and runtime credentials. Apply `database/runtime-grants.sql` after migrations; runtime does not own tables or have DDL privileges. An UPDATE(id) privilege on entities permits PostgreSQL row locking only; the immutable trigger rejects actual updates. Back up and restore-test before deployment. Prefer a forward migration for fixes. A pre-migration backup can be restored only before accepting dependent writes; dropping the schema is not a rollback for published history.
 
-Supporting verification policy remains pending owner approval; see ADR 0012. Do not treat a locally tested provisional gate as an approved publication policy.
+Supporting verification policy is owner-approved in ADR 0012: EDITORIAL for source versions/citations and registry metadata, RIGHTS for rights records, TECHNICAL for qualifications. The server enforces these prerequisites; clients cannot override them.

@@ -1,7 +1,7 @@
 # ADR 0012 — Supporting-record verification mapping
 
-Status: proposed; owner decision pending.
+Status: accepted by explicit owner approval on 2026-09-04.
 
-The directive requires verification dates/reviewers for source versions, citations, qualifications and rights but does not assign the review types that confer verification. Proposed smallest mapping: EDITORIAL for source versions/citations and other registry metadata, RIGHTS for rights records, TECHNICAL for qualifications. Verification is derived from explicit immutable review decisions, not editable verification flags. Existing independent publisher approval remains required.
+The owner approved EDITORIAL verification for source versions, citations and registry metadata; RIGHTS verification for rights records; and TECHNICAL verification for qualifications. These are server-owned publication prerequisites with no client override. Verification derives from explicit immutable review decisions, not editable verification flags. Append-only review history and independent final-approver requirements remain mandatory.
 
-This mapping is implemented provisionally for isolated synthetic validation. It must not be treated as approved publication policy or a completed acceptance criterion until the owner responds. Affected code: `requiredReviews`, source-verification eligibility and verification projections in the knowledge store. The migration stores generic review types and does not require a schema change for a different mapping.
+The existing implementation matches the approved mapping: `requiredReviews` supplies required types to server-side eligibility, and the knowledge store derives verification projections from review history. Strict payload schemas reject client-authored verification/status overrides. Enabled account, reviewer identity/type, current grants and review expiry are checked; approval and publication recheck prerequisites. No runtime or migration change is needed to adopt this approval. Existing tests cover verification, invalid authority, append-only history and independent approval. Phase B2 population and Phase C remain excluded.

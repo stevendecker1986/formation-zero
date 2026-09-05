@@ -4,7 +4,7 @@ Phase B — Knowledge Base Foundation
 
 # STATUS
 
-INCOMPLETE only because supporting-record verification policy requires the owner decision recorded in ADR 0012. Final clean validation and actual hosted CI passed. Phase B2 and Phase C have not begun.
+INCOMPLETE while the requested completion run on main is pending. The owner has approved ADR 0012, resolving the last product decision. Prior clean validation and hosted CI passed. Phase B2 and Phase C have not begun.
 
 # INITIAL STATE
 
@@ -77,11 +77,11 @@ Existing Phase A migration SQL, authentication implementation, entitlement mappi
 
 - 0010: typed immutable knowledge envelope, permanent codes and serialized editorial transactions; accepted technical decision.
 - 0011: owner-approved separate editorial grants, required reviews and independent final approval.
-- 0012: proposed supporting-record verification mapping; pending explicit owner answer.
+- 0012: owner-approved EDITORIAL verification for source versions/citations and registry metadata, RIGHTS for rights records and TECHNICAL for qualifications; server-owned, with no client override.
 
 # SOURCE REGISTRY
 
-Sources, immutable source versions, granular sections and multi-citation references are operational. Source/provenance lookup follows exact-version links. Source/citation verification dates/reviewers derive from append-only decisions; the mapping to EDITORIAL remains provisional. Locators and bounded notes replace bulk copied source text.
+Sources, immutable source versions, granular sections and multi-citation references are operational. Source/provenance lookup follows exact-version links. Source/citation verification dates/reviewers derive from append-only EDITORIAL decisions under approved ADR 0012. Locators and bounded notes replace bulk copied source text.
 
 # AUTHORSHIP / QUALIFICATIONS / REVIEWS
 
@@ -101,7 +101,7 @@ STILL_SEQUENCE defaults with START/KEY_POSITION/FINISH, 1–4 still capacity, op
 
 # RIGHTS / PUBLICATION
 
-UNKNOWN/unresolved third-party rights block publication. Commercial-use flag, current rights version, explicit review and license/permission evidence are checked. Central API gates enforce required reviews, sources, authorship, four-eyes approval, expected revision and published media. Published payloads and attachments are immutable; new versions, supersession and retirement retain history. Supporting verification mapping is provisional: this prevents declaring the workflow policy final, despite passing synthetic execution tests.
+UNKNOWN/unresolved third-party rights block publication. Commercial-use flag, current rights version, explicit review and license/permission evidence are checked. Central API gates enforce required reviews, sources, authorship, four-eyes approval, expected revision and published media. Published payloads and attachments are immutable; new versions, supersession and retirement retain history. The approved supporting verification mapping is enforced by the existing server code; no client override, runtime change or migration was needed to adopt approval.
 
 # ADMIN CMS
 
@@ -109,7 +109,7 @@ Authenticated collections, typed scalar/nested fields, validated JSON relationsh
 
 # SECURITY / PRIVACY
 
-Enabled-account sessions, HttpOnly cookies, origin/body validation, strict schemas, safe errors, parameterized SQL, no external locator fetch, no HTML/code execution and no public draft/review/audit reads. Separate least-privilege deployment grants tested against a real temporary PostgreSQL role. No extra health/location/unit data; credentials private by default. Legal commercial gate remains false. Main remains the passing Phase A/Amendment baseline while the proposed verification policy is reviewed.
+Enabled-account sessions, HttpOnly cookies, origin/body validation, strict schemas, safe errors, parameterized SQL, no external locator fetch, no HTML/code execution and no public draft/review/audit reads. Separate least-privilege deployment grants tested against a real temporary PostgreSQL role. No extra health/location/unit data; credentials private by default. Legal commercial gate remains false. The owner approved the policy and authorized merging the validated Phase B branch into main.
 
 # AUDIT
 
@@ -134,81 +134,81 @@ Final clean run: Next web/admin production builds, API tsup build and Expo web/A
 
 # HOSTED CI
 
-GitHub Actions, workflow **Phase A foundation**, branch `codex/phase-b-foundation`, implementation commit `cd03015d92caec99aca81c4c11916188c0b2034b`. [Run 33930991775](https://github.com/stevendecker1986/formation-zero/actions/runs/33930991775) completed **SUCCESS** at 2026-09-04T23:53:20Z; validation job `101209366590`. Actual downloaded job logs confirm 40 tests passed, 0 failed/skipped; dependency audit 0 vulnerabilities; 828 license entries; web/admin/API builds; Expo exports and doctor 21/21; client/permission scans; built CMS/account smoke; all four failure probes. No hosted failure or check weakening was required. Existing install/validation/failure-probe/artifact steps were retained. The branch keeps provisional supporting policy separate from main until the owner decision is resolved.
+GitHub Actions, workflow **Phase A foundation**, branch `codex/phase-b-foundation`, implementation commit `cd03015d92caec99aca81c4c11916188c0b2034b`. [Run 33930991775](https://github.com/stevendecker1986/formation-zero/actions/runs/33930991775) completed **SUCCESS** at 2026-09-04T23:53:20Z; validation job `101209366590`. Actual downloaded job logs confirm 40 tests passed, 0 failed/skipped; dependency audit 0 vulnerabilities; 828 license entries; web/admin/API builds; Expo exports and doctor 21/21; client/permission scans; built CMS/account smoke; all four failure probes. No hosted failure or check weakening was required. Existing install/validation/failure-probe/artifact steps were retained. The owner has now approved the supporting policy and authorized merging to main; completion-run evidence will be added after it succeeds.
 
 # ACCEPTANCE CRITERIA
 
-PASS below means the listed implemented behavior was exercised or inspected as identified. It does not imply approval of the pending supporting policy. Full Phase B remains INCOMPLETE until every row and the change-control decision are satisfied.
+PASS below means the listed implemented behavior was exercised or inspected as identified. ADR 0012 is now explicitly approved. The requested main-branch completion validation is pending; earlier hosted evidence remains recorded above.
 
-| #   | Criterion                                   | Status | Evidence                                                                                            |
-| --- | ------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------- |
-| 1   | Phase A remains passing                     | PASS   | All 26 baseline tests retained and passed in initial clean validation; account/build smoke passed   |
-| 2   | Amendment 001 intact                        | PASS   | Contrast test, unchanged artwork/tokens/positioning; CMS reuses shared theme                        |
-| 3   | Knowledge-domain separation                 | PASS   | kb schema and knowledge package; no profile/entitlement schema changes                              |
-| 4   | Source registry works                       | PASS   | Real API source creation, search and source-chain test                                              |
-| 5   | Source versions historical/immutable        | PASS   | New version plus original read and rejected SQL update                                              |
-| 6   | Source sections/citations work              | PASS   | Typed section FK and provenance lookup tests                                                        |
-| 7   | Authorship separate from provenance         | PASS   | AUTHOR references independent of provenance enum                                                    |
-| 8   | Qualifications separate from sources/rights | PASS   | Dedicated QUALIFICATION kind, redaction and version-preservation test                               |
-| 9   | Reviewer identities/append history          | PASS   | Identity/grant checks, appended decisions and rejected SQL update                                   |
-| 10  | Four-eyes capability                        | PASS   | Same creator/approver denied; separate publisher succeeds                                           |
-| 11  | Movement taxonomy                           | PASS   | Exact 21 values and primary/secondary tags                                                          |
-| 12  | Capability taxonomy                         | PASS   | Exact 23 values and primary/secondary tags                                                          |
-| 13  | Exercise schema                             | PASS   | Real strict-schema/API exercise creation                                                            |
-| 14  | Demand validation                           | PASS   | Schema and SQL range rejections                                                                     |
-| 15  | Formation suitability                       | PASS   | Exact six dimensions and range rejections                                                           |
-| 16  | Exercise variants/relationships             | PASS   | Parent/variant and directional REGRESSION relationship test                                         |
-| 17  | Equipment catalog                           | PASS   | API and browser create/new-version/read                                                             |
-| 18  | Recovery schema                             | PASS   | Real create/review/publish/new-version test                                                         |
-| 19  | Still-sequence requirements                 | PASS   | Default counts/views and linked asset publication tests                                             |
-| 20  | Video optional by default                   | PASS   | False default; true rejected                                                                        |
-| 21  | Technical media review representable        | PASS   | Explicit TECHNICAL asset decisions required and tested                                              |
-| 22  | Rights records work                         | PASS   | Versioned record creation, review and reference tests                                               |
-| 23  | UNKNOWN blocks publication                  | PASS   | Gate returns RIGHTS_NOT_ELIGIBLE                                                                    |
-| 24  | Server-side publication eligibility         | FAIL   | Implementation/tests work, but supporting verification mapping is not yet owner-approved (ADR 0012) |
-| 25  | Published versions immutable                | PASS   | DB payload/attachment rejection; new version preserves original                                     |
-| 26  | Supersede/retire retain history             | PASS   | Successor/retirement transitions and old reads tested                                               |
-| 27  | Admin CMS works                             | PASS   | Built proxy/SSR smoke plus interactive browser create/version/history                               |
-| 28  | Editorial authorization works               | PASS   | Ordinary/anonymous denial; admin has no implicit publishing grant                                   |
-| 29  | Draft/review content not public             | PASS   | All knowledge routes authenticated/authorized; denial tests                                         |
-| 30  | Critical editorial audit                    | PASS   | Event assertions and transaction rollback on failed audit                                           |
-| 31  | Only synthetic fixtures                     | PASS   | Seed and tests use explicitly synthetic metadata/disabled seed identities                           |
-| 32  | No bulk corpus                              | PASS   | File/seed review; no external document/media import                                                 |
-| 33  | No Phase C logic                            | PASS   | Scope/code review: metadata and editorial operations only                                           |
-| 34  | All tests pass                              | PASS   | Final clean run: 40 passed, 0 failed, 0 skipped                                                     |
-| 35  | Hosted CI passes                            | PASS   | Actual GitHub run 33930991775 completed SUCCESS                                                     |
-| 36  | Documentation reflects reality              | PASS   | Current-state docs, provisional policy and actual evidence distinguished                            |
+| #   | Criterion                                   | Status | Evidence                                                                                          |
+| --- | ------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------- |
+| 1   | Phase A remains passing                     | PASS   | All 26 baseline tests retained and passed in initial clean validation; account/build smoke passed |
+| 2   | Amendment 001 intact                        | PASS   | Contrast test, unchanged artwork/tokens/positioning; CMS reuses shared theme                      |
+| 3   | Knowledge-domain separation                 | PASS   | kb schema and knowledge package; no profile/entitlement schema changes                            |
+| 4   | Source registry works                       | PASS   | Real API source creation, search and source-chain test                                            |
+| 5   | Source versions historical/immutable        | PASS   | New version plus original read and rejected SQL update                                            |
+| 6   | Source sections/citations work              | PASS   | Typed section FK and provenance lookup tests                                                      |
+| 7   | Authorship separate from provenance         | PASS   | AUTHOR references independent of provenance enum                                                  |
+| 8   | Qualifications separate from sources/rights | PASS   | Dedicated QUALIFICATION kind, redaction and version-preservation test                             |
+| 9   | Reviewer identities/append history          | PASS   | Identity/grant checks, appended decisions and rejected SQL update                                 |
+| 10  | Four-eyes capability                        | PASS   | Same creator/approver denied; separate publisher succeeds                                         |
+| 11  | Movement taxonomy                           | PASS   | Exact 21 values and primary/secondary tags                                                        |
+| 12  | Capability taxonomy                         | PASS   | Exact 23 values and primary/secondary tags                                                        |
+| 13  | Exercise schema                             | PASS   | Real strict-schema/API exercise creation                                                          |
+| 14  | Demand validation                           | PASS   | Schema and SQL range rejections                                                                   |
+| 15  | Formation suitability                       | PASS   | Exact six dimensions and range rejections                                                         |
+| 16  | Exercise variants/relationships             | PASS   | Parent/variant and directional REGRESSION relationship test                                       |
+| 17  | Equipment catalog                           | PASS   | API and browser create/new-version/read                                                           |
+| 18  | Recovery schema                             | PASS   | Real create/review/publish/new-version test                                                       |
+| 19  | Still-sequence requirements                 | PASS   | Default counts/views and linked asset publication tests                                           |
+| 20  | Video optional by default                   | PASS   | False default; true rejected                                                                      |
+| 21  | Technical media review representable        | PASS   | Explicit TECHNICAL asset decisions required and tested                                            |
+| 22  | Rights records work                         | PASS   | Versioned record creation, review and reference tests                                             |
+| 23  | UNKNOWN blocks publication                  | PASS   | Gate returns RIGHTS_NOT_ELIGIBLE                                                                  |
+| 24  | Server-side publication eligibility         | PASS   | Owner-approved ADR 0012; server review/rights/source and independent-approval tests               |
+| 25  | Published versions immutable                | PASS   | DB payload/attachment rejection; new version preserves original                                   |
+| 26  | Supersede/retire retain history             | PASS   | Successor/retirement transitions and old reads tested                                             |
+| 27  | Admin CMS works                             | PASS   | Built proxy/SSR smoke plus interactive browser create/version/history                             |
+| 28  | Editorial authorization works               | PASS   | Ordinary/anonymous denial; admin has no implicit publishing grant                                 |
+| 29  | Draft/review content not public             | PASS   | All knowledge routes authenticated/authorized; denial tests                                       |
+| 30  | Critical editorial audit                    | PASS   | Event assertions and transaction rollback on failed audit                                         |
+| 31  | Only synthetic fixtures                     | PASS   | Seed and tests use explicitly synthetic metadata/disabled seed identities                         |
+| 32  | No bulk corpus                              | PASS   | File/seed review; no external document/media import                                               |
+| 33  | No Phase C logic                            | PASS   | Scope/code review: metadata and editorial operations only                                         |
+| 34  | All tests pass                              | PASS   | Final clean run: 40 passed, 0 failed, 0 skipped                                                   |
+| 35  | Hosted CI passes                            | PASS   | Actual GitHub run 33930991775 completed SUCCESS                                                   |
+| 36  | Documentation reflects reality              | PASS   | Approved policy, current implementation and actual evidence documented                            |
 
-| Action                     | Status | Evidence                                                                              |
-| -------------------------- | ------ | ------------------------------------------------------------------------------------- |
-| A1 Audit/plan              | PASS   | PHASE_B_PLAN written before major schema work                                         |
-| A2 Domain/schema           | PASS   | Strict typecheck and exact enum/range tests                                           |
-| A3 Migrations              | PASS   | Clean migrations 001–004, constraints/runtime test, documented forward strategy       |
-| A4 Sources                 | PASS   | Source/version/section/citation and historical read tests                             |
-| A5 Authorship/review       | PASS   | Separate models, redaction, append history and four-eyes tests                        |
-| A6 Exercises               | PASS   | Taxonomy/range/directional/variant tests; no prescriptions                            |
-| A7 Equipment               | PASS   | API/browser version CRUD and quantity semantics                                       |
-| A8 Recovery                | PASS   | Real author/review/publish/version flow; no adaptation                                |
-| A9 Media                   | PASS   | Still count/views, optional video, technical review tests                             |
-| A10 Rights                 | FAIL   | Functional gates pass tests; supporting verification policy remains provisional       |
-| A11 Publication            | FAIL   | Functional lifecycle passes tests; supporting verification policy remains provisional |
-| A12 Admin CMS              | PASS   | Built and interactive browser workflows; denial tests                                 |
-| A13 APIs                   | PASS   | Strict input, private drafts and authority-forgery rejection                          |
-| A14 Search                 | PASS   | Collection/name/status/provenance/rights/review filters tested                        |
-| A15 Audit                  | PASS   | Critical events, immutable storage and rollback tests                                 |
-| A16 Tests                  | PASS   | 40 tests and production/development/browser smoke passed                              |
-| A17 CI                     | PASS   | Clean local and hosted run 33930991775 pass                                           |
-| A18 Documentation          | PASS   | Required docs/ADRs report implementation and open policy accurately                   |
-| A19 Final clean validation | PASS   | Local install/migrate/seed/validate/probes and actual hosted run pass                 |
+| Action                     | Status | Evidence                                                                        |
+| -------------------------- | ------ | ------------------------------------------------------------------------------- |
+| A1 Audit/plan              | PASS   | PHASE_B_PLAN written before major schema work                                   |
+| A2 Domain/schema           | PASS   | Strict typecheck and exact enum/range tests                                     |
+| A3 Migrations              | PASS   | Clean migrations 001–004, constraints/runtime test, documented forward strategy |
+| A4 Sources                 | PASS   | Source/version/section/citation and historical read tests                       |
+| A5 Authorship/review       | PASS   | Separate models, redaction, append history and four-eyes tests                  |
+| A6 Exercises               | PASS   | Taxonomy/range/directional/variant tests; no prescriptions                      |
+| A7 Equipment               | PASS   | API/browser version CRUD and quantity semantics                                 |
+| A8 Recovery                | PASS   | Real author/review/publish/version flow; no adaptation                          |
+| A9 Media                   | PASS   | Still count/views, optional video, technical review tests                       |
+| A10 Rights                 | PASS   | Rights gates tested and supporting verification policy owner-approved           |
+| A11 Publication            | PASS   | Lifecycle, append-only history and independent approval tested; policy approved |
+| A12 Admin CMS              | PASS   | Built and interactive browser workflows; denial tests                           |
+| A13 APIs                   | PASS   | Strict input, private drafts and authority-forgery rejection                    |
+| A14 Search                 | PASS   | Collection/name/status/provenance/rights/review filters tested                  |
+| A15 Audit                  | PASS   | Critical events, immutable storage and rollback tests                           |
+| A16 Tests                  | PASS   | 40 tests and production/development/browser smoke passed                        |
+| A17 CI                     | PASS   | Clean local and hosted run 33930991775 pass                                     |
+| A18 Documentation          | PASS   | Required docs/ADRs report implementation and approved policy accurately         |
+| A19 Final clean validation | PASS   | Local install/migrate/seed/validate/probes and actual hosted run pass           |
 
 # KNOWN ISSUES
 
-Supporting-record verification mapping is provisional. No other implementation blocker is currently known. Relationship arrays use an explicitly documented JSON editor, not a bulk content authoring tool. Production rights/media/content population has not been attempted. Toolchain deprecation notices are present in dependency/Actions logs; checks passed with no reported dependency vulnerabilities or unresolved license inventory entries.
+No known implementation blocker. Main-branch completion validation is pending. Relationship arrays use an explicitly documented JSON editor, not a bulk content authoring tool. Production rights/media/content population has not been attempted. Toolchain deprecation notices are present in dependency/Actions logs; prior checks passed with no reported dependency vulnerabilities or unresolved license inventory entries.
 
 # OPEN DECISIONS
 
-ADR 0012: approve EDITORIAL verification for source versions/citations and other registry metadata, RIGHTS for rights records, TECHNICAL for qualification records, or provide a different mapping. This is separate from the two owner approvals already received. The directive's change-control section requires stopping affected product semantics rather than guessing.
+None within Phase B. The owner explicitly approved ADR 0012's mapping, server-owned prerequisites with no client override, append-only review history and independent final approval. Phase B2 requires separate execution authorization.
 
 # PHASE B2 READINESS
 
-NOT READY. Resolve ADR 0012 before declaring Phase B complete. Local and hosted validation pass. No Phase B2 or Phase C work has begun.
+NOT READY until the requested main-branch completion run passes. No product decisions remain. No Phase B2 or Phase C work has begun.

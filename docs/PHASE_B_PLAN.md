@@ -27,6 +27,6 @@ Add kb-prefixed entities, immutable versions, typed links, taxonomies, lifecycle
 
 Drafts and credential identifiers remain behind authenticated editorial APIs; no public content endpoint or external URL fetch. No billing activation; publication in the internal CMS is not commercial-launch approval. One isolated migration 004, no rewrite of 001–003. Forward fixes are preferred; restore a verified pre-migration backup only before dependent writes, never destructively drop published history.
 
-## Pending product decisions
+## Product decisions resolved
 
-Owner explicitly approved the exercise/recovery/media review matrix, policy review for official content, independent final approval, and separate editorial grants (ADR 0011). A follow-up asks which review types verify supporting source/citation, qualification and rights records; the proposed mapping is documented in ADR 0012 and remains pending. That mapping is provisional in isolated synthetic tests and is not a completed product decision. Rights evidence cannot be inferred from host/government status or professional credentials.
+Owner explicitly approved the exercise/recovery/media review matrix, policy review for official content, independent final approval, and separate editorial grants (ADR 0011). The owner subsequently approved EDITORIAL verification for source versions/citations and registry metadata, RIGHTS for rights records and TECHNICAL for qualifications (ADR 0012), with server-owned prerequisites, no client override and append-only history. This resolves the review-policy decision identified during the original plan. Rights evidence cannot be inferred from host/government status or professional credentials.
