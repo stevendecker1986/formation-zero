@@ -2,9 +2,9 @@
 
 Historical releases: [CHANGELOG.md](../CHANGELOG.md).
 
-## Phase C — validation in progress
+## Phase C — COMPLETE
 
-Added the deterministic rule-engine package, exact P0–P12 hierarchy, declarative conditions/typed effects, UNKNOWN handling, stable reasons and explainability, immutable rule/reason/set management, explicit production activation, restricted evaluation provenance, server-owned content eligibility, admin rule console and synthetic golden scenarios. B2 content remains pending; no production rules activated or Phase D implemented. See PHASE_C_REPORT.md for actual validation evidence.
+Added the deterministic rule-engine package, exact P0–P12 hierarchy, declarative conditions/typed effects, UNKNOWN handling, stable reasons and explainability, immutable rule/reason/set management, explicit production activation, restricted evaluation provenance, server-owned content eligibility, admin rule console and synthetic golden scenarios. Clean validation and hosted run 33939222984 passed with 70 tests, all builds/exports, security/license checks and smoke tests. B2 content remains pending; no production rules activated or Phase D implemented. See PHASE_C_REPORT.md for actual validation evidence.
 
 ## Phase B2 — COMPLETE
 

@@ -1,6 +1,6 @@
 # Phase C implementation plan
 
-Status: implementation in progress. Scope: deterministic constraints only; no Phase D.
+Status: complete; clean validation and hosted run 33939222984 succeeded. See PHASE_C_REPORT.md. Scope: deterministic constraints only; no Phase D.
 
 ## Audited baseline
 
