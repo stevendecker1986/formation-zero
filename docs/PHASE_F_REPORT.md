@@ -96,6 +96,8 @@ ADR 0017 selects immutable server-authorized execution snapshots, append-only ac
 
 GitHub Actions workflow `Phase A foundation`, branch `codex/phase-f-individual-training`, run [33974884539](https://github.com/stevendecker1986/formation-zero/actions/runs/33974884539), exact implementation commit `9dfe311c272c8120aeaf9384c4628fbeb9b11d82`: PASS. Install, complete A–F validation, failure probes, and evidence upload all completed successfully.
 
+The validated feature branch was fast-forwarded into `main` without rewriting history at `8fa34b6e925d8896b39ea7d7dca0d0c456f9877e`. GitHub Actions run [33976008483](https://github.com/stevendecker1986/formation-zero/actions/runs/33976008483) completed successfully against that exact merged main commit. The complete clean validation pipeline also passed on local merged `main` with 148 tests and all required migration, corpus, security, license, build, export, smoke, and failure-probe stages.
+
 ## ACCEPTANCE CRITERIA
 
 - PASS — all A–E behavior remains passing: the 148-test regression and all smoke stages passed.

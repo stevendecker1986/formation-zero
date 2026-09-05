@@ -8,6 +8,8 @@ Added authenticated individual-session orchestration over Phase D, independent P
 
 Clean validation passed 148 tests, all migrations/seeds/corpus checks, security/license checks, web/admin/API builds, Expo exports, accessibility checks, failure probes, and smoke tests. GitHub Actions run 33974884539 passed for exact implementation commit `9dfe311c272c8120aeaf9384c4628fbeb9b11d82`. Every Phase F acceptance criterion passes; Phase G has not begun.
 
+Phase F branch `codex/phase-f-individual-training` was fast-forwarded into `main` at `8fa34b6e925d8896b39ea7d7dca0d0c456f9877e`. The complete clean validation pipeline passed again on merged main, and GitHub Actions run 33976008483 completed successfully against that exact commit. Production remains fail closed; no production validation policy or pending B2 content was activated.
+
 ## Phase E
 
 Added independent prescription validation, stable PASS/WARN/REJECT findings, fresh Phase C/content/rights/dose/time/composition/provenance checks, sealed exact validation context, immutable policies/results, admin validation controls, a server-owned delivery gate, and the required adversarial/golden coverage. Final validation and hosted evidence are recorded in PHASE_E_REPORT.md.
