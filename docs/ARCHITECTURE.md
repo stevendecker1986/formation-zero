@@ -53,3 +53,7 @@ Phase D adds @formation-zero/prescription-engine, reviewed PRESCRIPTION_TEMPLATE
 ## Phase E
 
 Phase E adds the independent `@formation-zero/validation-engine`, sealed exact construction context, immutable validation policy/activation/history tables, authenticated validation/history APIs, an admin validation console and a server-owned delivery gate. The validator does not import Phase D. It independently recalculates arithmetic and structure and calls Phase C only for a fresh rules decision. See VALIDATION_ENGINE.md, DELIVERY_GATE.md and ADR 0016.
+
+## Phase F consumer execution
+
+The authenticated `/api/v1/training` boundary is separate from editorial knowledge routes. It resolves the stored account tier, orchestrates Phase D → Phase E → delivery, creates an immutable consumer workout snapshot, and owns all execution mutations. `@formation-zero/execution-engine` contains deterministic schemas, transitions, timers, and bounded offline primitives without importing Phase C, D, or E authority into clients. Migration 009 separates immutable prescriptions from versioned state and append-only actual/event/substitution history. ADR 0017 records this trust boundary.

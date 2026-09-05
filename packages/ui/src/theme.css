@@ -174,6 +174,48 @@ textarea {
   flex-wrap: wrap;
   gap: var(--fz-space-md);
 }
+.fz-training {
+  display: grid;
+  gap: var(--fz-space-lg);
+}
+.fz-workout,
+.fz-history,
+.fz-exercise {
+  background: var(--fz-color-surface-primary);
+  border: var(--fz-border-thin) solid var(--fz-color-border-default);
+  border-radius: var(--fz-radius-medium);
+  padding: var(--fz-space-lg);
+}
+.fz-session-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--fz-space-lg);
+}
+.fz-timer {
+  color: var(--fz-color-text-primary);
+  font-family: var(--fz-typography-data-family);
+  font-size: var(--fz-typography-size-title);
+  font-variant-numeric: tabular-nums;
+}
+.fz-muted {
+  color: var(--fz-color-text-muted);
+}
+.fz-check {
+  display: flex;
+  align-items: center;
+  min-height: var(--fz-layout-target);
+}
+.fz-check input {
+  width: var(--fz-layout-target);
+}
+@media (max-width: 40rem) {
+  .fz-workout,
+  .fz-history,
+  .fz-exercise {
+    padding: var(--fz-space-md);
+  }
+}
 pre {
   white-space: pre-wrap;
   overflow-wrap: anywhere;

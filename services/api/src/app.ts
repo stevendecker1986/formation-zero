@@ -24,6 +24,7 @@ import { resolveAuthorization } from "./authorization.js";
 import { createLogger, type LogSink } from "./logging.js";
 import { createMailDelivery, type MailDelivery } from "./mail.js";
 import { knowledgeRouter } from "./knowledge/routes.js";
+import { trainingRouter } from "./training.js";
 
 export function createApp(
   config: ServerConfig,
@@ -321,6 +322,11 @@ export function createApp(
     "/api/v1/knowledge",
     authenticated,
     knowledgeRouter(pool, config.AUTH_SECRET),
+  );
+  app.use(
+    "/api/v1/training",
+    authenticated,
+    trainingRouter(config, pool, config.AUTH_SECRET),
   );
   app.use((_req, res) => fail(res, 404, "NOT_FOUND"));
   app.use(

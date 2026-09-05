@@ -62,10 +62,12 @@ export async function constructStored(
   actor: kb.Actor,
   raw: unknown,
   secret: string,
+  accessMode: "EDITORIAL" | "CONSUMER" = "EDITORIAL",
 ) {
   const body = serviceRequest.parse(raw);
   return transaction(pool, async (c) => {
-    await kb.access(c, actor);
+    if (accessMode === "EDITORIAL") await kb.access(c, actor);
+    else await kb.consumerAccess(c, actor);
     const request = {
       ...body.context,
       mode: body.mode,

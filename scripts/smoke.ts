@@ -143,6 +143,59 @@ try {
     ).status,
     200,
   );
+  const trainingPage = await (
+    await fetch("http://localhost:3100/training")
+  ).text();
+  assert.match(trainingPage, /Execute the authorized plan/);
+  const phaseFRequest = await fetch(
+    "http://localhost:3100/api/training/sessions",
+    {
+      method: "POST",
+      headers: {
+        origin: "http://localhost:3100",
+        "Content-Type": "application/json",
+        cookie: proxyCookie,
+      },
+      body: JSON.stringify({
+        idempotency_key: "phase-f-built-smoke-001",
+        demo: true,
+        training_date: "2026-09-05",
+        objective: "GENERAL_READINESS",
+        duration_seconds: 2700,
+        equipment: { available: [], unsafe: [] },
+        space: "STANDARD",
+        restrictions: {},
+        preferences: [],
+        candidate_scope: [],
+      }),
+    },
+  );
+  assert.equal(phaseFRequest.status, 201, await phaseFRequest.clone().text());
+  const phaseFSession = await phaseFRequest.json();
+  assert.equal(phaseFSession.state, "NOT_STARTED");
+  assert.match(phaseFSession.consumer_snapshot.label, /SYNTHETIC DEMO/);
+  assert.equal(JSON.stringify(phaseFSession).includes('"internal"'), false);
+  const phaseFStart = await fetch(
+    `http://localhost:3100/api/training/sessions/${phaseFSession.id}/transitions`,
+    {
+      method: "POST",
+      headers: {
+        origin: "http://localhost:3100",
+        "Content-Type": "application/json",
+        cookie: proxyCookie,
+      },
+      body: JSON.stringify({
+        action: "START",
+        expected_version: 0,
+        idempotency_key: "phase-f-built-start-001",
+      }),
+    },
+  );
+  assert.equal(phaseFStart.status, 200, await phaseFStart.clone().text());
+  assert.equal((await phaseFStart.json()).state, "IN_PROGRESS");
+  console.log(
+    "Phase F built web/API smoke passed: authenticated demo delivery, consumer-safe snapshot and server-owned start.",
+  );
   assert.equal(
     (
       await fetch("http://localhost:3100/api/account/auth/logout", {

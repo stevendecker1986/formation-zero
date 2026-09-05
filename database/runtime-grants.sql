@@ -26,3 +26,8 @@ REVOKE UPDATE, DELETE, TRUNCATE ON prescriptions FROM fz_runtime;
 GRANT SELECT, INSERT ON validation_policies, validation_policy_activations, prescription_validations TO fz_runtime;
 GRANT USAGE, SELECT ON SEQUENCE validation_policy_activations_sequence_seq TO fz_runtime;
 REVOKE UPDATE, DELETE, TRUNCATE ON validation_policies, validation_policy_activations, prescription_validations FROM fz_runtime;
+GRANT SELECT, INSERT ON workout_sessions, workout_execution_events, workout_actuals, workout_substitutions TO fz_runtime;
+GRANT SELECT, INSERT, UPDATE ON workout_session_state TO fz_runtime;
+GRANT USAGE, SELECT ON SEQUENCE workout_execution_events_sequence_seq TO fz_runtime;
+REVOKE UPDATE, DELETE, TRUNCATE ON workout_sessions, workout_execution_events, workout_actuals, workout_substitutions FROM fz_runtime;
+REVOKE DELETE, TRUNCATE ON workout_session_state FROM fz_runtime;

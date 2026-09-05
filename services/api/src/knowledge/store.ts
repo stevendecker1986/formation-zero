@@ -69,6 +69,13 @@ export async function access(c: Client, actor: Actor, permission?: Permission) {
     deny();
   return { admin, permissions };
 }
+export async function consumerAccess(c: Client, actor: Actor) {
+  const user = await c.query(
+    "SELECT id FROM users WHERE id=$1 AND enabled FOR UPDATE",
+    [actor.userId],
+  );
+  if (!user.rowCount) deny();
+}
 export async function audit(
   c: Client,
   actor: Actor,

@@ -219,10 +219,12 @@ export async function validateStored(
   actor: kb.Actor,
   raw: unknown,
   secret: string,
+  accessMode: "EDITORIAL" | "CONSUMER" = "EDITORIAL",
 ) {
   const body = validateRequest.parse(raw);
   return transaction(pool, async (c) => {
-    await kb.access(c, actor);
+    if (accessMode === "EDITORIAL") await kb.access(c, actor);
+    else await kb.consumerAccess(c, actor);
     const prepared = await inputFor(
       c,
       actor,
@@ -280,15 +282,17 @@ export async function deliver(
   actor: kb.Actor,
   prescriptionId: string,
   secret: string,
+  accessMode: "EDITORIAL" | "CONSUMER" = "EDITORIAL",
 ) {
   return transaction(pool, async (c) => {
-    await kb.access(c, actor);
+    if (accessMode === "EDITORIAL") await kb.access(c, actor);
+    else await kb.consumerAccess(c, actor);
     const prepared = await inputFor(c, actor, prescriptionId, secret);
     if (prepared.row.mode !== "PRODUCTION")
       throw new kb.KnowledgeError(409, "TEST_PRESCRIPTION_NOT_DELIVERABLE");
     const latest = (
-      await c.query<{ status: string; policy_version: string }>(
-        "SELECT status,policy_version FROM prescription_validations WHERE prescription_record_id=$1 AND actor_id=$2 ORDER BY validated_at DESC,id DESC LIMIT 1",
+      await c.query<{ id: string; status: string; policy_version: string }>(
+        "SELECT id,status,policy_version FROM prescription_validations WHERE prescription_record_id=$1 AND actor_id=$2 ORDER BY validated_at DESC,id DESC LIMIT 1",
         [prescriptionId, actor.userId],
       )
     ).rows[0];
@@ -302,7 +306,44 @@ export async function deliver(
       throw new kb.KnowledgeError(409, "PRESCRIPTION_NOT_DELIVERABLE");
     return {
       prescription_record_id: prepared.row.id,
+      validation_record_id: latest.id,
       validation_status: current.status,
+      material: prepared.row.material,
+    };
+  });
+}
+
+export async function deliverDemo(
+  pool: pg.Pool,
+  actor: kb.Actor,
+  prescriptionId: string,
+  secret: string,
+) {
+  return transaction(pool, async (c) => {
+    await kb.consumerAccess(c, actor);
+    const prepared = await inputFor(c, actor, prescriptionId, secret);
+    if (prepared.row.mode !== "TEST")
+      throw new kb.KnowledgeError(409, "DEMO_BOUNDARY_VIOLATION");
+    const latest = (
+      await c.query<{ id: string; status: string; policy_version: string }>(
+        "SELECT id,status,policy_version FROM prescription_validations WHERE prescription_record_id=$1 AND actor_id=$2 ORDER BY validated_at DESC,id DESC LIMIT 1",
+        [prescriptionId, actor.userId],
+      )
+    ).rows[0];
+    const current = validate(prepared.input, secret);
+    if (
+      !latest ||
+      !["PASS", "WARN"].includes(latest.status) ||
+      latest.policy_version !== TEST_POLICY.version ||
+      current.policy_version !== TEST_POLICY.version ||
+      !["PASS", "WARN"].includes(current.status)
+    )
+      throw new kb.KnowledgeError(409, "PRESCRIPTION_NOT_DELIVERABLE");
+    return {
+      prescription_record_id: prepared.row.id,
+      validation_record_id: latest.id,
+      validation_status: current.status,
+      demo: true as const,
       material: prepared.row.material,
     };
   });

@@ -77,6 +77,11 @@ export default function Account() {
     });
     setMessage(response.ok ? "Signed out." : "Unable to sign out.");
     if (response.ok) setAccount("");
+    if (response.ok) {
+      localStorage.removeItem("fz.phase-f.active");
+      localStorage.removeItem("fz.phase-f.queue");
+      localStorage.removeItem("fz.phase-f.user");
+    }
   }
   return (
     <section className="fz-surface">

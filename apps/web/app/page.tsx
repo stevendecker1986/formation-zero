@@ -22,6 +22,9 @@ export default function Home() {
       <Link href="/account" className="fz-button fz-button-primary">
         Manage your account
       </Link>
+      <Link href="/training" className="fz-button">
+        Individual training
+      </Link>
     </Surface>
   );
 }

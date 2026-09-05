@@ -19,3 +19,7 @@ Phase D: internal editorial authorization is required for fixture access, constr
 ## Phase E
 
 Phase E uses strict request schemas, actor-scoped history, explicit PUBLISHER policy authority, server-selected production policy and current database evidence. Exact construction inputs are AES-256-GCM sealed at rest; request/input/artifact/history fingerprints are keyed and domain separated. Generic logs and audit omit facts, findings and fingerprints. Validation results and policy history are append-only with SELECT/INSERT-only runtime grants. Client-supplied status or policy fields are rejected. Delivery always performs a fresh server-side validation and fails closed.
+
+## Phase F controls
+
+Training endpoints require the existing authenticated identity and query every session, state, actual, substitution, and history record by actor. The server ignores client entitlement assertions, validates strict 16 KB payloads, uses parameterized SQL, checks optimistic versions, and scopes idempotency keys per actor. Consumer responses and caches omit sealed validation input, restricted engine traces, credentials, and secrets. Generic logs contain request metadata only; private notes and restrictions are not logged. Immutable triggers protect prescribed snapshots, events, substitutions, and actual revisions, while runtime grants permit only the state update needed for execution.

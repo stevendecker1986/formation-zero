@@ -32,7 +32,14 @@ assert.ok(
   ),
 );
 const source = await readFile("apps/mobile/App.tsx", "utf8");
-assert.ok(!/process\.env|requestPermissions|requestAuthorization/.test(source));
+assert.ok(!/requestPermissions|requestAuthorization/.test(source));
+const publicVariables = [...source.matchAll(/process\.env\.([A-Z0-9_]+)/g)].map(
+  (match) => match[1],
+);
+assert.deepEqual(publicVariables.sort(), [
+  "EXPO_PUBLIC_API_ORIGIN",
+  "EXPO_PUBLIC_WEB_ORIGIN",
+]);
 console.log(
   "Mobile permission/config boundary passed: no requested sensitive permissions or client secrets.",
 );

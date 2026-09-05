@@ -17,3 +17,7 @@ Phase D adds tests/prescription-engine.test.ts (24 golden scenarios plus bounds/
 ## Phase E
 
 Phase E adds independent PASS/WARN/REJECT, deterministic, constrained/recovery/substitution/shuffle golden cases and the exact numbered 30-mutation adversarial suite. PostgreSQL/API tests cover encrypted context, client forgery, production policy authority, actual B2 rejection, immutable results, actor isolation, positive delivery and delivery invalidation after supersession. The full prior suite, clean source-only validation, builds, scans, license checks, smoke and hosted workflow remain required.
+
+## Phase F
+
+Phase F tests cover the D→E→delivery orchestration boundary, authentication, stored-tier enforcement, client forgery rejection, production fail-closed behavior, B2/demo isolation, execution transitions, timer recovery, immutable prescribed snapshots, append-only actual/corrections, skips, completion/abandonment, server-authorized substitutions, new-restriction safety stops, ownership/history privacy, idempotency, concurrent conflicts, offline bounds/account isolation, public-safe errors, client secret/authority exclusion, and web/mobile accessibility source contracts. The full suite remains the regression gate for Phases A–E.

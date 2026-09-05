@@ -34,3 +34,12 @@ Prescription facts are transient; input/material digests become domain-separated
 ## Phase E
 
 The exact validation context is restricted health-adjacent data, encrypted at rest and decrypted only inside an authenticated validation/delivery transaction. Immutable validation history stores codes, restricted trace, version references and keyed fingerprints; it does not store the raw facts again. Public summaries contain fixed generic text. Actor-scoped reads, no-store responses and the existing log allowlist apply. Real-data retention/deletion remains a production-launch decision.
+
+## Phase F additions
+
+- ACCOUNT: workout ownership, entitlement tier captured at delivery, idempotency and session identifiers.
+- FITNESS: prescribed snapshot, execution state, factual performance, skips, elapsed duration, completion/abandonment and substitutions.
+- SENSITIVE_HEALTH_ADJACENT: supplied restrictions, perceived effort and private notes. Sealed request context remains server-side; clients receive only safe output. Notes are not parsed into authority.
+- LOCATION: no precise or continuous location. Only non-precise environment/space context is accepted.
+
+Training history is private by default and is not shared with leaders, coaches, formations, or other users. Web caching is limited to a consumer-safe active snapshot for 24 hours; native persistence is disabled. Logout and account changes clear cached state.

@@ -2,6 +2,10 @@
 
 Historical releases: [CHANGELOG.md](../CHANGELOG.md).
 
+## Phase F
+
+Added authenticated individual-session orchestration over Phase D, independent Phase E validation and the delivery gate; immutable workout snapshots; a deterministic versioned execution state machine; append-only actual performance, correction and substitution history; server-authorized substitutions; safety termination; private history; bounded offline synchronization; and accessible web/Expo training experiences. Production remains fail closed and synthetic demonstrations remain isolated outside production.
+
 ## Phase E
 
 Added independent prescription validation, stable PASS/WARN/REJECT findings, fresh Phase C/content/rights/dose/time/composition/provenance checks, sealed exact validation context, immutable policies/results, admin validation controls, a server-owned delivery gate, and the required adversarial/golden coverage. Final validation and hosted evidence are recorded in PHASE_E_REPORT.md.
