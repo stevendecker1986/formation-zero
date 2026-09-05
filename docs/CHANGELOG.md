@@ -8,6 +8,8 @@ Added independent prescription validation, stable PASS/WARN/REJECT findings, fre
 
 Clean validation passed 136 tests and all migrations, corpus integrity, security/license, build/export, Expo and smoke checks. GitHub Actions run 33970392758 passed for exact implementation commit `cd3b905831cc9cecd9d7ba39a882b79838b430c2`.
 
+Phase E branch `codex/phase-e-validation-engine` was fast-forwarded into `main` at `1b8dd2b5cc9dacc9e7582028a4fc42e1cc6441a0`. The complete clean validation pipeline passed again on the merged state, and GitHub Actions run 33972082558 completed successfully against that exact main commit. No production validation policy was created or activated.
+
 ## Phase C — COMPLETE
 
 Added the deterministic rule-engine package, exact P0–P12 hierarchy, declarative conditions/typed effects, UNKNOWN handling, stable reasons and explainability, immutable rule/reason/set management, explicit production activation, restricted evaluation provenance, server-owned content eligibility, admin rule console and synthetic golden scenarios. Clean validation and hosted run 33939222984 passed with 70 tests, all builds/exports, security/license checks and smoke tests. B2 content remains pending; no production rules activated or Phase D implemented. See PHASE_C_REPORT.md for actual validation evidence.

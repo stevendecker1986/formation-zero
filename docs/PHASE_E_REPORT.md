@@ -85,6 +85,7 @@ Migration: `008_validation_engine.sql` adds sealed prescription input/fingerprin
 - Local migrations: migration 008 applied; rerunnable seed passed; corpus import remained exactly 100 exercise, 30 recovery, 16 equipment, 100 media requirements and zero production media.
 - Full automated suite: 136 tests passed, 0 failed; includes 30/30 adversarial mutations.
 - Final clean source-only validation at `2026-09-05T13:56:26.942Z`: install, all migrations, seed, corpus, full 136-test validation and failure probes each exited 0. A focused 36-test validator/API run also passed.
+- The complete clean validation pipeline was repeated successfully after the Phase E fast-forward merge on `main` at `1b8dd2b5cc9dacc9e7582028a4fc42e1cc6441a0`; install, migrations, seed, corpus, validation and failure probes each exited 0.
 - Format, ESLint, strict TypeScript, secret/client scans, runtime grants and failure probes passed.
 - Dependency audit: 0 vulnerabilities. License inventory: 828 locked entries reviewed, no unresolved licenses.
 
@@ -95,6 +96,8 @@ Web and admin Next.js production builds passed. API ESM build passed (173.85 KB)
 ## HOSTED CI
 
 GitHub Actions workflow `Phase A foundation`, run [33970392758](https://github.com/stevendecker1986/formation-zero/actions/runs/33970392758), completed successfully for branch `codex/phase-e-validation-engine` at exact implementation commit `cd3b905831cc9cecd9d7ba39a882b79838b430c2`.
+
+The validated feature branch was fast-forwarded into `main` without rewriting history. GitHub Actions workflow `Phase A foundation`, run [33972082558](https://github.com/stevendecker1986/formation-zero/actions/runs/33972082558), completed successfully for the exact merged main commit `1b8dd2b5cc9dacc9e7582028a4fc42e1cc6441a0`; its `validate` job completed successfully.
 
 ## ACCEPTANCE CRITERIA
 
