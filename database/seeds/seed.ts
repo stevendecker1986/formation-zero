@@ -1,3 +1,4 @@
+import { seedRules } from "./rules.js";
 import { pathToFileURL } from "node:url";
 import { randomUUID } from "node:crypto";
 import type pg from "pg";
@@ -48,6 +49,7 @@ export async function seed(pool: pg.Pool, environment: string): Promise<void> {
       );
   });
   await seedKnowledge(pool, environment);
+  await seedRules(pool, environment);
 }
 if (
   process.argv[1] &&

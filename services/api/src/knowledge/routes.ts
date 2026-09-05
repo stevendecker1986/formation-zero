@@ -1,3 +1,4 @@
+import * as rules from "./rules.js";
 import {
   Router,
   type Request,
@@ -22,8 +23,24 @@ const actor = (res: Response) => ({
   requestId: String(res.locals.requestId),
 });
 const id = (req: Request) => z.uuid().parse(req.params.id);
-export function knowledgeRouter(pool: pg.Pool) {
+export function knowledgeRouter(pool: pg.Pool, secret: string) {
   const router = Router();
+  router.use((_req, res, next) => {
+    res.setHeader("Cache-Control", "no-store");
+    next();
+  });
+  router.post("/rule-activations", async (req, res) =>
+    res.status(201).json(await rules.activate(pool, actor(res), req.body)),
+  );
+  router.get("/rule-activations", async (_req, res) =>
+    res.json(await rules.activationHistory(pool, actor(res))),
+  );
+  router.post("/rule-evaluations", async (req, res) =>
+    res.json(await rules.evaluateStored(pool, actor(res), req.body, secret)),
+  );
+  router.get("/rule-evaluations/:id", async (req, res) =>
+    res.json(await rules.readEvaluation(pool, actor(res), id(req))),
+  );
   router.get("/corpus", async (_req, res) => {
     res.setHeader("Cache-Control", "no-store");
     res.json(await inspectCorpus(pool, actor(res)));

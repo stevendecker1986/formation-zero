@@ -1,6 +1,10 @@
+import { ruleContentSchemas } from "./rules";
 import { z } from "zod";
 import { PROVENANCE, RIGHTS, CONTENT_STATUSES } from "@formation-zero/domain";
 export const KINDS = [
+  "RULE",
+  "REASON_CODE",
+  "RULE_SET",
   "SOURCE",
   "SOURCE_VERSION",
   "SOURCE_SECTION",
@@ -164,8 +168,23 @@ const suitability = z.record(z.enum(FORMATIONS), score);
 const relation = z
   .object({ type: z.enum(RELATIONS), target: id, notes: note })
   .strict();
-const content = { ...common, ...authored, aliases: names, equipment: ids };
+const content = {
+  ...common,
+  ...authored,
+  aliases: names,
+  equipment: ids,
+  rule_metadata: z
+    .object({
+      tags: names,
+      environment: names,
+      intensity: score.nullable(),
+      supervision_required: z.boolean().nullable(),
+    })
+    .strict()
+    .optional(),
+};
 export const schemas = {
+  ...ruleContentSchemas,
   SOURCE: z
     .object({
       ...common,
@@ -498,16 +517,21 @@ export function parsePayload(kind: Kind, data: unknown): Payload {
   return schemas[kind].parse(data);
 }
 export function requiredReviews(kind: Kind, provenance: unknown): ReviewType[] {
-  const result: ReviewType[] =
-    kind === "EXERCISE" || kind === "RECOVERY"
-      ? ["TECHNICAL", "SAFETY", "EDITORIAL", "RIGHTS"]
-      : kind === "MEDIA_ASSET"
-        ? ["TECHNICAL", "RIGHTS"]
-        : kind === "RIGHTS"
-          ? ["RIGHTS"]
-          : kind === "QUALIFICATION"
-            ? ["TECHNICAL"]
-            : ["EDITORIAL"];
+  const result: ReviewType[] = [
+    "EXERCISE",
+    "RECOVERY",
+    "RULE",
+    "REASON_CODE",
+    "RULE_SET",
+  ].includes(kind)
+    ? ["TECHNICAL", "SAFETY", "EDITORIAL", "RIGHTS"]
+    : kind === "MEDIA_ASSET"
+      ? ["TECHNICAL", "RIGHTS"]
+      : kind === "RIGHTS"
+        ? ["RIGHTS"]
+        : kind === "QUALIFICATION"
+          ? ["TECHNICAL"]
+          : ["EDITORIAL"];
   if (provenance === "OFFICIAL" || provenance === "OFFICIAL_DERIVED")
     result.push("TECHNICAL", "POLICY", "EDITORIAL", "RIGHTS");
   return [...new Set(result)];

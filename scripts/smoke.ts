@@ -1,3 +1,8 @@
+import { seedRules } from "../database/seeds/rules.js";
+import {
+  baselineFacts,
+  syntheticCandidate,
+} from "@formation-zero/rule-engine/fixtures";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { spawn, type ChildProcess } from "node:child_process";
@@ -230,6 +235,45 @@ try {
     await fetch("http://localhost:3101/admin/knowledge", { headers })
   ).text();
   assert.match(cms, /Knowledge workspace/);
+  assert.match(cms, /Rule engine administration/);
+  const ruleSet = await seedRules(h.pool, "TEST");
+  const ruleCandidate = Object.fromEntries(
+    Object.entries(syntheticCandidate()).filter(
+      ([key]) =>
+        ![
+          "synthetic",
+          "production_eligible",
+          "status",
+          "content_version",
+        ].includes(key),
+    ),
+  );
+  const evaluated = await fetch(knowledge + "rule-evaluations", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      mode: "TEST",
+      rule_set_version: ruleSet,
+      as_of: "2026-09-05",
+      facts: baselineFacts,
+      candidates: [ruleCandidate],
+    }),
+  });
+  assert.equal(evaluated.status, 200, await evaluated.clone().text());
+  assert.equal((await evaluated.json()).material.results[0].eligible, true);
+  const activation = await fetch(knowledge + "rule-activations", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      rule_set_version: ruleSet,
+      reason: "Synthetic activation must fail",
+    }),
+  });
+  assert.equal(activation.status, 403);
+  assert.equal((await fetch(knowledge + "rule-activations")).status, 401);
+  console.log(
+    "Phase C built CMS smoke passed: synthetic constraint evaluation, production activation denial and anonymous denial.",
+  );
   await importCorpus(h.pool);
   assert.match(cms, /Export B2 corpus/);
   const corpusResponse = await fetch(knowledge + "corpus", { headers });

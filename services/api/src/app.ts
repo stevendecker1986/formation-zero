@@ -317,7 +317,11 @@ export function createApp(
     }
     res.json({ shell: "Formation Zero administration", phase: "A" });
   });
-  app.use("/api/v1/knowledge", authenticated, knowledgeRouter(pool));
+  app.use(
+    "/api/v1/knowledge",
+    authenticated,
+    knowledgeRouter(pool, config.AUTH_SECRET),
+  );
   app.use((_req, res) => fail(res, 404, "NOT_FOUND"));
   app.use(
     (error: unknown, _req: Request, res: Response, _next: NextFunction) => {

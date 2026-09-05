@@ -12,4 +12,17 @@ Baseline: [PRIVACY_DATA_CLASSIFICATION.md](../PRIVACY_DATA_CLASSIFICATION.md).
 | Rights/license evidence                         | Internal editorial evidence, not an inferred legal authorization              |
 | Audit metadata                                  | Internal append-only identifiers/reasons; no content/credential values logged |
 
-Only synthetic fixture identities and metadata are shipped. No additional health, location, fitness session, unit, rank or biometric information is collected. Version history is retained for traceability; public distribution and production retention/deletion policy are not introduced. Before collecting real personal editorial evidence in Phase B2, use data minimization and the existing privacy process.
+B2 adds unpublished candidate content and owner-reported qualification metadata under the same editorial boundaries. Phase C accepts health-adjacent facts transiently for restricted editorial evaluation; it does not add consumer profile, session, location or biometric collection. Public distribution and a production retention/deletion policy are not introduced.
+
+## Phase C
+
+| Data                                         | Classification and handling                                                                  |
+| -------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Safety/restriction/readiness/load fact input | Sensitive health-adjacent; transient request memory only; not in logs or persisted snapshots |
+| Evaluation result/constraints/reason codes   | Potential health-adjacent inference; restricted evaluation provenance, evaluating actor only |
+| Raw input hash / full trace                  | Transient authenticated response; not generic audit/log data                                 |
+| Stored HMAC fingerprint                      | Restricted provenance; domain separated and keyed; not analytics                             |
+| Rule/source/reason/set version references    | Immutable editorial provenance                                                               |
+| Generic activation/evaluation audit          | IDs/counts only; no facts, hashes or results                                                 |
+
+Only synthetic evaluation examples are shipped. No production rule set is activated. Controlled validation does not authorize collecting real health data or establish production retention policy. Replaying requires a separately protected caller-held input; the service intentionally cannot reconstruct facts from retained provenance.

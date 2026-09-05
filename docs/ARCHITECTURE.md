@@ -41,3 +41,7 @@ The existing UI workspace owns provisional cross-platform semantic tokens. Web/a
 Migration 004 creates permanent coded entities, immutable versions, typed FK links, taxonomy tags, append-only reviews, editorial grants and separate lifecycle state. Content does not enter ordinary profiles. All mutation/audit work shares one transaction; advisory locking serializes low-volume editorial changes, and expected revisions reject stale requests. Database triggers preserve payload/review/history immutability.
 
 No public knowledge API, production corpus, actual media processing or training logic is present. See KNOWLEDGE_BASE.md, CONTENT_LIFECYCLE.md, ADMIN_CMS.md and ADRs 0010–0012. Supporting-record verification mapping is owner-approved and enforced by the server; append-only decisions and independent final approval remain required.
+
+## Phase C — deterministic constraints
+
+The framework-independent @formation-zero/rule-engine package evaluates declarative conditions and typed effects using the exact P0–P12 hierarchy. It returns constraints/reasons/eligible-only ranking without selecting sessions or calculating readiness/load. Knowledge RULE/REASON_CODE/RULE_SET entities reuse immutable version/review/publication controls. Migration 006 adds immutable activation/evaluation provenance. The admin knowledge workspace provides rule collection editing and an isolated rule console. Production evaluation loads active exact references and content eligibility server-side; pending B2 content remains excluded. See RULE_ENGINE.md and ADR 0014.

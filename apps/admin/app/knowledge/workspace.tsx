@@ -9,6 +9,7 @@ import {
   type Kind,
   type Permission,
 } from "@formation-zero/knowledge";
+import RuleConsole from "./rule-console";
 import { template } from "@formation-zero/knowledge/templates";
 import { CONTENT_STATUSES, PROVENANCE, RIGHTS } from "@formation-zero/domain";
 type RecordView = {
@@ -55,6 +56,14 @@ function Fields({
       {Object.entries(data).map(([key, value]) => {
         const label = key.replaceAll("_", " ");
         const update = (v: unknown) => onChange({ ...data, [key]: v });
+        if (key === "definition")
+          return (
+            <ObjectField
+              key={key}
+              value={value as Record<string, unknown>}
+              onChange={update}
+            />
+          );
         const nullableNumber = [
           "page_start",
           "page_end",
@@ -136,6 +145,42 @@ function Fields({
         );
       })}
     </>
+  );
+}
+function ObjectField({
+  value,
+  onChange,
+}: {
+  value: Record<string, unknown>;
+  onChange: (v: Record<string, unknown>) => void;
+}) {
+  const [raw, setRaw] = useState(JSON.stringify(value, null, 2));
+  const [error, setError] = useState(false);
+  useEffect(() => setRaw(JSON.stringify(value, null, 2)), [value]);
+  return (
+    <label>
+      Rule definition JSON (conditions, effects and priority)
+      <textarea
+        rows={16}
+        value={raw}
+        aria-invalid={error}
+        onChange={(event) => {
+          setRaw(event.target.value);
+          try {
+            const next: unknown = JSON.parse(event.target.value);
+            if (!next || typeof next !== "object" || Array.isArray(next))
+              throw new Error();
+            onChange(next as Record<string, unknown>);
+            setError(false);
+          } catch {
+            setError(true);
+          }
+        }}
+      />
+      {error && (
+        <span role="alert">Enter a valid JSON object before saving.</span>
+      )}
+    </label>
   );
 }
 function ArrayField({
@@ -671,6 +716,7 @@ export default function KnowledgeCMS() {
           </div>
         </>
       )}
+      <RuleConsole canActivate={permissions.includes("PUBLISHER")} />
       {lookup !== null && (
         <pre aria-label="Lookup result">{JSON.stringify(lookup, null, 2)}</pre>
       )}

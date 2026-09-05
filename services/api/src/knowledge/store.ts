@@ -160,6 +160,9 @@ export async function read(pool: pg.Pool, actor: Actor, id: string) {
   });
 }
 const prefixes: Record<Kind, string> = {
+  RULE: "RULE",
+  REASON_CODE: "RSN",
+  RULE_SET: "RSET",
   SOURCE: "SRC",
   SOURCE_VERSION: "SRV",
   SOURCE_SECTION: "SEC",
@@ -182,6 +185,7 @@ function references(
   const result: { relation: string; id: string; kinds: Kind[] }[] = [];
   const single: Record<string, Kind[]> = {
     source: [kind === "RESTRICTION" ? "SOURCE_SECTION" : "SOURCE"],
+    reason_code: ["REASON_CODE"],
     source_version: ["SOURCE_VERSION"],
     section: ["SOURCE_SECTION"],
     author: ["AUTHOR"],
@@ -195,6 +199,7 @@ function references(
     if (typeof p[key] === "string")
       result.push({ relation: key, id: p[key], kinds });
   for (const [key, kinds] of Object.entries({
+    rules: ["RULE"],
     citations: ["CITATION"],
     equipment: ["EQUIPMENT"],
     restrictions: ["RESTRICTION"],
@@ -223,6 +228,12 @@ export async function insert(
   prior?: Version,
 ) {
   const payload = parsePayload(kind, input);
+  if (
+    prior &&
+    ["RULE", "REASON_CODE", "RULE_SET"].includes(kind) &&
+    prior.payload.synthetic !== payload.synthetic
+  )
+    deny("SYNTHETIC_IDENTITY_IMMUTABLE", 409);
   // RIGHTS.source is a locator, not a content reference.
   const refs = references(
     kind === "RIGHTS" ? { ...payload, source: null } : payload,
@@ -298,6 +309,19 @@ export async function insert(
   await audit(c, actor, kind.toLowerCase() + ".version_created", id, {
     version: (prior?.version ?? 0) + 1,
   });
+  if (prior && kind === "RULE") {
+    const before = prior.payload.definition as { priority: number };
+    const after = payload.definition as { priority: number };
+    if (before.priority !== after.priority)
+      await audit(c, actor, "rule.priority_changed", id, {
+        from: before.priority,
+        to: after.priority,
+      });
+    if (prior.payload.reason_code !== payload.reason_code)
+      await audit(c, actor, "rule.reason_reference_changed", id);
+  }
+  if (prior && kind === "REASON_CODE")
+    await audit(c, actor, "reason_code.version_changed", id);
   return redact(await get(c, id));
 }
 export async function create(
@@ -595,6 +619,23 @@ export async function eligibility(
     for (const asset of assets)
       if (asset.status !== "PUBLISHED") reasons.push("MEDIA_NOT_PUBLISHED");
   }
+  if (v.kind === "RULE_SET")
+    for (const ref of v.payload.rules as string[]) {
+      const rule = await get(c, ref);
+      if (
+        rule.payload.synthetic !== v.payload.synthetic ||
+        !(await publishedEligibility(c, rule))
+      )
+        reasons.push("RULE_NOT_PRODUCTION_ELIGIBLE");
+    }
+  if (v.kind === "RULE") {
+    const reason = await get(c, String(v.payload.reason_code));
+    if (
+      reason.payload.synthetic !== v.payload.synthetic ||
+      !(await publishedEligibility(c, reason))
+    )
+      reasons.push("REASON_NOT_PUBLISHED");
+  }
   return { eligible: reasons.length === 0, reasons: [...new Set(reasons)] };
 }
 export async function check(pool: pg.Pool, actor: Actor, id: string) {
@@ -695,4 +736,23 @@ export async function list(pool: pg.Pool, actor: Actor, input: unknown) {
     ).rows;
     return rows.map(redact);
   });
+}
+
+// Revalidate current review/rights/source/media prerequisites without publishing.
+export async function publishedEligibility(
+  c: Client,
+  v: Version,
+): Promise<boolean> {
+  if (v.status !== "PUBLISHED" || !v.approved_by) return false;
+  const stale = await c.query(
+    "WITH RECURSIVE refs(id) AS (SELECT target_id FROM kb_links WHERE version_id=$1 UNION SELECT l.target_id FROM kb_links l JOIN refs r ON l.version_id=r.id) SELECT 1 FROM refs r JOIN kb_states s ON s.version_id=r.id WHERE s.status IN ('SUPERSEDED','RETIRED') LIMIT 1",
+    [v.id],
+  );
+  if (stale.rowCount) return false;
+  if (v.kind === "EXERCISE")
+    for (const id of v.payload.media_assets as string[]) {
+      if (!(await publishedEligibility(c, await get(c, id)))) return false;
+    }
+  const actor = { userId: v.approved_by, requestId: "production-boundary" };
+  return (await eligibility(c, { ...v, status: "APPROVED" }, actor)).eligible;
 }

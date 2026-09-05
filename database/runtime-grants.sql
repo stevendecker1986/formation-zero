@@ -18,3 +18,6 @@ REVOKE DELETE, TRUNCATE ON kb_states FROM fz_runtime;
 -- rejects actual entity updates, including updates of id.
 GRANT UPDATE(id) ON kb_entities TO fz_runtime;
 -- Runtime has no DDL ownership; migration credentials never enter app containers.
+GRANT SELECT, INSERT ON rule_activations, rule_evaluations TO fz_runtime;
+GRANT USAGE, SELECT ON SEQUENCE rule_activations_sequence_seq TO fz_runtime;
+REVOKE UPDATE, DELETE, TRUNCATE ON rule_activations, rule_evaluations FROM fz_runtime;

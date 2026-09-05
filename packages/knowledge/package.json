@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@formation-zero/domain": "0.1.0",
-    "zod": "^4.3.6"
+    "zod": "^4.3.6",
+    "@formation-zero/rule-engine": "0.1.0"
   }
 }

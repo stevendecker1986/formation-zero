@@ -46,6 +46,9 @@ test("knowledge runtime grants allow version writes and locks but deny history m
       "DELETE FROM kb_versions",
       "UPDATE kb_reviews SET comments='tampered'",
       "TRUNCATE kb_states",
+      "DELETE FROM rule_evaluations",
+      "UPDATE rule_activations SET reason='tampered'",
+      "TRUNCATE rule_evaluations",
       "CREATE TABLE forbidden_runtime_table(id int)",
     ]) {
       await c.query("SAVEPOINT denied_action");

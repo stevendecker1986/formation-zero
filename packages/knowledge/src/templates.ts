@@ -13,6 +13,31 @@ const authoring = {
 };
 export function template(kind: Kind): Record<string, unknown> {
   const values: Record<Kind, Record<string, unknown>> = {
+    RULE: {
+      ...authoring,
+      synthetic: true,
+      reason_code: "",
+      definition: {
+        priority: 0,
+        type: "HARD_BLOCK",
+        condition: { op: "EQ", path: "safety.pain", value: true },
+        effects: [{ type: "BLOCK_CANDIDATE" }],
+        effective_from: "2026-09-05",
+        effective_until: null,
+        population: null,
+        unknown_behavior: "BLOCK",
+      },
+    },
+    REASON_CODE: {
+      ...authoring,
+      synthetic: true,
+      reason: {
+        category: "SAFETY",
+        explanation: "Synthetic constraint; not training guidance.",
+        severity: "BLOCK",
+      },
+    },
+    RULE_SET: { ...authoring, synthetic: true, rules: [] },
     SOURCE: {
       issuing_authority: "Synthetic authority",
       source_type: "OTHER",

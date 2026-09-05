@@ -5,7 +5,7 @@ async function proxy(
 ) {
   const path = (await context.params).path.join("/");
   if (
-    !/^(access|taxonomies|records|grants|corpus|versions\/[0-9a-f-]{36}(?:\/(versions|reviews|eligibility|transitions|provenance|rights))?)$/.test(
+    !/^(access|taxonomies|records|grants|corpus|rule-activations|rule-evaluations(?:\/[0-9a-f-]{36})?|versions\/[0-9a-f-]{36}(?:\/(versions|reviews|eligibility|transitions|provenance|rights))?)$/.test(
       path,
     )
   )
