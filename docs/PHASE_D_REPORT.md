@@ -170,50 +170,50 @@ PASS: optimized web and admin Next.js builds, API tsup build, and Expo web/Andro
 
 ## HOSTED CI
 
-GitHub Actions / Phase A foundation / codex/phase-d-prescription-engine / 01398d3a80fd22a3de86659c9c74850637f4b618. Run [33946312038](https://github.com/stevendecker1986/formation-zero/actions/runs/33946312038): completed SUCCESS. Job 101252925503 passed install, all validation, failure probes and artifact upload. The actual hosted logs confirm 101 passing tests, zero failures, security/license checks, builds/exports and D smoke.
+GitHub Actions / Phase A foundation / main / 2c7ae6ebf11e0d6d9aaffc7dfa906eebc1ddfe0b. Run [33965986622](https://github.com/stevendecker1986/formation-zero/actions/runs/33965986622): completed SUCCESS. The job passed install, complete A/B/B2/C/D validation, failure probes, artifact upload and cleanup. This main commit is the exact Phase D feature-branch commit previously validated by successful branch run 33946506456.
 
 ## ACCEPTANCE CRITERIA
 
-| #   | Criterion                                                     | Status | Evidence                                                                                    |
-| --- | ------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------- |
-| 1   | all previous phases pass                                      | PASS   | Clean 101-test regression suite, including all A/B/B2/C tests.                              |
-| 2   | framework-independent prescription engine exists              | PASS   | packages/prescription-engine imports only Phase C, Zod and Node crypto.                     |
-| 3   | Phase C cannot be bypassed                                    | PASS   | Base and each dose invoke C; golden 05, 12–15, 17, 19.                                      |
-| 4   | production content eligibility server-enforced                | PASS   | Production API loads active rules and publishedEligibility server-side; rule-api D subtest. |
-| 5   | real pending B2 content remains non-prescribable              | PASS   | Actual B2 imported in API test; zero published; prescription denied.                        |
-| 6   | synthetic fixtures isolated                                   | PASS   | Fixed synthetic catalog; mixed-mode/forged catalog tests.                                   |
-| 7   | typed request/result works                                    | PASS   | Strict Zod construction/request schemas; exported Prescription result type; tsc passes.     |
-| 8   | objective/session structures work                             | PASS   | All thirteen objectives test and golden 01–06, 24.                                          |
-| 9   | time budget respected                                         | PASS   | Golden 02, 18; exact timing/rest/buffer arithmetic.                                         |
-| 10  | deterministic ranking works                                   | PASS   | Golden 21–22; priority-vector and stable ID ordering.                                       |
-| 11  | volume/intensity/rest works                                   | PASS   | Volume arithmetic, minimum-rest bounds and supplied intensity tests.                        |
-| 12  | movement composition works                                    | PASS   | Golden 01/03/24; mandatory movement slots and no duplicate versions.                        |
-| 13  | explicit progression/regression/substitution works            | PASS   | Golden 10 and progression/regression/blocked-target tests.                                  |
-| 14  | blocked candidates never reappear                             | PASS   | Golden 05/12/13/15/17; permanent base eligibility gate.                                     |
-| 15  | readiness/load/phase consumed, not calculated                 | PASS   | Golden 07–09/14; supplied Deload test; no calculation code.                                 |
-| 16  | preference remains low priority                               | PASS   | Golden 12/16/17 and rank ordering.                                                          |
-| 17  | explicit failure outcomes including NO_SAFE_PRESCRIPTION work | PASS   | All eight outcome tests and safe failure results.                                           |
-| 18  | explainability/public-safe rationale works                    | PASS   | Public marker-absence test, base/dose internal trace and selection codes.                   |
-| 19  | exact provenance recorded                                     | PASS   | Exact template/content/rule/reason versions and server HMAC tests.                          |
-| 20  | saved history immutable/version-stable                        | PASS   | PostgreSQL UPDATE/DELETE/TRUNCATE denial and supersession history equality.                 |
-| 21  | construction invariants work                                  | PASS   | Constructor required-slot/time/uniqueness assertions and tests.                             |
-| 22  | at least 24 golden scenarios pass                             | PASS   | Golden 01–24 PASS within 101 clean tests.                                                   |
-| 23  | shuffled input does not change material output                | PASS   | Golden 22 reverses candidates/rules/doses/slots with identical result.                      |
-| 24  | no Phase E validator exists                                   | PASS   | Source review: only local constructor assertions; no independent validator.                 |
-| 25  | no COMMAND/Unit PT logic                                      | PASS   | Source review: individual structures only; no group logistics.                              |
-| 26  | no consumer workout UI                                        | PASS   | Only internal admin testing console added; consumer app unchanged.                          |
-| 27  | security/privacy passes                                       | PASS   | API authorization/privacy/runtime-grant tests, source/client/security scans.                |
-| 28  | regressions/builds/security/license checks pass               | PASS   | Clean validate exited 0; 101 tests, builds/exports, scans/licenses/smoke.                   |
-| 29  | hosted CI passes                                              | PASS   | Actual GitHub Actions run 33946312038 completed SUCCESS for implementation commit 01398d3.  |
-| 30  | docs reflect reality                                          | PASS   | This report records real commands, resolved failures and completed hosted CI.               |
+| #   | Criterion                                                     | Status | Evidence                                                                                        |
+| --- | ------------------------------------------------------------- | ------ | ----------------------------------------------------------------------------------------------- |
+| 1   | all previous phases pass                                      | PASS   | Clean 101-test regression suite, including all A/B/B2/C tests.                                  |
+| 2   | framework-independent prescription engine exists              | PASS   | packages/prescription-engine imports only Phase C, Zod and Node crypto.                         |
+| 3   | Phase C cannot be bypassed                                    | PASS   | Base and each dose invoke C; golden 05, 12–15, 17, 19.                                          |
+| 4   | production content eligibility server-enforced                | PASS   | Production API loads active rules and publishedEligibility server-side; rule-api D subtest.     |
+| 5   | real pending B2 content remains non-prescribable              | PASS   | Actual B2 imported in API test; zero published; prescription denied.                            |
+| 6   | synthetic fixtures isolated                                   | PASS   | Fixed synthetic catalog; mixed-mode/forged catalog tests.                                       |
+| 7   | typed request/result works                                    | PASS   | Strict Zod construction/request schemas; exported Prescription result type; tsc passes.         |
+| 8   | objective/session structures work                             | PASS   | All thirteen objectives test and golden 01–06, 24.                                              |
+| 9   | time budget respected                                         | PASS   | Golden 02, 18; exact timing/rest/buffer arithmetic.                                             |
+| 10  | deterministic ranking works                                   | PASS   | Golden 21–22; priority-vector and stable ID ordering.                                           |
+| 11  | volume/intensity/rest works                                   | PASS   | Volume arithmetic, minimum-rest bounds and supplied intensity tests.                            |
+| 12  | movement composition works                                    | PASS   | Golden 01/03/24; mandatory movement slots and no duplicate versions.                            |
+| 13  | explicit progression/regression/substitution works            | PASS   | Golden 10 and progression/regression/blocked-target tests.                                      |
+| 14  | blocked candidates never reappear                             | PASS   | Golden 05/12/13/15/17; permanent base eligibility gate.                                         |
+| 15  | readiness/load/phase consumed, not calculated                 | PASS   | Golden 07–09/14; supplied Deload test; no calculation code.                                     |
+| 16  | preference remains low priority                               | PASS   | Golden 12/16/17 and rank ordering.                                                              |
+| 17  | explicit failure outcomes including NO_SAFE_PRESCRIPTION work | PASS   | All eight outcome tests and safe failure results.                                               |
+| 18  | explainability/public-safe rationale works                    | PASS   | Public marker-absence test, base/dose internal trace and selection codes.                       |
+| 19  | exact provenance recorded                                     | PASS   | Exact template/content/rule/reason versions and server HMAC tests.                              |
+| 20  | saved history immutable/version-stable                        | PASS   | PostgreSQL UPDATE/DELETE/TRUNCATE denial and supersession history equality.                     |
+| 21  | construction invariants work                                  | PASS   | Constructor required-slot/time/uniqueness assertions and tests.                                 |
+| 22  | at least 24 golden scenarios pass                             | PASS   | Golden 01–24 PASS within 101 clean tests.                                                       |
+| 23  | shuffled input does not change material output                | PASS   | Golden 22 reverses candidates/rules/doses/slots with identical result.                          |
+| 24  | no Phase E validator exists                                   | PASS   | Source review: only local constructor assertions; no independent validator.                     |
+| 25  | no COMMAND/Unit PT logic                                      | PASS   | Source review: individual structures only; no group logistics.                                  |
+| 26  | no consumer workout UI                                        | PASS   | Only internal admin testing console added; consumer app unchanged.                              |
+| 27  | security/privacy passes                                       | PASS   | API authorization/privacy/runtime-grant tests, source/client/security scans.                    |
+| 28  | regressions/builds/security/license checks pass               | PASS   | Clean validate exited 0; 101 tests, builds/exports, scans/licenses/smoke.                       |
+| 29  | hosted CI passes                                              | PASS   | Actual main-branch GitHub Actions run 33965986622 completed SUCCESS for Phase D commit 2c7ae6e. |
+| 30  | docs reflect reality                                          | PASS   | This report records real commands, resolved failures and completed hosted CI.                   |
 
 ## KNOWN ISSUES
 
-No unresolved implementation or validation failures. Delivery is on codex/phase-d-prescription-engine; main is unchanged. Production training content still requires real reviews, rights clearance and publication; this is an enforced boundary, not an approval supplied by Phase D. The bounded search may return a safe failure when it cannot find a complete composition. No Phase E functionality was implemented.
+No unresolved implementation, merge, or validation failures. Phase D was fast-forwarded to main without rewriting history. Production training content still requires real reviews, rights clearance and publication; this is an enforced boundary, not an approval supplied by Phase D. The bounded search may return a safe failure when it cannot find a complete composition. No Phase E functionality was implemented.
 
 ## OPEN DECISIONS
 
-No implementation decision remains. Optional merge into main requires explicit owner authorization: automatic approval review rejected the default-branch mutation. The authorized feature branch is pushed and validated. Future real reviewers must author/approve production templates/dose profiles; no fabricated defaults.
+No implementation or merge decision remains. Future real reviewers must author and approve production templates and dose profiles; no fabricated defaults.
 
 ## PHASE E READINESS
 
