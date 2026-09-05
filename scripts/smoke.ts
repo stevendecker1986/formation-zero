@@ -236,6 +236,40 @@ try {
   ).text();
   assert.match(cms, /Knowledge workspace/);
   assert.match(cms, /Rule engine administration/);
+  assert.match(cms, /Prescription engine testing/);
+  const fixtureResponse = await fetch(knowledge + "prescription-fixtures", {
+    headers,
+  });
+  assert.equal(fixtureResponse.status, 200);
+  const prescriptionFixture = await fixtureResponse.json();
+  const prescriptionResponse = await fetch(knowledge + "prescriptions", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      mode: "TEST",
+      catalog_version: prescriptionFixture.catalog_version,
+      context: prescriptionFixture.default_context,
+    }),
+  });
+  assert.equal(
+    prescriptionResponse.status,
+    200,
+    await prescriptionResponse.clone().text(),
+  );
+  const prescription = await prescriptionResponse.json();
+  assert.equal(prescription.material.outcome, "CANDIDATE_SESSION");
+  assert.equal(
+    (
+      await fetch(knowledge + "prescriptions/" + prescription.record_id, {
+        headers,
+      })
+    ).status,
+    200,
+  );
+  assert.equal((await fetch(knowledge + "prescription-fixtures")).status, 401);
+  console.log(
+    "Phase D built CMS smoke passed: synthetic prescription, immutable history retrieval and anonymous denial.",
+  );
   const ruleSet = await seedRules(h.pool, "TEST");
   const ruleCandidate = Object.fromEntries(
     Object.entries(syntheticCandidate()).filter(

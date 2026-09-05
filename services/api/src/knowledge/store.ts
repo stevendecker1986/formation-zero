@@ -163,6 +163,7 @@ const prefixes: Record<Kind, string> = {
   RULE: "RULE",
   REASON_CODE: "RSN",
   RULE_SET: "RSET",
+  PRESCRIPTION_TEMPLATE: "PTPL",
   SOURCE: "SRC",
   SOURCE_VERSION: "SRV",
   SOURCE_SECTION: "SEC",
@@ -230,7 +231,9 @@ export async function insert(
   const payload = parsePayload(kind, input);
   if (
     prior &&
-    ["RULE", "REASON_CODE", "RULE_SET"].includes(kind) &&
+    ["RULE", "REASON_CODE", "RULE_SET", "PRESCRIPTION_TEMPLATE"].includes(
+      kind,
+    ) &&
     prior.payload.synthetic !== payload.synthetic
   )
     deny("SYNTHETIC_IDENTITY_IMMUTABLE", 409);

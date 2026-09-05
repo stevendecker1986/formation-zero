@@ -1,3 +1,4 @@
+import { fixture as prescriptionFixture } from "@formation-zero/prescription-engine/fixtures";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { testHarness } from "./helpers.js";
@@ -353,6 +354,100 @@ test("Phase C PostgreSQL/API lifecycle, production boundary and private provenan
         result.material.results[0].reasons.some(
           (r: { code: string }) => r.code === "FZ-RSN-CONTENT-NOT-ELIGIBLE",
         ),
+      );
+      assert.equal(
+        (
+          await h.pool.query(
+            "SELECT count(*)::int n FROM kb_corpus_members cm JOIN kb_states s ON s.version_id=cm.initial_version_id WHERE s.status='PUBLISHED'",
+          )
+        ).rows[0].n,
+        0,
+      );
+    },
+  );
+  await t.test(
+    "D production templates, actual B2 exclusion and version-stable saved prescription",
+    async () => {
+      const f = prescriptionFixture("RECOVERY");
+      const definition = Object.fromEntries(
+        Object.entries(f.template).filter(
+          ([k]) =>
+            !["version_id", "synthetic", "production_eligible"].includes(k),
+        ),
+      );
+      const structure = await create("PRESCRIPTION_TEMPLATE", {
+        ...authored,
+        definition,
+      });
+      await transition(structure.id, "APPROVE", pc, null, 409);
+      await publish(structure);
+      const recovery = await create("RECOVERY", {
+        ...Object.fromEntries(
+          Object.entries(authored).filter(([k]) => k !== "synthetic"),
+        ),
+        rule_metadata: {
+          tags: [],
+          environment: [],
+          intensity: 0,
+          supervision_required: false,
+        },
+        prescription_metadata: f.candidates.find((c) => c.kind === "RECOVERY")!
+          .metadata,
+      });
+      await publish(recovery);
+      const context = Object.fromEntries(
+        Object.entries(f.request).filter(
+          ([k]) => !["mode", "individual_ref"].includes(k),
+        ),
+      );
+      const request = {
+        mode: "PRODUCTION",
+        template_version: structure.id,
+        context: { ...context, candidate_scope: [recovery.id] },
+      };
+      const generated = await call("prescriptions", request);
+      assert.equal(generated.material.outcome, "CANDIDATE_SESSION");
+      assert.deepEqual(generated.material.provenance.content_versions, [
+        recovery.id,
+      ]);
+      assert.equal(generated.material.provenance.rule_set_version, set.id);
+      await call(
+        "prescriptions",
+        { ...request, rule_set_version: set.id },
+        ec,
+        400,
+      );
+      const b2 = (
+        await h.pool.query(
+          "SELECT initial_version_id FROM kb_corpus_members WHERE member_key='exercise-001'",
+        )
+      ).rows[0].initial_version_id;
+      const blocked = await call("prescriptions", {
+        ...request,
+        context: { ...request.context, candidate_scope: [b2] },
+      });
+      assert.equal(blocked.material.outcome, "CONTENT_NOT_PRODUCTION_ELIGIBLE");
+      const updated = await call(
+        "versions/" + recovery.id + "/versions",
+        {
+          expected_version: 1,
+          data: {
+            ...recovery.payload,
+            notes: "SYNTHETIC next metadata version",
+          },
+        },
+        ec,
+        201,
+      );
+      await publish(updated);
+      await transition(recovery.id, "SUPERSEDE", pc, updated.id);
+      assert.deepEqual(
+        (await call("prescriptions/" + generated.record_id)).material,
+        generated.material,
+      );
+      assert.equal(
+        (await call("prescriptions", request)).material.outcome,
+        "CONTENT_NOT_PRODUCTION_ELIGIBLE",
       );
       assert.equal(
         (

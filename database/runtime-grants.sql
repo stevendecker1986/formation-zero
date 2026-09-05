@@ -21,3 +21,5 @@ GRANT UPDATE(id) ON kb_entities TO fz_runtime;
 GRANT SELECT, INSERT ON rule_activations, rule_evaluations TO fz_runtime;
 GRANT USAGE, SELECT ON SEQUENCE rule_activations_sequence_seq TO fz_runtime;
 REVOKE UPDATE, DELETE, TRUNCATE ON rule_activations, rule_evaluations FROM fz_runtime;
+GRANT SELECT, INSERT ON prescriptions TO fz_runtime;
+REVOKE UPDATE, DELETE, TRUNCATE ON prescriptions FROM fz_runtime;

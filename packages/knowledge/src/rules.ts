@@ -1,3 +1,4 @@
+import { templateDefinition } from "@formation-zero/prescription-engine/schemas";
 import { z } from "zod";
 import {
   ruleDefinitionSchema,
@@ -20,6 +21,9 @@ const authoring = {
   synthetic: z.boolean(),
 };
 export const ruleContentSchemas = {
+  PRESCRIPTION_TEMPLATE: z
+    .object({ ...authoring, definition: templateDefinition })
+    .strict(),
   RULE: z
     .object({
       ...authoring,

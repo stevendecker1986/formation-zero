@@ -108,34 +108,7 @@ export async function evaluateStored(
           !(await kb.publishedEligibility(c, set)))
     )
       throw new kb.KnowledgeError(409, "RULE_SET_NOT_ELIGIBLE");
-    const rules = [];
-    for (const id of set.payload.rules as string[]) {
-      const v = await kb.get(c, id),
-        reason = await kb.get(c, String(v.payload.reason_code));
-      if (
-        v.kind !== "RULE" ||
-        reason.kind !== "REASON_CODE" ||
-        v.payload.synthetic !== set.payload.synthetic ||
-        reason.payload.synthetic !== set.payload.synthetic
-      )
-        throw new kb.KnowledgeError(409, "INVALID_RULE_SET");
-      rules.push(
-        runtimeRuleSchema.parse({
-          ...(v.payload.definition as object),
-          rule_id: v.code,
-          version: v.version,
-          version_id: v.id,
-          status: v.status,
-          synthetic: v.payload.synthetic,
-          production_eligible:
-            body.mode === "PRODUCTION" && (await kb.publishedEligibility(c, v)),
-          provenance: v.payload.provenance,
-          citations: v.payload.citations,
-          reason_version_id: reason.id,
-          reason: { ...(reason.payload.reason as object), code: reason.code },
-        }),
-      );
-    }
+    const rules = await loadRules(c, set, body.mode);
     const candidates: Candidate[] = [];
     if (body.mode === "TEST")
       for (const v of body.candidates)
@@ -148,30 +121,10 @@ export async function evaluateStored(
         });
     else
       for (const id of body.candidates) {
-        const v = await kb.get(c, id),
-          p = v.payload;
+        const v = await kb.get(c, id);
         if (!["EXERCISE", "RECOVERY"].includes(v.kind))
           throw new kb.KnowledgeError(400, "INVALID_CANDIDATE_KIND");
-        const metadata = (p.rule_metadata ?? {}) as Record<string, unknown>;
-        candidates.push(
-          candidateSchema.parse({
-            id: v.code,
-            content_version: v.id,
-            status: v.status,
-            synthetic: false,
-            production_eligible: await kb.publishedEligibility(c, v),
-            tags: metadata.tags ?? null,
-            movement: p.primary_movement ?? null,
-            capability: p.primary_capability ?? null,
-            complexity: p.technical_complexity ?? null,
-            intensity: metadata.intensity ?? null,
-            equipment: p.equipment ?? null,
-            restrictions: p.restrictions ?? null,
-            environment: metadata.environment ?? null,
-            supervision_required: metadata.supervision_required ?? null,
-            demand: p.demand_profile ?? {},
-          }),
-        );
+        candidates.push(await loadCandidate(c, v));
       }
     const knowledge_version = fingerprint(candidates);
     const evaluationInput = {
@@ -243,5 +196,66 @@ export async function readEvaluation(
     ).rows[0];
     if (!result) throw new kb.KnowledgeError(404, "NOT_FOUND");
     return result;
+  });
+}
+
+export async function loadRules(
+  c: pg.PoolClient,
+  set: Awaited<ReturnType<typeof kb.get>>,
+  mode: "TEST" | "PRODUCTION",
+) {
+  const rules = [];
+  for (const id of set.payload.rules as string[]) {
+    const v = await kb.get(c, id),
+      reason = await kb.get(c, String(v.payload.reason_code));
+    if (
+      v.kind !== "RULE" ||
+      reason.kind !== "REASON_CODE" ||
+      v.payload.synthetic !== set.payload.synthetic ||
+      reason.payload.synthetic !== set.payload.synthetic
+    )
+      throw new kb.KnowledgeError(409, "INVALID_RULE_SET");
+    rules.push(
+      runtimeRuleSchema.parse({
+        ...(v.payload.definition as object),
+        rule_id: v.code,
+        version: v.version,
+        version_id: v.id,
+        status: v.status,
+        synthetic: v.payload.synthetic,
+        production_eligible:
+          mode === "PRODUCTION" && (await kb.publishedEligibility(c, v)),
+        provenance: v.payload.provenance,
+        citations: v.payload.citations,
+        reason_version_id: reason.id,
+        reason: { ...(reason.payload.reason as object), code: reason.code },
+      }),
+    );
+  }
+  return rules;
+}
+
+export async function loadCandidate(
+  c: pg.PoolClient,
+  v: Awaited<ReturnType<typeof kb.get>>,
+) {
+  const p = v.payload;
+  const metadata = (p.rule_metadata ?? {}) as Record<string, unknown>;
+  return candidateSchema.parse({
+    id: v.code,
+    content_version: v.id,
+    status: v.status,
+    synthetic: false,
+    production_eligible: await kb.publishedEligibility(c, v),
+    tags: metadata.tags ?? null,
+    movement: p.primary_movement ?? null,
+    capability: p.primary_capability ?? null,
+    complexity: p.technical_complexity ?? null,
+    intensity: metadata.intensity ?? null,
+    equipment: p.equipment ?? null,
+    restrictions: p.restrictions ?? null,
+    environment: metadata.environment ?? null,
+    supervision_required: metadata.supervision_required ?? null,
+    demand: p.demand_profile ?? {},
   });
 }

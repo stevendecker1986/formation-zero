@@ -1,3 +1,4 @@
+import { prescriptionMetadata } from "@formation-zero/prescription-engine/schemas";
 import { ruleContentSchemas } from "./rules";
 import { z } from "zod";
 import { PROVENANCE, RIGHTS, CONTENT_STATUSES } from "@formation-zero/domain";
@@ -5,6 +6,7 @@ export const KINDS = [
   "RULE",
   "REASON_CODE",
   "RULE_SET",
+  "PRESCRIPTION_TEMPLATE",
   "SOURCE",
   "SOURCE_VERSION",
   "SOURCE_SECTION",
@@ -173,6 +175,7 @@ const content = {
   ...authored,
   aliases: names,
   equipment: ids,
+  prescription_metadata: prescriptionMetadata.optional(),
   rule_metadata: z
     .object({
       tags: names,
@@ -523,6 +526,7 @@ export function requiredReviews(kind: Kind, provenance: unknown): ReviewType[] {
     "RULE",
     "REASON_CODE",
     "RULE_SET",
+    "PRESCRIPTION_TEMPLATE",
   ].includes(kind)
     ? ["TECHNICAL", "SAFETY", "EDITORIAL", "RIGHTS"]
     : kind === "MEDIA_ASSET"

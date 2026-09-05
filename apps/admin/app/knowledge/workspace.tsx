@@ -9,6 +9,7 @@ import {
   type Kind,
   type Permission,
 } from "@formation-zero/knowledge";
+import PrescriptionConsole from "./prescription-console";
 import RuleConsole from "./rule-console";
 import { template } from "@formation-zero/knowledge/templates";
 import { CONTENT_STATUSES, PROVENANCE, RIGHTS } from "@formation-zero/domain";
@@ -716,6 +717,7 @@ export default function KnowledgeCMS() {
           </div>
         </>
       )}
+      <PrescriptionConsole />
       <RuleConsole canActivate={permissions.includes("PUBLISHER")} />
       {lookup !== null && (
         <pre aria-label="Lookup result">{JSON.stringify(lookup, null, 2)}</pre>

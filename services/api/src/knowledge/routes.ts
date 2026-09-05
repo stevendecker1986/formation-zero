@@ -1,3 +1,4 @@
+import * as prescriptions from "./prescriptions.js";
 import * as rules from "./rules.js";
 import {
   Router,
@@ -29,6 +30,17 @@ export function knowledgeRouter(pool: pg.Pool, secret: string) {
     res.setHeader("Cache-Control", "no-store");
     next();
   });
+  router.get("/prescription-fixtures", async (_req, res) =>
+    res.json(await prescriptions.fixtureCatalog(pool, actor(res))),
+  );
+  router.post("/prescriptions", async (req, res) =>
+    res.json(
+      await prescriptions.constructStored(pool, actor(res), req.body, secret),
+    ),
+  );
+  router.get("/prescriptions/:id", async (req, res) =>
+    res.json(await prescriptions.readPrescription(pool, actor(res), id(req))),
+  );
   router.post("/rule-activations", async (req, res) =>
     res.status(201).json(await rules.activate(pool, actor(res), req.body)),
   );

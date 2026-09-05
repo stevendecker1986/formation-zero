@@ -26,3 +26,7 @@ B2 adds unpublished candidate content and owner-reported qualification metadata 
 | Generic activation/evaluation audit          | IDs/counts only; no facts, hashes or results                                                 |
 
 Only synthetic evaluation examples are shipped. No production rule set is activated. Controlled validation does not authorize collecting real health data or establish production retention policy. Replaying requires a separately protected caller-held input; the service intentionally cannot reconstruct facts from retained provenance.
+
+## Phase D
+
+Prescription facts are transient; input/material digests become domain-separated HMACs at the service boundary. Saved prescriptions contain sensitive derived constraints/trace and exact content references, accessible only to the originating authorized actor. Public rationale is static and separate. Raw fact values/identity are not included in material or generic logs. generated_at and actor_id are restricted persistence metadata. Immutable retention follows the existing append-only architecture; no new erasure policy is invented.

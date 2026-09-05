@@ -9,3 +9,7 @@ Baseline instructions: [TESTING.md](../TESTING.md). `npm test` discovers all exi
 ## Phase C checks
 
 Run npm test for all prior regressions plus tests/rule-engine.test.ts (16 golden scenarios and core semantics) and tests/rule-api.test.ts (real PostgreSQL lifecycle/activation/production-boundary/privacy). The runtime-grant regression includes the new immutable tables. npm run validate:clean performs fresh install/migrations/seeds/B2 import/full validation and failure probes. npm run smoke additionally exercises the built CMS rule evaluation proxy and denies unauthorized production activation. Hosted Phase A foundation runs the same required validation chain; no checks are skipped for Phase C. See PHASE_C_REPORT.md for executed results.
+
+## Phase D
+
+Phase D adds tests/prescription-engine.test.ts (24 golden scenarios plus bounds/failures/relationships/privacy), prescription-api.test.ts and production/history subtests in rule-api.test.ts. Runtime grants and built CMS smoke include prescriptions. npm run validate:clean performs source-only npm ci, fresh migrations/seeds/corpus, all validation and failure probes. Existing Phase A foundation hosted workflow runs the same checks including D. See PHASE_D_REPORT.md for actual execution evidence.

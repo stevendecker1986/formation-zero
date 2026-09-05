@@ -1,0 +1,9 @@
+# Prescription request
+
+Core strict input: request, candidate snapshots, exact template, rules, rule-set version and knowledge fingerprint. Request fields: TEST/PRODUCTION mode, individual reference, ISO training date, objective, duration_seconds (1–14400), available/unsafe equipment references, STANDARD/LIMITED/UNKNOWN space, typed Phase C facts, candidate version scope, preferences, optional emphasis, explicit relationship requests and supplied intensity references. Empty core/test scope means the complete supplied catalog; production scope must explicitly name versions.
+
+All thirteen objectives are supported: GENERAL_READINESS, STRENGTH, MUSCLE_DEVELOPMENT, RUNNING, RUCKING, HYBRID, TACTICAL_FITNESS, WORK_CAPACITY, MOBILITY, RECOVERY, PFT_PREPARATION, CFT_PREPARATION, CUSTOM. Military objectives are opt-in. Objective-specific reviewed templates and dose options determine structure. Phase C objective facts are supplied separately using Phase C's established taxonomy; no readiness/load/phase calculation or physiological inference occurs.
+
+Equipment and space fields are authoritative duplicate context; conflicting facts fail INVALID_REQUEST instead of silently weakening constraints. Readiness, recent load, program phase, safety, restrictions, environment and preference facts retain Phase C typing and unknown semantics.
+
+Internal POST `/api/v1/knowledge/prescriptions`: TEST accepts catalog_version and context; PRODUCTION accepts template_version and context. Neither accepts eligibility flags, candidates, rules, active-set overrides or individual identity. Server binds identity to the authenticated actor. GET prescription-fixtures supplies the exact synthetic catalog/set and a default synthetic context. Context JSON is the core request without mode and individual_ref. GET prescriptions/:id returns only the requesting actor's saved result after editorial authorization.

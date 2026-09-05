@@ -37,6 +37,16 @@ export function template(kind: Kind): Record<string, unknown> {
         severity: "BLOCK",
       },
     },
+    PRESCRIPTION_TEMPLATE: {
+      ...authoring,
+      synthetic: true,
+      definition: {
+        objective: "CUSTOM",
+        slots: [],
+        buffer_seconds: 0,
+        limit_units: {},
+      },
+    },
     RULE_SET: { ...authoring, synthetic: true, rules: [] },
     SOURCE: {
       issuing_authority: "Synthetic authority",

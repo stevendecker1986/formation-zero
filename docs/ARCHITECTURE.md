@@ -45,3 +45,7 @@ No public knowledge API, production corpus, actual media processing or training 
 ## Phase C — deterministic constraints
 
 The framework-independent @formation-zero/rule-engine package evaluates declarative conditions and typed effects using the exact P0–P12 hierarchy. It returns constraints/reasons/eligible-only ranking without selecting sessions or calculating readiness/load. Knowledge RULE/REASON_CODE/RULE_SET entities reuse immutable version/review/publication controls. Migration 006 adds immutable activation/evaluation provenance. The admin knowledge workspace provides rule collection editing and an isolated rule console. Production evaluation loads active exact references and content eligibility server-side; pending B2 content remains excluded. See RULE_ENGINE.md and ADR 0014.
+
+## Phase D
+
+Phase D adds @formation-zero/prescription-engine, reviewed PRESCRIPTION_TEMPLATE records, optional exact-version dose profiles, secured internal construction/catalog/history routes and immutable prescriptions. Shared Phase C loaders and publication gates remain authoritative. See PRESCRIPTION_ENGINE.md and ADR 0015.
