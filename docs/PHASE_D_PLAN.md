@@ -1,6 +1,6 @@
 # Phase D implementation plan
 
-Status: implementation in progress. Individual candidate-session construction only; no Phase E.
+Status: COMPLETE. Implementation, clean validation and hosted CI passed. Individual candidate-session construction only; no Phase E.
 
 ## Audited baseline
 
