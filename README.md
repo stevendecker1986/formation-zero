@@ -1,6 +1,6 @@
 # Formation Zero
 
-**Readiness Starts Here.** Phase A account/platform foundation plus Phase B knowledge-management foundation under review. Universal fitness and human-performance software, not an official USMC/DoD product; no endorsement implied. Commercial launch is not authorized.
+**Readiness Starts Here.** Phase A account/platform and Phase B knowledge-management foundations complete. Universal fitness and human-performance software, not an official USMC/DoD product; no endorsement implied. Commercial launch is not authorized.
 
 The initial repository was empty. See [the audit and implementation plan](docs/REPOSITORY_AUDIT.md), [architecture](docs/ARCHITECTURE.md), and [Phase A report](docs/PHASE_A_REPORT.md).
 

@@ -8,18 +8,18 @@ Express/Better Auth authenticates enabled accounts and preserves origin/JSON che
 
 ## Requirement comparison and planned work
 
-| Directive coverage | Current state                               | Phase B work                                                                                                                                               |
-| ------------------ | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| O1–3 / A1–3        | Audit primitives only; no knowledge records | Isolated knowledge package, strict schemas, one forward migration, permanent FZ codes, immutable version payloads.                                         |
-| O4–7 / A4          | Missing                                     | Source/source-version/section/citation kinds, typed exact-version foreign-key links, locators instead of copied corpus.                                    |
-| O8–12 / A5         | Future requirements documented              | Editorial authors/qualifications/reviewer records; separate grants and append-only reviews; server-owned gates pending owner matrix decision.              |
-| O13–21 / A6        | Missing                                     | Exact movement/capability taxonomies, exercises/variants/directional links, DB score constraints, restrictions as metadata only.                           |
-| O22–24 / A7–8      | Missing                                     | Equipment and recovery version schemas and explicit relationships; no automated interpretation.                                                            |
-| O25–27 / A9–10     | Rights enum only                            | Still-first requirements, metadata-only assets, versioned rights evidence; no fetching or generation of media.                                             |
-| O28–30 / A11       | Necessary-condition helper only             | Central eligibility, approve/publish/supersede/retire, lineage and history; immutable content separate from lifecycle projection.                          |
-| O31–35 / A12–15    | Protected shell only                        | Separate knowledge CMS, typed forms, filters, review/publication queue, authenticated APIs and transactional audit. No public knowledge reads in Phase B.  |
-| O36–38 / A16–17    | Phase A tests/seeds                         | Minimal explicitly synthetic fixtures, real API/DB/workflow tests, privacy/forgery/concurrency/immutability checks and unchanged full regression pipeline. |
-| O39 / A18–19       | Phase A/amendment docs                      | Knowledge/lifecycle/provenance/rights/authorship/media/admin docs, ADRs, clean validation, hosted CI and full acceptance report.                           |
+| Directive coverage | Current state                               | Phase B work                                                                                                                                                |
+| ------------------ | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| O1–3 / A1–3        | Audit primitives only; no knowledge records | Isolated knowledge package, strict schemas, one forward migration, permanent FZ codes, immutable version payloads.                                          |
+| O4–7 / A4          | Missing                                     | Source/source-version/section/citation kinds, typed exact-version foreign-key links, locators instead of copied corpus.                                     |
+| O8–12 / A5         | Future requirements documented              | Editorial authors/qualifications/reviewer records; separate grants and append-only reviews; server-owned gates with owner-approved matrix (ADRs 0011–0012). |
+| O13–21 / A6        | Missing                                     | Exact movement/capability taxonomies, exercises/variants/directional links, DB score constraints, restrictions as metadata only.                            |
+| O22–24 / A7–8      | Missing                                     | Equipment and recovery version schemas and explicit relationships; no automated interpretation.                                                             |
+| O25–27 / A9–10     | Rights enum only                            | Still-first requirements, metadata-only assets, versioned rights evidence; no fetching or generation of media.                                              |
+| O28–30 / A11       | Necessary-condition helper only             | Central eligibility, approve/publish/supersede/retire, lineage and history; immutable content separate from lifecycle projection.                           |
+| O31–35 / A12–15    | Protected shell only                        | Separate knowledge CMS, typed forms, filters, review/publication queue, authenticated APIs and transactional audit. No public knowledge reads in Phase B.   |
+| O36–38 / A16–17    | Phase A tests/seeds                         | Minimal explicitly synthetic fixtures, real API/DB/workflow tests, privacy/forgery/concurrency/immutability checks and unchanged full regression pipeline.  |
+| O39 / A18–19       | Phase A/amendment docs                      | Knowledge/lifecycle/provenance/rights/authorship/media/admin docs, ADRs, clean validation, hosted CI and full acceptance report.                            |
 
 ## Migration and architecture plan
 
