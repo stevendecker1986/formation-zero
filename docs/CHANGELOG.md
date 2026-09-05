@@ -18,4 +18,6 @@ Added isolated immutable knowledge storage, exact taxonomies, source/citation an
 
 Phase D implementation: deterministic individual candidate sessions subordinate to Phase C; reviewed template/profile foundation; isolated synthetic catalog; internal testing console; immutable private history; golden/API/production-gate regressions. Validation status is recorded in PHASE_D_REPORT.md. No Phase E functionality.
 
-Phase D completion: clean validation and actual GitHub Actions run 33945985079 passed (101 tests). All 30 acceptance criteria pass; Phase E remains unimplemented. See PHASE_D_REPORT.md for exact evidence and resolved local startup/newline issues.
+Phase D completion: clean validation and actual GitHub Actions run 33946312038 passed (101 tests). All 30 acceptance criteria pass; Phase E remains unimplemented. See PHASE_D_REPORT.md for exact evidence and resolved local startup/newline issues.
+
+Final Phase D review correction preserves requested-template provenance on failures; cross-editor history isolation is explicitly tested. Repeated clean validation and hosted CI passed for commit 01398d3.

@@ -6,7 +6,7 @@ Phase D — Deterministic Individual Prescription Engine
 
 ## STATUS
 
-INCOMPLETE — final failure-provenance fix is undergoing clean and hosted revalidation.
+COMPLETE — every Phase D acceptance criterion passes.
 
 ## ARCHITECTURE
 
@@ -138,7 +138,7 @@ Migration 007_prescription_engine.sql; ADR 0015-prescription-construction.md. Ne
 
 ## TESTS / RESULTS
 
-`npm test`: 101 passed, 0 failed, 0 skipped. `npm run validate:clean`: every step exited 0 at 2026-09-05T04:59:22.985Z. Fresh source directory: formation-zero-clean-0YUmh7; fresh disposable PostgreSQL database migrated through 007, seeded and imported the exact 510-record corpus. B2 stayed 100 exercises/30 recoveries, 16 equipment records, 100 media requirements and zero production media/publications.
+`npm test`: 101 passed, 0 failed, 0 skipped. `npm run validate:clean`: every step exited 0 at 2026-09-05T05:08:37.519Z. Fresh source directory: formation-zero-clean-V9jIeQ; fresh disposable PostgreSQL database migrated through 007, seeded and imported the exact 510-record corpus. B2 stayed 100 exercises/30 recoveries, 16 equipment records, 100 media requirements and zero production media/publications.
 
 | Executed check                         | Actual result                                                                  |
 | -------------------------------------- | ------------------------------------------------------------------------------ |
@@ -162,13 +162,15 @@ Earlier failures were resolved: stopped/stalled PostgreSQL recovered without del
 
 Local execution logs are retained in ignored validation-artifacts/clean-*.log and clean-results.json. They contain the actual commands/results, not simulated evidence.
 
+Final review correction: rejected production templates now retain the exact requested template ID instead of a synthetic placeholder ID. Cross-editor history denial also has a direct regression assertion. Targeted PostgreSQL/API tests passed (8/8); full clean validation and actual hosted run 33946312038 also passed for this correction.
+
 ## BUILD RESULTS
 
 PASS: optimized web and admin Next.js builds, API tsup build, and Expo web/Android/iOS exports from the clean source copy. Built smoke exercised synthetic prescription construction, saved history retrieval, authorization, origin protection and all prior phase surfaces.
 
 ## HOSTED CI
 
-GitHub Actions / Phase A foundation / codex/phase-d-prescription-engine / 80c2d6fffbbdfe352f4124e493f8badce1c4a9c3. Run [33945985079](https://github.com/stevendecker1986/formation-zero/actions/runs/33945985079): completed SUCCESS. Job 101252039377 passed install, all validation, failure probes and artifact upload. The actual hosted logs confirm 101 passing tests, zero failures, security/license checks, builds/exports and D smoke.
+GitHub Actions / Phase A foundation / codex/phase-d-prescription-engine / 01398d3a80fd22a3de86659c9c74850637f4b618. Run [33946312038](https://github.com/stevendecker1986/formation-zero/actions/runs/33946312038): completed SUCCESS. Job 101252925503 passed install, all validation, failure probes and artifact upload. The actual hosted logs confirm 101 passing tests, zero failures, security/license checks, builds/exports and D smoke.
 
 ## ACCEPTANCE CRITERIA
 
@@ -202,19 +204,17 @@ GitHub Actions / Phase A foundation / codex/phase-d-prescription-engine / 80c2d6
 | 26  | no consumer workout UI                                        | PASS   | Only internal admin testing console added; consumer app unchanged.                          |
 | 27  | security/privacy passes                                       | PASS   | API authorization/privacy/runtime-grant tests, source/client/security scans.                |
 | 28  | regressions/builds/security/license checks pass               | PASS   | Clean validate exited 0; 101 tests, builds/exports, scans/licenses/smoke.                   |
-| 29  | hosted CI passes                                              | PASS   | Actual GitHub Actions run 33945985079 completed SUCCESS for implementation commit 80c2d6f.  |
+| 29  | hosted CI passes                                              | PASS   | Actual GitHub Actions run 33946312038 completed SUCCESS for implementation commit 01398d3.  |
 | 30  | docs reflect reality                                          | PASS   | This report records real commands, resolved failures and completed hosted CI.               |
 
 ## KNOWN ISSUES
 
-No unresolved implementation or validation failures. Production training content still requires real reviews, rights clearance and publication; this is an enforced boundary, not an approval supplied by Phase D. The bounded search may return a safe failure when it cannot find a complete composition. No Phase E functionality was implemented.
+No unresolved implementation or validation failures. Delivery is on codex/phase-d-prescription-engine; main is unchanged. Production training content still requires real reviews, rights clearance and publication; this is an enforced boundary, not an approval supplied by Phase D. The bounded search may return a safe failure when it cannot find a complete composition. No Phase E functionality was implemented.
 
 ## OPEN DECISIONS
 
-None blocking implementation. Future real reviewers must author/approve production templates/dose profiles; no fabricated defaults.
+No implementation decision remains. Optional merge into main requires explicit owner authorization: automatic approval review rejected the default-branch mutation. The authorized feature branch is pushed and validated. Future real reviewers must author/approve production templates/dose profiles; no fabricated defaults.
 
 ## PHASE E READINESS
 
-NOT READY until final revalidation completes. Phase E is not started.
-
-Final review correction: rejected production templates now retain the exact requested template ID instead of a synthetic placeholder ID. Cross-editor history denial also has a direct regression assertion. Targeted PostgreSQL/API tests passed (8/8); full clean and hosted revalidation are pending for this correction.
+READY for separately authorized Phase E work. Phase E is not started. STOP.
