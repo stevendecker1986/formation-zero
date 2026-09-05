@@ -1,4 +1,4 @@
-import { randomUUID, createHmac } from "node:crypto";
+import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import type pg from "pg";
 import {
@@ -13,10 +13,12 @@ import {
   CATALOG_VERSION,
   catalog,
 } from "@formation-zero/prescription-engine/fixtures";
-import { canonical, fingerprint } from "@formation-zero/rule-engine";
+import { fingerprint } from "@formation-zero/rule-engine";
 import { transaction } from "../db.js";
 import * as kb from "./store.js";
 import { loadCandidate, loadRules } from "./rules.js";
+import { keyedFingerprint } from "@formation-zero/validation-engine";
+import { sealValidationInput } from "./validation-crypto.js";
 const context = requestSchema.omit({ mode: true, individual_ref: true });
 export const serviceRequest = z.discriminatedUnion("mode", [
   z
@@ -170,10 +172,7 @@ export async function constructStored(
         "No candidate session could be constructed within the supplied constraints.";
     }
     // Keyed, domain-separated digests replace low-entropy material/fact hashes at the service boundary.
-    const keyed = (v: unknown) =>
-      createHmac("sha256", secret)
-        .update("formation-zero-prescription-v1:" + canonical(v))
-        .digest("hex");
+    const keyed = (v: unknown) => keyedFingerprint(secret, v);
     const material = structuredClone(result);
     if (material.provenance) {
       material.provenance.request_fingerprint = keyed(request);
@@ -189,10 +188,24 @@ export async function constructStored(
         "FZ-EVAL-" + keyed(material.internal.base.evaluation_id);
     }
     const id = randomUUID();
+    const artifactFingerprint = keyedFingerprint(
+      secret,
+      material,
+      "formation-zero-prescription-artifact-v1",
+    );
+    const validationInput = sealValidationInput(secret, input);
     const row = (
       await c.query(
-        "INSERT INTO prescriptions(id,actor_id,mode,input_fingerprint,material) VALUES($1,$2,$3,$4,$5) RETURNING generated_at",
-        [id, actor.userId, body.mode, keyed(input), JSON.stringify(material)],
+        "INSERT INTO prescriptions(id,actor_id,mode,input_fingerprint,material,validation_input,artifact_fingerprint) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING generated_at",
+        [
+          id,
+          actor.userId,
+          body.mode,
+          keyed(input),
+          JSON.stringify(material),
+          validationInput,
+          artifactFingerprint,
+        ],
       )
     ).rows[0];
     // Normal prescription history is deliberately separate from editorial audit events.

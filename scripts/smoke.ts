@@ -168,7 +168,7 @@ try {
     "http://localhost:3101/admin/api/knowledge/records",
     { headers: { cookie: user.cookie } },
   );
-  assert.equal(kbDenied.status, 403);
+  assert.equal(kbDenied.status, 403, await kbDenied.clone().text());
   await h.pool.query("INSERT INTO user_roles(user_id,role) VALUES($1,$2)", [
     id,
     "PLATFORM_ADMIN",
@@ -237,6 +237,7 @@ try {
   assert.match(cms, /Knowledge workspace/);
   assert.match(cms, /Rule engine administration/);
   assert.match(cms, /Prescription engine testing/);
+  assert.match(cms, /Run independent validation/);
   const fixtureResponse = await fetch(knowledge + "prescription-fixtures", {
     headers,
   });
@@ -266,9 +267,48 @@ try {
     ).status,
     200,
   );
+  const validationResponse = await fetch(
+    knowledge + "prescription-validations",
+    {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        prescription_record_id: prescription.record_id,
+      }),
+    },
+  );
+  assert.equal(
+    validationResponse.status,
+    201,
+    await validationResponse.clone().text(),
+  );
+  const validation = await validationResponse.json();
+  assert.ok(["PASS", "WARN"].includes(validation.material.status));
+  assert.equal(
+    (
+      await fetch(
+        knowledge + "prescription-validations/" + validation.record_id,
+        { headers },
+      )
+    ).status,
+    200,
+  );
+  assert.equal(
+    (
+      await fetch(
+        knowledge + "prescriptions/" + prescription.record_id + "/delivery",
+        { headers },
+      )
+    ).status,
+    409,
+  );
+  const validationFixtures = await (
+    await fetch(knowledge + "validation-fixtures", { headers })
+  ).json();
+  assert.equal(validationFixtures.scenarios.length, 30);
   assert.equal((await fetch(knowledge + "prescription-fixtures")).status, 401);
   console.log(
-    "Phase D built CMS smoke passed: synthetic prescription, immutable history retrieval and anonymous denial.",
+    "Phase E built CMS smoke passed: independent validation/history, 30 adversarial fixtures, test delivery denial and anonymous denial.",
   );
   const ruleSet = await seedRules(h.pool, "TEST");
   const ruleCandidate = Object.fromEntries(

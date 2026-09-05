@@ -23,3 +23,6 @@ GRANT USAGE, SELECT ON SEQUENCE rule_activations_sequence_seq TO fz_runtime;
 REVOKE UPDATE, DELETE, TRUNCATE ON rule_activations, rule_evaluations FROM fz_runtime;
 GRANT SELECT, INSERT ON prescriptions TO fz_runtime;
 REVOKE UPDATE, DELETE, TRUNCATE ON prescriptions FROM fz_runtime;
+GRANT SELECT, INSERT ON validation_policies, validation_policy_activations, prescription_validations TO fz_runtime;
+GRANT USAGE, SELECT ON SEQUENCE validation_policy_activations_sequence_seq TO fz_runtime;
+REVOKE UPDATE, DELETE, TRUNCATE ON validation_policies, validation_policy_activations, prescription_validations FROM fz_runtime;

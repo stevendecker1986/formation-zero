@@ -49,3 +49,7 @@ The framework-independent @formation-zero/rule-engine package evaluates declarat
 ## Phase D
 
 Phase D adds @formation-zero/prescription-engine, reviewed PRESCRIPTION_TEMPLATE records, optional exact-version dose profiles, secured internal construction/catalog/history routes and immutable prescriptions. Shared Phase C loaders and publication gates remain authoritative. See PRESCRIPTION_ENGINE.md and ADR 0015.
+
+## Phase E
+
+Phase E adds the independent `@formation-zero/validation-engine`, sealed exact construction context, immutable validation policy/activation/history tables, authenticated validation/history APIs, an admin validation console and a server-owned delivery gate. The validator does not import Phase D. It independently recalculates arithmetic and structure and calls Phase C only for a fresh rules decision. See VALIDATION_ENGINE.md, DELIVERY_GATE.md and ADR 0016.

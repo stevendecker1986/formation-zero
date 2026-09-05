@@ -15,3 +15,7 @@ Facts are transient. Evaluation provenance is separated from generic audit and m
 ## Phase D
 
 Phase D: internal editorial authorization is required for fixture access, construction and actor-only history. Server loads active production rules/eligibility; request envelopes reject forged states/rules/identity. Parameterized queries, bounded schemas/search, no-store proxy and existing CSRF protections remain. Immutable prescriptions permit runtime SELECT/INSERT only. Test fixtures are fixed code with no administration endpoint; template changes use existing audited editorial lifecycle. No real corpus state is promoted.
+
+## Phase E
+
+Phase E uses strict request schemas, actor-scoped history, explicit PUBLISHER policy authority, server-selected production policy and current database evidence. Exact construction inputs are AES-256-GCM sealed at rest; request/input/artifact/history fingerprints are keyed and domain separated. Generic logs and audit omit facts, findings and fingerprints. Validation results and policy history are append-only with SELECT/INSERT-only runtime grants. Client-supplied status or policy fields are rejected. Delivery always performs a fresh server-side validation and fails closed.

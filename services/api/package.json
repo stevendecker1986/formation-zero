@@ -9,6 +9,7 @@
     "@formation-zero/entitlements": "0.1.0",
     "@formation-zero/config": "0.1.0",
     "@formation-zero/knowledge": "0.1.0",
-    "@formation-zero/prescription-engine": "0.1.0"
+    "@formation-zero/prescription-engine": "0.1.0",
+    "@formation-zero/validation-engine": "0.1.0"
   }
 }

@@ -1,5 +1,6 @@
 import * as prescriptions from "./prescriptions.js";
 import * as rules from "./rules.js";
+import * as validations from "./validations.js";
 import {
   Router,
   type Request,
@@ -33,6 +34,9 @@ export function knowledgeRouter(pool: pg.Pool, secret: string) {
   router.get("/prescription-fixtures", async (_req, res) =>
     res.json(await prescriptions.fixtureCatalog(pool, actor(res))),
   );
+  router.get("/validation-fixtures", async (_req, res) =>
+    res.json(await validations.fixtureCatalog(pool, actor(res))),
+  );
   router.post("/prescriptions", async (req, res) =>
     res.json(
       await prescriptions.constructStored(pool, actor(res), req.body, secret),
@@ -40,6 +44,35 @@ export function knowledgeRouter(pool: pg.Pool, secret: string) {
   );
   router.get("/prescriptions/:id", async (req, res) =>
     res.json(await prescriptions.readPrescription(pool, actor(res), id(req))),
+  );
+  router.get("/prescriptions/:id/delivery", async (req, res) =>
+    res.json(await validations.deliver(pool, actor(res), id(req), secret)),
+  );
+  router.post("/prescription-validations", async (req, res) =>
+    res
+      .status(201)
+      .json(
+        await validations.validateStored(pool, actor(res), req.body, secret),
+      ),
+  );
+  router.get("/prescription-validations/:id", async (req, res) =>
+    res.json(await validations.readValidation(pool, actor(res), id(req))),
+  );
+  router.get("/validation-policies", async (_req, res) =>
+    res.json(await validations.policies(pool, actor(res))),
+  );
+  router.post("/validation-policies", async (req, res) =>
+    res
+      .status(201)
+      .json(await validations.createPolicy(pool, actor(res), req.body)),
+  );
+  router.get("/validation-policy-activations", async (_req, res) =>
+    res.json(await validations.activationHistory(pool, actor(res))),
+  );
+  router.post("/validation-policy-activations", async (req, res) =>
+    res
+      .status(201)
+      .json(await validations.activatePolicy(pool, actor(res), req.body)),
   );
   router.post("/rule-activations", async (req, res) =>
     res.status(201).json(await rules.activate(pool, actor(res), req.body)),

@@ -427,6 +427,41 @@ test("Phase C PostgreSQL/API lifecycle, production boundary and private provenan
         recovery.id,
       ]);
       assert.equal(generated.material.provenance.rule_set_version, set.id);
+      const policy = await call(
+        "validation-policies",
+        {
+          version: "PHASE-E-PRODUCTION-V1",
+          status: "ACTIVE",
+          synthetic: false,
+          production_eligible: true,
+          allowed_prescription_engines: ["1.0.0"],
+          allowed_rule_engines: ["1.0.0"],
+          approved_nonblocking_codes: ["FZ-VAL-STRUCTURE-090"],
+        },
+        pc,
+        201,
+      );
+      await call(
+        "validation-policy-activations",
+        { policy_id: policy.id, reason: "Synthetic production boundary test" },
+        pc,
+        201,
+      );
+      const validation = await call(
+        "prescription-validations",
+        { prescription_record_id: generated.record_id },
+        ec,
+        201,
+      );
+      assert.ok(
+        ["PASS", "WARN"].includes(validation.material.status),
+        JSON.stringify(validation.material),
+      );
+      assert.equal(
+        (await call("prescriptions/" + generated.record_id + "/delivery"))
+          .prescription_record_id,
+        generated.record_id,
+      );
       await call(
         "prescriptions",
         { ...request, rule_set_version: set.id },
@@ -443,6 +478,16 @@ test("Phase C PostgreSQL/API lifecycle, production boundary and private provenan
         context: { ...request.context, candidate_scope: [b2] },
       });
       assert.equal(blocked.material.outcome, "CONTENT_NOT_PRODUCTION_ELIGIBLE");
+      const blockedValidation = await call(
+        "prescription-validations",
+        { prescription_record_id: blocked.record_id },
+        ec,
+        201,
+      );
+      assert.equal(blockedValidation.material.status, "REJECT");
+      assert.ok(
+        blockedValidation.material.codes.includes("FZ-VAL-CONTENT-001"),
+      );
       const updated = await call(
         "versions/" + recovery.id + "/versions",
         {
@@ -457,6 +502,12 @@ test("Phase C PostgreSQL/API lifecycle, production boundary and private provenan
       );
       await publish(updated);
       await transition(recovery.id, "SUPERSEDE", pc, updated.id);
+      await call(
+        "prescriptions/" + generated.record_id + "/delivery",
+        undefined,
+        ec,
+        409,
+      );
       assert.deepEqual(
         (await call("prescriptions/" + generated.record_id)).material,
         generated.material,

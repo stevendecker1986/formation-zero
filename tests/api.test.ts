@@ -27,6 +27,7 @@ test("real PostgreSQL API, authentication and authorization integration", async 
         "005_controlled_corpus.sql",
         "006_rule_engine.sql",
         "007_prescription_engine.sql",
+        "008_validation_engine.sql",
       ]);
       assert.deepEqual(await migrate(h.pool), []);
       await seed(h.pool, "TEST");

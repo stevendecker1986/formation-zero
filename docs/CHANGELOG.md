@@ -2,6 +2,10 @@
 
 Historical releases: [CHANGELOG.md](../CHANGELOG.md).
 
+## Phase E
+
+Added independent prescription validation, stable PASS/WARN/REJECT findings, fresh Phase C/content/rights/dose/time/composition/provenance checks, sealed exact validation context, immutable policies/results, admin validation controls, a server-owned delivery gate, and the required adversarial/golden coverage. Final validation and hosted evidence are recorded in PHASE_E_REPORT.md.
+
 ## Phase C — COMPLETE
 
 Added the deterministic rule-engine package, exact P0–P12 hierarchy, declarative conditions/typed effects, UNKNOWN handling, stable reasons and explainability, immutable rule/reason/set management, explicit production activation, restricted evaluation provenance, server-owned content eligibility, admin rule console and synthetic golden scenarios. Clean validation and hosted run 33939222984 passed with 70 tests, all builds/exports, security/license checks and smoke tests. B2 content remains pending; no production rules activated or Phase D implemented. See PHASE_C_REPORT.md for actual validation evidence.

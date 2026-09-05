@@ -13,3 +13,7 @@ Run npm test for all prior regressions plus tests/rule-engine.test.ts (16 golden
 ## Phase D
 
 Phase D adds tests/prescription-engine.test.ts (24 golden scenarios plus bounds/failures/relationships/privacy), prescription-api.test.ts and production/history subtests in rule-api.test.ts. Runtime grants and built CMS smoke include prescriptions. npm run validate:clean performs source-only npm ci, fresh migrations/seeds/corpus, all validation and failure probes. Existing Phase A foundation hosted workflow runs the same checks including D. See PHASE_D_REPORT.md for actual execution evidence.
+
+## Phase E
+
+Phase E adds independent PASS/WARN/REJECT, deterministic, constrained/recovery/substitution/shuffle golden cases and the exact numbered 30-mutation adversarial suite. PostgreSQL/API tests cover encrypted context, client forgery, production policy authority, actual B2 rejection, immutable results, actor isolation, positive delivery and delivery invalidation after supersession. The full prior suite, clean source-only validation, builds, scans, license checks, smoke and hosted workflow remain required.

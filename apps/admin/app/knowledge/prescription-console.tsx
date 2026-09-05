@@ -5,6 +5,7 @@ export default function PrescriptionConsole() {
   const [output, setOutput] = useState<unknown>(null);
   const [busy, setBusy] = useState(false);
   const [record, setRecord] = useState("");
+  const [validationRecord, setValidationRecord] = useState("");
   async function request(path: string, input?: unknown) {
     setBusy(true);
     try {
@@ -28,7 +29,10 @@ export default function PrescriptionConsole() {
             2,
           ),
         );
-      if (response.ok && data.record_id) setRecord(data.record_id);
+      if (response.ok && data.record_id && path === "prescriptions")
+        setRecord(data.record_id);
+      if (response.ok && data.record_id && path === "prescription-validations")
+        setValidationRecord(data.record_id);
     } catch {
       setOutput({ error: "Invalid request or unavailable service" });
     } finally {
@@ -40,14 +44,20 @@ export default function PrescriptionConsole() {
       <h3>Individual prescription testing</h3>
       <p>
         Synthetic software fixtures only. Phase C controls eligibility and
-        constraints. The result is a candidate session awaiting future
-        independent validation.
+        constraints. Phase E independently validates each saved candidate
+        session before delivery.
       </p>
       <button
         disabled={busy}
         onClick={() => void request("prescription-fixtures")}
       >
         Load synthetic prescription catalog
+      </button>
+      <button
+        disabled={busy}
+        onClick={() => void request("validation-fixtures")}
+      >
+        View adversarial validation fixture catalog
       </button>
       <p>
         The catalog identifies the fixed synthetic rule set and candidate
@@ -87,6 +97,43 @@ export default function PrescriptionConsole() {
         }
       >
         Read saved prescription
+      </button>
+      <button
+        disabled={busy || !record}
+        onClick={() =>
+          void request("prescription-validations", {
+            prescription_record_id: record,
+          })
+        }
+      >
+        Run independent validation
+      </button>
+      <button
+        disabled={busy || !record}
+        onClick={() =>
+          void request(
+            "prescriptions/" + encodeURIComponent(record) + "/delivery",
+          )
+        }
+      >
+        Check delivery gate
+      </button>
+      <label>
+        Saved validation record ID
+        <input
+          value={validationRecord}
+          onChange={(e) => setValidationRecord(e.target.value)}
+        />
+      </label>
+      <button
+        disabled={busy || !validationRecord}
+        onClick={() =>
+          void request(
+            "prescription-validations/" + encodeURIComponent(validationRecord),
+          )
+        }
+      >
+        Read immutable validation result
       </button>
       {output !== null && (
         <pre aria-label="Prescription result">
