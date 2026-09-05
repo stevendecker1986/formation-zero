@@ -1,6 +1,6 @@
 # Phase B2 implementation plan
 
-Status: in progress. Scope: controlled source and content population only.
+Status: complete; local clean validation and hosted run 33936993726 passed. See PHASE_B2_REPORT.md. Scope: controlled source and content population only.
 
 ## Audited baseline
 

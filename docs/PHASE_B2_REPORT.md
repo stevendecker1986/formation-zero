@@ -6,11 +6,11 @@ Phase B2 — Controlled Source & Content Population
 
 ## STATUS
 
-INCOMPLETE — local validation passed; hosted CI is pending. No Phase C work.
+COMPLETE — all 23 B2 acceptance criteria pass. No Phase C work.
 
 ## SOURCE MANIFEST
 
-26 official sources: 11 USMC and 15 USU/CHAMP/HPRC; 5 orders, 3 MARADMINs, 3 program/index websites and 15 educational articles. Currency observations dated 2026-09-05 UTC: 22 CURRENT, 1 AMENDED, 3 PARTIALLY_SUPERSEDED. All 26 source rights records UNKNOWN. Key controlling records include MCO 6100.14, 6100.13A ADMIN CH-5, 1500.62, 6110.3A ADMIN CH-4 and 1500.59A, together with MARADMIN 613/25, 066/26 and 073/26. See [manifest](SOURCE_MANIFEST.md) for official links, exact scope and limitations. Research observations are not professional verification.
+26 official sources: 11 USMC and 15 USU/CHAMP/HPRC; 5 orders, 3 MARADMINs, 3 program/index websites and 15 educational articles. Currency observations dated 2026-09-05 UTC: 22 CURRENT, 1 AMENDED, 3 PARTIALLY_SUPERSEDED. All 26 sources have OFFICIAL issuing provenance; all source rights records UNKNOWN. Key controlling records include MCO 6100.14, 6100.13A ADMIN CH-5, 1500.62, 6110.3A ADMIN CH-4 and 1500.59A, together with MARADMIN 613/25, 066/26 and 073/26. See [manifest](SOURCE_MANIFEST.md) for official links, exact scope and limitations. Research observations are not professional verification.
 
 ## EXERCISE CORPUS
 
@@ -26,7 +26,7 @@ INCOMPLETE — local validation passed; hosted CI is pending. No Phase C work.
 
 ## MEDIA BACKLOG
 
-100 STILL_SEQUENCE requirements, each with START / KEY_POSITION / FINISH; higher-complexity records add COMMON_FAULT. Every record has video_required=false and technical_media_review_required=true and rights_review_required=true. No production assets generated or imported. Distribution is recorded in [media backlog](MEDIA_PRODUCTION_BACKLOG.md).
+100 STILL_SEQUENCE requirements, each with START / KEY_POSITION / FINISH; higher-complexity records add COMMON_FAULT. Every record has video_required=false and technical_media_review_required=true and rights_review_required=true. No production assets generated or imported. 86 sequences recommend 3 images; 14 recommend 4. Motion complexity: LOW 50, MODERATE 36, HIGH 14. Optional video recommended for 14. See [media backlog](MEDIA_PRODUCTION_BACKLOG.md).
 
 ## AUTHORSHIP / QUALIFICATIONS
 
@@ -78,15 +78,39 @@ Web and admin Next.js production builds, API build and Expo Android/iOS/web expo
 
 ## HOSTED CI
 
-GitHub Actions / Phase A foundation / codex/phase-b2-corpus. Not yet pushed or executed for B2. No hosted PASS claimed.
+GitHub Actions / Phase A foundation / codex/phase-b2-corpus. Implementation commit `43db00aa6595a177e7d4a06f9082720457fce5df` pushed; [run 33936993726](https://github.com/stevendecker1986/formation-zero/actions/runs/33936993726) completed SUCCESS on 2026-09-05 UTC. All job steps passed: install, full validation, failure probes and artifact upload. Hosted logs confirm 43/43 tests, zero dependency vulnerabilities, 828 license entries, all builds/exports, Expo Doctor 21/21 and built CMS smoke. No CI fixes or weakened checks. Evidence artifact: phase-a-evidence, ID 9960547753.
 
 ## ACCEPTANCE CRITERIA
 
-Final PASS/FAIL evidence pending required regression, build, smoke and hosted execution. Phase B2 remains INCOMPLETE until all 23 criteria are satisfied.
+| #   | Criterion                                                                      | Result | Evidence                                                                                                        |
+| --- | ------------------------------------------------------------------------------ | ------ | --------------------------------------------------------------------------------------------------------------- |
+| 1   | Preserve Phase A, Amendment 001 and Phase B                                    | PASS   | Clean regression suite: 43/43, existing built smoke checks retained.                                            |
+| 2   | Manifest and source currency distinctions                                      | PASS   | SOURCE_MANIFEST.md: 26 sources, 22 current, 1 amended, 3 partially superseded; change chain scoped.             |
+| 3   | Honest rights                                                                  | PASS   | All 156 rights records UNKNOWN, commercial use false.                                                           |
+| 4   | Exactly 100 exercise candidates                                                | PASS   | Import audit and database/export assertions; four batches of 25.                                                |
+| 5   | Exactly 30 recovery candidates                                                 | PASS   | Import audit and database/export assertions.                                                                    |
+| 6   | Equipment supports corpus                                                      | PASS   | 16 entries; audit rejects unused equipment.                                                                     |
+| 7   | Media requirements for every exercise                                          | PASS   | 100 schema-validated linked requirements.                                                                       |
+| 8   | Still-first; no production photos                                              | PASS   | 100 STILL_SEQUENCE; zero MEDIA_ASSET records.                                                                   |
+| 9   | Video optional by default                                                      | PASS   | video_required=false for all 100.                                                                               |
+| 10  | Original Formation Zero exercise prose                                         | PASS   | Original FZ_DERIVED drafts; source notes limited to principle context.                                          |
+| 11  | No proprietary ISSA ingestion or endorsement                                   | PASS   | Only owner-reported, unverified qualification metadata; no ISSA corpus content.                                 |
+| 12  | Universal product identity preserved                                           | PASS   | USMC policy remains specialized source registry context; no consumer identity change.                           |
+| 13  | Citation, provenance, taxonomy, demand, suitability and relationship integrity | PASS   | Strict 510-record schema/reference audit and PostgreSQL suite.                                                  |
+| 14  | Duplicates resolved as aliases/variants                                        | PASS   | Unique normalized names and keys; explicit variant lineage and editorial alternatives; no self-links.           |
+| 15  | Honest review states                                                           | PASS   | Zero real review events/approvals; 978 pending review-type slots.                                               |
+| 16  | Server-owned review gates                                                      | PASS   | Regression tests and browser eligibility denial; official minimum strengthened.                                 |
+| 17  | UNKNOWN rights non-publishable                                                 | PASS   | Database/API rights denial assertions and CMS eligibility result.                                               |
+| 18  | Published content satisfies gates                                              | PASS   | Zero published corpus records; synthetic publication-gate regressions pass without production approval.         |
+| 19  | CMS manages corpus                                                             | PASS   | Built smoke plus browser filter/read/edit/version history and blocked publication.                              |
+| 20  | Corpus export/report                                                           | PASS   | Authenticated safe JSON export tested, including access denial; six inventory/backlog documents.                |
+| 21  | No Phase C logic                                                               | PASS   | Reviewed diff limited to corpus, registry, CMS inspection, gates and validation.                                |
+| 22  | All tests and hosted CI                                                        | PASS   | Clean validation and GitHub Actions run 33936993726 succeeded, 43/43 tests.                                     |
+| 23  | Documentation reflects reality                                                 | PASS   | Report and inventories distinguish candidates, research observations, pending reviews and actual test evidence. |
 
 ## KNOWN ISSUES
 
-Hosted CI pending. Professional content reviews, source editorial verification, founder qualification verification, rights decisions and media production remain pending by design. No candidate is authorized for publication.
+No B2 implementation blocker remains. Professional content reviews, source editorial verification, founder qualification verification, rights decisions and media production remain pending by design. No candidate is authorized for publication.
 
 ## OPEN DECISIONS
 
@@ -94,4 +118,4 @@ Before publication: founder attribution/evidence, real qualified reviewers and i
 
 ## PHASE C READINESS
 
-NOT READY while B2 validation remains incomplete. Phase C is not authorized or implemented.
+READY for separately authorized Phase C work. The corpus is a reviewed-by-software candidate foundation, not professionally approved or publishable content. Phase C is not authorized or implemented.
