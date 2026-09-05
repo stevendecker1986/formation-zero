@@ -1,6 +1,6 @@
 # Phase E implementation plan
 
-Status: implementation in progress. Independent validation only; no Phase F.
+Status: implemented and validated. Independent validation only; no Phase F.
 
 ## Audited baseline
 
